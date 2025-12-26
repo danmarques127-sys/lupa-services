@@ -1,4 +1,4 @@
-# Lupa Services — Cleaning & Painting Basic Website
+# Lupa Services — Cleaning & Painting Business Website
 
 🔗 **Live Demo (GitHub Pages)**  
 https://danmarques127-sys.github.io/lupa-services/
@@ -12,23 +12,31 @@ https://lupaservices.com
 
 This project is a **responsive business website for Lupa Services**, a professional company offering **cleaning and painting services** for residential and commercial clients.
 
-The website was built to clearly present services, showcase real work, and support SEO best practices.  
-It is a **real-world client project**, not a template or demo.
+The website was designed to **clearly separate service categories, showcase real work, and support strong SEO foundations**, improving both usability and search visibility.
 
-Main service areas include:
-- Residential & commercial cleaning
-- Deep cleaning and move-in / move-out cleaning
-- Interior & exterior painting
-- Cabinet, trim, and carpentry painting
-- Deck painting and renovation-related services
+This is a **real-world client project**, developed for production use — not a template or demo.
+
+---
+
+## 🎯 Project Goals
+
+- Clearly distinguish cleaning and painting services
+- Improve local SEO structure and indexing
+- Present services in a professional, conversion-focused layout
+- Support future content expansion (blog, service pages)
+- Deliver a fast, mobile-first user experience
 
 ---
 
 ## 🖥️ Preview
 
-The website is fully responsive and optimized for desktop, tablet, and mobile devices.
+The website is fully responsive and optimized for **desktop, tablet, and mobile devices**.
 
-It includes:
+📸 _Screenshots coming soon_  
+(Desktop and mobile views will be added here.)
+
+Key elements include:
+
 - Service-specific landing pages
 - Separate sections for cleaning and painting
 - Blog and inspiration pages
@@ -39,28 +47,28 @@ It includes:
 
 ## 🛠️ Tech Stack
 
-- **HTML5** — semantic, structured markup  
-- **CSS3** — responsive layouts and section-based styling  
-- **JavaScript (Vanilla)** — interactive behavior  
-- **Git & GitHub** — version control  
+- **HTML5** — semantic, accessible, SEO-friendly markup  
+- **CSS3** — responsive layouts with service-based styling separation  
+- **JavaScript (Vanilla)** — lightweight interactivity without framework overhead  
+- **Git & GitHub** — version control and deployment workflow  
 - **GitHub Pages** — live demo hosting  
 
 ---
 
 ## 🚀 Features
 
-- Fully responsive layout
+- Fully responsive, mobile-first layout
 - Clear separation of service categories
-- Optimized images and assets
-- SEO-friendly structure
-- Multiple sitemap files
+- Optimized images and static assets
+- SEO-friendly site architecture
+- Multiple sitemap files with sitemap index
 - Production-ready static deployment
 
 ---
 
 ## 🔍 SEO & Optimization
 
-This project includes several SEO-related features:
+This project includes advanced SEO structure for a static business website:
 
 - `robots.txt`
 - Multiple sitemap files:
@@ -68,12 +76,13 @@ This project includes several SEO-related features:
   - `sitemap-painting.xml`
   - `sitemap-hub.xml`
   - `sitemap_index.xml`
-- Google Search Console verification file
-- Clean URLs and semantic HTML structure
+- Google Search Console verification
+- Clean URLs and semantic HTML hierarchy
 
 ---
 
 ## 📂 Project Structure
+
 /
 ├── index.html
 ├── style-cleaning.css
@@ -103,6 +112,6 @@ This project includes several SEO-related features:
 ## 👤 Author
 
 **Dangelo Marques**  
-Frontend Developer | Web Projects for Businesses
+Frontend Developer — Business websites, SEO structure, and production deployments
 
----
+This project demonstrates my ability to **deliver real-world, client-ready websites**, covering structure, SEO, performance, and deployment.

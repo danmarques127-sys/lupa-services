@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-NK6LL4QX');</script>
+  <!-- End Google Tag Manager -->
+
+  <!-- FAVICONS PRINCIPAIS -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+  <link rel="icon" type="image/svg+xml" href="/icons/icon.svg">
+
+  <!-- APPLE / IOS -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+
+  <!-- ANDROID / PWA -->
+  <link rel="manifest" href="/site.webmanifest">
+  <meta name="theme-color" content="#ffffff">
+
+  <!-- SAFARI (OPCIONAL) -->
+  <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#000000">
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lupa Services — Choose a Service</title>
+  <meta name="description" content="Choose Cleaning or Painting to enter the dedicated mini-site." />
+  <meta name="robots" content="index,follow" />
+
+  <style>
+    :root{
+      --ink:#0f1220;
+      --brand-blue:#103a56;   /* cleaning */
+      --paint-gold:#d4a900;   /* painting */
+      --blue-ink:#dfeaf3;
+      --gold-ink:#fff7d6;
+      --ring:#ffffffcc;
+      --bg:#0b0f19;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:var(--bg);
+      color:var(--ink);
+    }
+    a{text-decoration:none;color:inherit}
+
+    /* ✅ MOBILE-FIRST (stack) */
+    .split{
+      min-height:100dvh;
+      display:grid;
+      grid-template-columns:1fr;   /* mobile = 1 coluna */
+    }
+
+    /* ✅ SÓ VIRA 2 COLUNAS EM TELAS GRANDES */
+    @media (min-width:1100px){
+      .split{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    .panel{
+      position:relative;
+      display:grid;
+      place-items:center;
+      padding:40px;
+      overflow:hidden;
+      isolation:isolate;
+    }
+
+    .panel::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      opacity:.12;
+      background-image:url('/assets/textures/mesh.svg');
+      background-size:cover;
+      background-position:center;
+      z-index:-1;
+    }
+
+    /* cores */
+    .panel--cleaning{
+      color:var(--blue-ink);
+      background:radial-gradient(1200px 1200px at 20% 50%, #1c5b83 0%, #0f2e45 60%, #0b1f2f 100%);
+    }
+    .panel--painting{
+      color:var(--gold-ink);
+      background:radial-gradient(1200px 1200px at 80% 50%, #d4a900 0%, #3e2f00 60%, #1f1700 100%);
+    }
+
+    .card{
+      display:grid;
+      gap:18px;
+      max-width:min(700px,92vw);
+      text-align:center;
+    }
+
+    .title{
+      font-weight:800;
+      line-height:1.05;
+      margin:0;
+      font-size:clamp(1.6rem,4vw,2.6rem);
+    }
+
+    .subtitle{
+      margin:0;
+      opacity:.9;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:700;
+      border:2px solid transparent;
+      box-shadow:0 10px 26px rgba(0,0,0,.18);
+      transition:transform .18s ease, box-shadow .18s ease
+    }
+    .btn--clean{ background:#e6f1f9; color:#0c2a3e; }
+    .btn--paint{ background:#fff3c4; color:#5b4200; }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      box-shadow:0 16px 36px rgba(0,0,0,.26)
+    }
+    .btn:focus-visible{
+      outline:0;
+      box-shadow:0 0 0 4px var(--ring),0 0 0 8px rgba(0,0,0,.35)
+    }
+
+    .choose{
+      position:fixed;
+      left:0; right:0; top:16px;
+      display:grid;
+      place-items:center;
+      pointer-events:none;
+      z-index:5
+    }
+    .choose .pill{
+      background:#0b0f19cc;
+      color:#e8ecf6;
+      border:1px solid #ffffff22;
+      padding:8px 14px;
+      border-radius:999px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      backdrop-filter:blur(6px)
+    }
+
+    /* ====== SHAPES (DESKTOP) ====== */
+    .shape{
+      width:min(700px,92vw);
+      height:min(380px,52vh);
+      margin-inline:auto;
+    }
+
+    .shape svg{
+      width:100%;
+      height:100%;
+      display:block;
+      filter:drop-shadow(0 18px 48px rgba(2,6,23,.5));
+    }
+
+    .shape--desktop{
+      display:block;
+    }
+
+    /* ====== CÍRCULO (MOBILE) ====== */
+    .shape--mobile-circle{
+      display:none; /* some only on mobile */
+      margin-inline:auto;
+      border-radius:999px;
+      overflow:hidden;
+      box-shadow:0 18px 48px rgba(2,6,23,.6);
+    }
+
+    .shape--mobile-circle img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+    }
+
+    /* ✅ Ajuste do mobile para empilhar corretamente + círculo */
+    @media (max-width:1099.98px){
+      .panel{
+        min-height:auto;
+        padding:32px 20px;
+      }
+
+      .shape--desktop{
+        display:none;
+      }
+
+      .shape--mobile-circle{
+        display:block;
+        width:70vw;
+        max-width:320px;
+        aspect-ratio:1/1; /* vira círculo perfeito */
+      }
+
+      /* ordem garantida */
+      .panel--cleaning{ order:1; }
+      .panel--painting{ order:2; }
+    }
+
+    /* linha divisória só no desktop */
+    .divider{ display:none }
+    @media (min-width:1100px){
+      .divider{
+        display:block;
+        position:absolute;
+        inset:0;
+        pointer-events:none;
+      }
+      .divider::before{
+        content:"";
+        position:absolute;
+        top:0; bottom:0; left:50%;
+        width:1px;
+        background:linear-gradient(to bottom,transparent,#ffffff66 40%,#ffffff66 60%,transparent);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="choose" aria-hidden="true">
+    <div class="pill">Choose an option</div>
+  </div>
+
+  <div class="split" role="list" aria-label="Service areas">
+
+    <!-- CLEANING -->
+    <section class="panel panel--cleaning" role="listitem" aria-labelledby="cleaning-title">
+      <div class="card">
+
+        <!-- DESKTOP SHAPE (SVG recortado) -->
+        <div class="shape shape--desktop">
+          <svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cleaning services home">
+            <defs>
+              <clipPath id="clip-house-us" clipPathUnits="userSpaceOnUse">
+                <path d="M120 420 L290 250 Q300 240 310 250 L440 380 L440 280 Q440 270 450 270 L490 270 Q500 270 500 280 L500 380 L620 260 Q630 250 640 260 L880 420 L880 620 Q880 630 870 630 L140 630 Q130 630 130 620 L130 420 Z"/>
+              </clipPath>
+            </defs>
+            <image href="/images/cleaninghome.png"
+                   width="1000"
+                   height="700"
+                   clip-path="url(#clip-house-us)"
+                   preserveAspectRatio="xMidYMid slice" />
+          </svg>
+        </div>
+
+        <!-- MOBILE CIRCLE IMAGE -->
+        <div class="shape--mobile-circle">
+          <img src="/images/cleaninghome.png"
+               alt="Cleaning services home preview">
+        </div>
+
+        <h1 id="cleaning-title" class="title">Cleaning Services</h1>
+        <p class="subtitle">House cleaning · Move-in/Move-out · Deep cleaning · Airbnb · Commercial janitorial</p>
+        <a class="btn btn--clean" href="cleaning.html">Enter Cleaning</a>
+      </div>
+    </section>
+
+    <!-- PAINTING -->
+    <section class="panel panel--painting" role="listitem" aria-labelledby="painting-title">
+      <div class="card">
+
+        <!-- DESKTOP SHAPE (SVG recortado) -->
+        <div class="shape shape--desktop">
+          <svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Painting services home">
+            <defs>
+              <clipPath id="clip-stroke" clipPathUnits="userSpaceOnUse">
+                <path d="M40 120
+                         Q120 110 180 140 T320 120 T460 140 T600 120 T760 130 T920 120
+                         L920 520
+                         Q880 540 820 548 T700 572 T600 560 T520 582 T440 564 T360 590 T280 560 T200 584 T120 558 T60 568
+                         L40 568 Z"/>
+              </clipPath>
+            </defs>
+            <image href="/images/paintinghome.png"
+                   width="1000"
+                   height="700"
+                   clip-path="url(#clip-stroke)"
+                   preserveAspectRatio="xMidYMid slice" />
+          </svg>
+        </div>
+
+        <!-- MOBILE CIRCLE IMAGE -->
+        <div class="shape--mobile-circle">
+          <img src="/images/paintinghome.png"
+               alt="Painting services home preview">
+        </div>
+
+        <h2 id="painting-title" class="title">Painting Services</h2>
+        <p class="subtitle">Interior & exterior painting · Drywall & plaster repair · Deck staining</p>
+        <a class="btn btn--paint" href="painting.html">Enter Painting</a>
+      </div>
+    </section>
+
+    <span class="divider" aria-hidden="true"></span>
+  </div>
+
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NK6LL4QX"
+            height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+</body>
+</html>

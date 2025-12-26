@@ -1,0 +1,60 @@
+# robots.txt for https://www.lupaservices.com/
+# Global crawling rules for all bots + sitemap configuration
+# HUB (index) + Cleaning + Painting + Blogs
+
+#############################
+# 1) REGRAS GERAIS (TODOS BOTS)
+#############################
+
+User-agent: *
+# Permite rastrear todo o site
+Allow: /
+
+# Bloqueia apenas pastas genéricas de sistema / internas (se existirem)
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /admin/
+Disallow: /private/
+
+#############################
+# 2) GOOGLEBOTS ESPECÍFICOS
+#############################
+
+# Google web search
+User-agent: Googlebot
+Allow: /
+
+# Google imagens
+User-agent: Googlebot-Image
+Allow: /
+
+# Google Ads / Landing pages
+User-agent: AdsBot-Google
+Allow: /
+
+# Google para páginas mobile
+User-agent: Googlebot-Mobile
+Allow: /
+
+#############################
+# 3) ASSETS (CSS, JS, IMAGENS)
+#############################
+# (Já estão liberados por Allow: /, mas deixamos explícito)
+
+User-agent: *
+Allow: /*.css$
+Allow: /*.js$
+Allow: /images/
+Allow: /icons/
+
+#############################
+# 4) SITEMAPS
+#############################
+
+# Sitemap principal (index) – ponto de entrada
+Sitemap: https://www.lupaservices.com/sitemap_index.xml
+
+# Sitemaps específicos (opcional, mas recomendável manter)
+Sitemap: https://www.lupaservices.com/sitemap-hub.xml
+Sitemap: https://www.lupaservices.com/sitemap-cleaning.xml
+Sitemap: https://www.lupaservices.com/sitemap-painting.xml

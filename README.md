@@ -1,32 +1,39 @@
 <!--
-  Lupa Services & Lupa Painting — README (Top-tier / Senior)
-  Theme: Dark Blue + Yellow + White
+  Lupa Services — README (Top-tier / Senior)
+  Theme: Dark Blue + Dark Yellow + Off White
   Author: DaNgelo Marques (GitHub: danmarques127-sys)
 -->
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FFFFFF,35:0B3C5D,70:FFC400,100:FFFFFF&height=240&section=header&text=Lupa%20Services%20%26%20Lupa%20Painting&fontSize=52&fontColor=111827&animation=fadeIn&fontAlignY=38&desc=Production%20static%20website%20%E2%80%A2%20Dual-brand%20architecture%20%E2%80%A2%20SEO-first%20%E2%80%A2%20Performance-focused&descAlignY=64&descSize=18" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:F8F9FA,35:0B3C5D,70:FFC400,100:F8F9FA&height=240&section=header&text=Lupa%20Services&fontSize=54&fontColor=111827&animation=fadeIn&fontAlignY=38&desc=Production%20static%20website%20%E2%80%A2%20SEO-first%20%E2%80%A2%20Performance-focused%20%E2%80%A2%20Accessibility-aware&descAlignY=64&descSize=18" />
 </p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=900&color=FFC400&center=true&vCenter=true&width=980&lines=Two+brands%2C+one+engineering+core+(Cleaning+%26+Painting);Engineered+for+SEO%2C+speed%2C+and+reliability+on+Apache%2FcPanel;No+frameworks.+No+build+step.+Clean+static+delivery." />
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=900&color=FFC400&center=true&vCenter=true&width=980&lines=Client-grade+static+site+for+a+real+service+business;Engineered+for+SEO%2C+speed%2C+and+reliability+on+Apache%2FcPanel;Dark+Blue+%26+Yellow+theme+for+GitHub;No+frameworks.+No+build+step.+Clean+delivery." />
 </p>
 
 <p align="center">
-  <a href="https://lupaservices.com"><img src="https://img.shields.io/badge/Production-Live-0B3C5D?style=for-the-badge&logo=googlechrome&logoColor=white" /></a>
-  <a href="https://github.com/danmarques127-sys/lupa-services"><img src="https://img.shields.io/badge/GitHub-Repository-111827?style=for-the-badge&logo=github&logoColor=white" /></a>
-  <a href="https://github.com/danmarques127-sys"><img src="https://img.shields.io/badge/Author-DaNgelo%20Marques-FFFFFF?style=for-the-badge&logo=github&logoColor=0B3C5D" /></a>
+  <a href="https://lupaservices.com">
+    <img src="https://img.shields.io/badge/Production-Live-0B3C5D?style=for-the-badge&logo=googlechrome&logoColor=white" />
+  </a>
+  <a href="https://github.com/danmarques127-sys/lupa-services">
+    <img src="https://img.shields.io/badge/GitHub-Repository-111827?style=for-the-badge&logo=github&logoColor=white" />
+  </a>
+  <a href="https://github.com/danmarques127-sys">
+    <img src="https://img.shields.io/badge/Author-DaNgelo%20Marques-F8F9FA?style=for-the-badge&logo=github&logoColor=0B3C5D" />
+  </a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Brand-Cleaning%20(Lupa%20Services)-FFFFFF?style=for-the-badge&labelColor=0B3C5D&color=FFFFFF" />
-  <img src="https://img.shields.io/badge/Brand-Painting%20(Lupa%20Painting)-FFFFFF?style=for-the-badge&labelColor=FFC400&color=FFFFFF" />
+  <img src="https://img.shields.io/badge/Theme-Dark%20Blue%20%26%20Yellow-F8F9FA?style=for-the-badge&labelColor=0B3C5D&color=F8F9FA" />
+  <img src="https://img.shields.io/badge/Brand-Lupa%20Services-F8F9FA?style=for-the-badge&labelColor=FFC400&color=F8F9FA" />
   <img src="https://img.shields.io/badge/Hosting-Apache%20%2F%20cPanel-111827?style=for-the-badge&logo=apache&logoColor=white" />
 </p>
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:FFFFFF,50:0B3C5D,100:FFFFFF&height=2&section=header" />
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:F8F9FA,50:0B3C5D,100:F8F9FA&height=2&section=header" />
 </p>
+
 
 ---
 

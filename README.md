@@ -1,3 +1,118 @@
+<!--
+  Lupa Services & Lupa Painting — README (Top-tier / Senior)
+  Theme: Dark Blue + Yellow + White
+  Author: DaNgelo Marques (GitHub: danmarques127-sys)
+-->
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0B3C5D,40:0B3C5D,70:FFC400,100:FFFFFF&height=240&section=header&text=Lupa%20Services%20%26%20Lupa%20Painting&fontSize=48&fontColor=FFFFFF&animation=fadeIn&fontAlignY=38&desc=Production%20static%20website%20%E2%80%A2%20Dual-brand%20architecture%20%E2%80%A2%20SEO-first%20%E2%80%A2%20Performance-focused&descAlignY=64&descSize=18" />
+</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=900&color=FFC400&center=true&vCenter=true&width=980&lines=Client-grade+static+site+for+a+real+service+company;Two+brands%2C+one+engineering+core+%28Cleaning+%26+Painting%29;Engineered+for+SEO%2C+speed%2C+and+reliability+on+Apache%2FcPanel;No+frameworks.+No+build+step.+Clean%2C+predictable+delivery." />
+</p>
+
+<p align="center">
+  <a href="https://lupaservices.com"><img src="https://img.shields.io/badge/Production-Live-0B3C5D?style=for-the-badge&logo=vercel&logoColor=white" /></a>
+  <a href="https://github.com/danmarques127-sys/lupa-services"><img src="https://img.shields.io/badge/GitHub-Repository-111827?style=for-the-badge&logo=github&logoColor=white" /></a>
+  <a href="https://github.com/danmarques127-sys"><img src="https://img.shields.io/badge/Author-DaNgelo%20Marques-FFC400?style=for-the-badge&logo=github&logoColor=111827" /></a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Brand-Lupa%20Services%20%28Cleaning%29-0B3C5D?style=for-the-badge&labelColor=0B3C5D&color=FFFFFF" />
+  <img src="https://img.shields.io/badge/Brand-Lupa%20Painting-FFC400?style=for-the-badge&labelColor=FFC400&color=FFFFFF" />
+  <img src="https://img.shields.io/badge/Hosting-Apache%20%2F%20cPanel-111827?style=for-the-badge&logo=apache&logoColor=white" />
+</p>
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:FFFFFF,50:0B3C5D,100:FFFFFF&height=2&section=header" />
+</p>
+
+---
+
+## 🔍 Title + One-liner
+
+**Lupa Services & Lupa Painting** — a production-ready static website for a real dual-service company, operating **Cleaning** and **Painting** under a unified, SEO-driven, performance-focused engineering architecture.
+
+> Built and maintained by **DaNgelo Marques**  
+> GitHub: https://github.com/danmarques127-sys
+
+---
+
+## 🔗 Live Links
+
+- **Production:** https://lupaservices.com  
+- **GitHub Repository:** https://github.com/danmarques127-sys/lupa-services  
+
+---
+
+## ✨ Features (3–6)
+
+- **Dual-brand architecture** (Cleaning + Painting) sharing a single, consistent codebase
+- **SEO-first static structure** (semantic HTML, metadata, clean internal linking)
+- **Performance-focused delivery** with cache policy via **`.htaccess`**
+- **Accessibility-aware layout** (semantic landmarks, readable hierarchy, mobile-first)
+- **Deployment-ready** for **Apache/cPanel** with HTTPS (SSL enabled)
+
+---
+
+## 🎨 Brand System (Design Intent)
+
+This project intentionally supports **two brands in one site**:
+
+### Lupa Services — Cleaning
+- Dark Blue `#0B3C5D`
+- White `#FFFFFF`
+
+### Lupa Painting
+- Yellow `#FFC400`
+- White `#FFFFFF`
+
+### Shared language
+- Dark blue for structure and trust  
+- Yellow for CTAs, highlights, and motion  
+- Clean white space for clarity and premium feel  
+
+---
+
+## 🧰 Tech Stack
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=html,css,js,apache,git" />
+  <img src="https://img.shields.io/badge/HTTPS-Secure-22C55E?style=for-the-badge&logo=letsencrypt&logoColor=white" />
+</p>
+
+- **HTML5** — semantic, SEO- and accessibility-oriented markup  
+- **CSS3** — responsive layout, animations, and brand system  
+- **Vanilla JavaScript** — lightweight interactions only  
+- **Apache (.htaccess)** — cache control, compression, static hosting behavior  
+- **HTTPS (SSL)** — secure production deployment  
+
+---
+
+## 🗂️ Project Structure
+
+> Production static-site layout — simple, portable, and predictable.
+
+/
+├── assets/
+│ ├── css/ # Stylesheets
+│ ├── js/ # JavaScript
+│ ├── img/ # Images (flattened; no /images nesting)
+│ └── icons/ # Icons + favicons (flattened; no /icons nesting)
+│
+├── seo/
+│ ├── robots.txt
+│ └── sitemap.xml
+│
+├── docs/
+│ └── ARCHITECTURE.md
+│
+├── .htaccess
+├── index.html
+├── cleaning.html
+├── painting.html
+└── *.html
 
 ---
 

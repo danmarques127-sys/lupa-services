@@ -1,10 +1,64 @@
 <!--
   Lupa Services & Lupa Painting — README (Top-tier / Senior)
   Theme: Dark Blue + Yellow + White
-  Author: Dangelo Marques (GitHub: danmarques127-sys)
+  Author: DaNgelo Marques (GitHub: danmarques127-sys)
 -->
 
+<!-- HERO BACKDROP (inline SVG — no external images) -->
+<p align="center">
+  <svg width="980" height="260" viewBox="0 0 980 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lupa hero background">
+    <defs>
+      <!-- Soft background -->
+      <linearGradient id="bg" x1="0" y1="0" x2="980" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#FFFFFF"/>
+        <stop offset="0.55" stop-color="#FFF7DD"/>
+        <stop offset="1" stop-color="#FFFFFF"/>
+      </linearGradient>
+
+      <!-- Blue + Yellow ribbons -->
+      <linearGradient id="ribbonBlue" x1="0" y1="0" x2="980" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#0B3C5D" stop-opacity="0.00"/>
+        <stop offset="0.35" stop-color="#0B3C5D" stop-opacity="0.18"/>
+        <stop offset="0.65" stop-color="#0B3C5D" stop-opacity="0.08"/>
+        <stop offset="1" stop-color="#0B3C5D" stop-opacity="0.00"/>
+      </linearGradient>
+
+      <linearGradient id="ribbonYellow" x1="0" y1="0" x2="980" y2="0" gradientUnits="userSpaceOnUse">
+        <stop offset="0" stop-color="#FFC400" stop-opacity="0.00"/>
+        <stop offset="0.45" stop-color="#FFC400" stop-opacity="0.22"/>
+        <stop offset="0.70" stop-color="#FFC400" stop-opacity="0.10"/>
+        <stop offset="1" stop-color="#FFC400" stop-opacity="0.00"/>
+      </linearGradient>
+
+      <filter id="blur" x="-10%" y="-60%" width="120%" height="220%">
+        <feGaussianBlur stdDeviation="18"/>
+      </filter>
+
+      <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#0B3C5D" flood-opacity="0.10"/>
+      </filter>
+    </defs>
+
+    <!-- Background panel -->
+    <rect x="0" y="0" width="980" height="260" rx="22" fill="url(#bg)" filter="url(#softShadow)"/>
+
+    <!-- Soft ribbons (like Thalita’s) -->
+    <path d="M0,120 C220,80 360,160 520,120 C690,80 780,70 980,115 L980,260 L0,260 Z"
+          fill="url(#ribbonBlue)" filter="url(#blur)"/>
+    <path d="M0,155 C260,210 390,115 560,160 C720,200 830,210 980,170 L980,260 L0,260 Z"
+          fill="url(#ribbonYellow)" filter="url(#blur)"/>
+
+    <!-- Tiny accent dots -->
+    <circle cx="130" cy="70" r="5" fill="#FFC400" fill-opacity="0.35"/>
+    <circle cx="820" cy="88" r="5" fill="#0B3C5D" fill-opacity="0.22"/>
+  </svg>
+</p>
+
 <h1 align="center">Lupa Services &amp; Lupa Painting</h1>
+
+<p align="center">
+  <b>Production static website</b> • <b>SEO-first</b> • <b>Performance-focused</b> • <b>Accessibility-aware</b>
+</p>
 
 <p align="center">
   <img
@@ -31,7 +85,7 @@
   <img alt="Hosting Apache cPanel" src="https://img.shields.io/badge/Hosting-Apache%20%2F%20cPanel-111827?style=for-the-badge&logo=apache&logoColor=white" />
 </p>
 
-<!-- Premium gradient divider (inline SVG — no external image dependency) -->
+<!-- Premium divider -->
 <p align="center">
   <svg width="920" height="18" viewBox="0 0 920 18" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="divider">
     <defs>

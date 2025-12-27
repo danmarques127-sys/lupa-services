@@ -1,0 +1,25 @@
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Archives
+*.zip
+*.rar
+*.7z
+*.tar
+*.gz
+
+# Node / tooling (not used, but ignored by default)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local server / temp
+*.log
+*.tmp
+
+# System
+.env

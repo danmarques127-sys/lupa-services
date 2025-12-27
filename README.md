@@ -1,48 +1,41 @@
 <!--
   Lupa Services & Lupa Painting — README (Top-tier / Senior)
   Theme: Dark Blue + Yellow + White
-  Author: DaNgelo Marques (GitHub: danmarques127-sys)
+  Author: Dangelo Marques (GitHub: danmarques127-sys)
 -->
 
-<!--
-  Lupa Services & Lupa Painting — README (Top-tier / Senior)
-  Theme: Dark Blue + Yellow + White
-  Author: DaNgelo Marques (GitHub: danmarques127-sys)
--->
+<h1 align="center">Lupa Services & Lupa Painting</h1>
 
 <p align="center">
-  <!-- Capsule (curto e estável) -->
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0B3C5D,70:FFC400,100:FFFFFF&height=240&section=header&text=Lupa%20Services%20%26%20Lupa%20Painting&fontSize=46&fontColor=FFFFFF&animation=fadeIn&fontAlignY=38&desc=Two%20brands%2C%20one%20engineering%20core&descAlignY=64&descSize=18" />
+  <b>Two brands, one engineering core</b><br/>
+  Cleaning <span style="color:#0B3C5D;"><b>•</b></span> Painting <span style="color:#FFC400;"><b>•</b></span>
+  SEO-first <span style="color:#0B3C5D;"><b>•</b></span> Performance-focused <span style="color:#FFC400;"><b>•</b></span> Apache/cPanel
 </p>
 
 <p align="center">
-  <!-- Typing (também curto) -->
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=900&color=FFC400&center=true&vCenter=true&width=980&lines=Cleaning%20%2B%20Painting%20under%20one%20production%20codebase;SEO-first%20%E2%80%A2%20Performance-focused%20%E2%80%A2%20Accessibility-aware;Apache%2FcPanel%20deployment%20%E2%80%A2%20.htaccess%20cache%20policy%20%E2%80%A2%20SSL%20ready" />
-</p>
-
-<p align="center">
-  <!-- Badges -->
   <a href="https://lupaservices.com">
-    <img src="https://img.shields.io/badge/Production-Live-0B3C5D?style=for-the-badge&logo=googlechrome&logoColor=white" />
+    <img alt="Production Live" src="https://img.shields.io/badge/Production-Live-0B3C5D?style=for-the-badge&logo=googlechrome&logoColor=white" />
   </a>
   <a href="https://github.com/danmarques127-sys/lupa-services">
-    <img src="https://img.shields.io/badge/GitHub-Repository-111827?style=for-the-badge&logo=github&logoColor=white" />
+    <img alt="GitHub Repository" src="https://img.shields.io/badge/GitHub-Repository-111827?style=for-the-badge&logo=github&logoColor=white" />
   </a>
   <a href="https://github.com/danmarques127-sys">
-    <img src="https://img.shields.io/badge/Author-DaNgelo%20Marques-FFC400?style=for-the-badge&logo=github&logoColor=111827" />
+    <img alt="Author" src="https://img.shields.io/badge/Author-DaNgelo%20Marques-FFC400?style=for-the-badge&logo=github&logoColor=111827" />
   </a>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Brand-Cleaning%20%28Lupa%20Services%29-0B3C5D?style=for-the-badge&labelColor=0B3C5D&color=FFFFFF" />
-  <img src="https://img.shields.io/badge/Brand-Painting%20%28Lupa%20Painting%29-FFC400?style=for-the-badge&labelColor=FFC400&color=FFFFFF" />
-  <img src="https://img.shields.io/badge/Hosting-Apache%20%2F%20cPanel-111827?style=for-the-badge&logo=apache&logoColor=white" />
+  <img alt="Brand Cleaning" src="https://img.shields.io/badge/Brand-Cleaning%20(Lupa%20Services)-0B3C5D?style=for-the-badge&labelColor=0B3C5D&color=FFFFFF" />
+  <img alt="Brand Painting" src="https://img.shields.io/badge/Brand-Painting%20(Lupa%20Painting)-FFC400?style=for-the-badge&labelColor=FFC400&color=FFFFFF" />
+  <img alt="Hosting Apache cPanel" src="https://img.shields.io/badge/Hosting-Apache%20%2F%20cPanel-111827?style=for-the-badge&logo=apache&logoColor=white" />
 </p>
 
 <p align="center">
-  <!-- Divider premium -->
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:FFFFFF,50:0B3C5D,100:FFFFFF&height=2&section=header" />
+  <img alt="divider" src="https://img.shields.io/badge/%20-0B3C5D?style=for-the-badge" />
+  <img alt="divider" src="https://img.shields.io/badge/%20-FFC400?style=for-the-badge" />
+  <img alt="divider" src="https://img.shields.io/badge/%20-FFFFFF?style=for-the-badge" />
 </p>
+
 
 
 ---
@@ -94,19 +87,25 @@ This project intentionally supports **two brands in one site**:
 
 ## 🧰 Tech Stack
 
+## 🧰 Tech Stack
+
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,js,apache" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" height="48" alt="Git" />
-  <img src="https://img.shields.io/badge/HTTPS%20%2F%20SSL-Secure-22C55E?style=for-the-badge&logo=letsencrypt&logoColor=white" />
+  <img alt="HTML5" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" />
+  <img alt="CSS3" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" />
+  <img alt="JavaScript" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
+  <img alt="Apache" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" />
+  <img alt="Git" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />
+  <img alt="GitHub" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
+  <img alt="HTTPS/SSL Secure" src="https://img.shields.io/badge/HTTPS%20%2F%20SSL-Secure-22C55E?style=for-the-badge&logo=letsencrypt&logoColor=white" />
 </p>
 
 - **HTML5** — semantic, SEO- and accessibility-oriented markup  
 - **CSS3** — responsive layout, animations, and brand system  
 - **Vanilla JavaScript** — lightweight interactions only  
 - **Apache (.htaccess)** — cache control, compression, and static hosting behavior  
-- **Git** — versioning and release hygiene (tags/releases)  
-- **HTTPS / SSL** — secure production deployment  
-
+- **Git + GitHub** — versioning, release hygiene (tags/releases), collaboration  
+- **HTTPS / SSL** — secure production deployment
+- 
 ---
 
 ## 🗂️ Project Structure
@@ -178,6 +177,3 @@ GitHub: https://github.com/danmarques127-sys
 </p>
 
 ---
-
-## 📁 Project Structure
-

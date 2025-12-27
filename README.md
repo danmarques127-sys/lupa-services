@@ -4,12 +4,13 @@
   Author: Dangelo Marques (GitHub: danmarques127-sys)
 -->
 
-<h1 align="center">Lupa Services & Lupa Painting</h1>
+<h1 align="center">Lupa Services &amp; Lupa Painting</h1>
 
 <p align="center">
-  <b>Two brands, one engineering core</b><br/>
-  Cleaning <span style="color:#0B3C5D;"><b>•</b></span> Painting <span style="color:#FFC400;"><b>•</b></span>
-  SEO-first <span style="color:#0B3C5D;"><b>•</b></span> Performance-focused <span style="color:#FFC400;"><b>•</b></span> Apache/cPanel
+  <img
+    src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=900&color=FFC400&center=true&vCenter=true&width=980&lines=Two+brands%2C+one+engineering+core.;Cleaning+%E2%80%A2+Painting+%E2%80%A2+SEO-first+%E2%80%A2+Performance-focused.;Apache%2FcPanel+deployment+%E2%80%A2+.htaccess+cache+policy+%E2%80%A2+SSL+ready."
+    alt="Typing intro"
+  />
 </p>
 
 <p align="center">
@@ -30,13 +31,29 @@
   <img alt="Hosting Apache cPanel" src="https://img.shields.io/badge/Hosting-Apache%20%2F%20cPanel-111827?style=for-the-badge&logo=apache&logoColor=white" />
 </p>
 
+<!-- Premium gradient divider (inline SVG — no external image dependency) -->
 <p align="center">
-  <img alt="divider" src="https://img.shields.io/badge/%20-0B3C5D?style=for-the-badge" />
-  <img alt="divider" src="https://img.shields.io/badge/%20-FFC400?style=for-the-badge" />
-  <img alt="divider" src="https://img.shields.io/badge/%20-FFFFFF?style=for-the-badge" />
+  <svg width="920" height="18" viewBox="0 0 920 18" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="divider">
+    <defs>
+      <linearGradient id="lupaGrad" x1="0" y1="0" x2="920" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#FFFFFF" offset="0"/>
+        <stop stop-color="#0B3C5D" offset="0.35"/>
+        <stop stop-color="#FFC400" offset="0.70"/>
+        <stop stop-color="#FFFFFF" offset="1"/>
+      </linearGradient>
+      <filter id="soft" x="-20%" y="-200%" width="140%" height="500%">
+        <feGaussianBlur stdDeviation="2.2" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <rect x="20" y="8" width="880" height="2" rx="1" fill="url(#lupaGrad)" filter="url(#soft)"/>
+    <circle cx="460" cy="9" r="4" fill="#FFC400" />
+    <circle cx="460" cy="9" r="2" fill="#0B3C5D" />
+  </svg>
 </p>
-
-
 
 ---
 
@@ -84,8 +101,6 @@ This project intentionally supports **two brands in one site**:
 - Clean white space for clarity and premium feel  
 
 ---
-
-## 🧰 Tech Stack
 
 ## 🧰 Tech Stack
 
@@ -168,7 +183,7 @@ Reuse, redistribution, or modification is not permitted without explicit authori
 
 ## 👤 Author
 
-**DaNgelo Marques**  
+**Dangelo Marques**  
 Software Engineer • Web Architecture • SEO-driven Systems  
 GitHub: https://github.com/danmarques127-sys
 

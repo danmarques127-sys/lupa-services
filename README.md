@@ -1,75 +1,47 @@
-# 🔍 Lupa Services & Lupa Painting  
-**Professional Cleaning & Painting Services — fast, optimized, and SEO-driven websites**
+
+---
+
+## 🚀 Deployment
+
+### cPanel / Apache (Production)
+1. Upload all files to `public_html/` (or domain root)
+2. Ensure `.htaccess` is included and overrides are allowed
+3. Confirm HTTPS / SSL is active
+4. Validate internal links and assets on the live domain
+
+---
+
+## 🗄️ Cache Policy (2 lines)
+
+- Static assets (CSS, JS, images, icons) are cached aggressively for repeat visits.  
+- HTML documents use shorter cache to avoid stale content after updates.
+
+---
+
+## 📄 Documentation
+
+- `docs/ARCHITECTURE.md` — explains routing, asset strategy, SEO decisions, and performance trade-offs.
+
+---
+
+## 📜 License (conscious choice)
+
+**All Rights Reserved**
+
+This repository represents a real client-grade production website.  
+Reuse, redistribution, or modification is not permitted without explicit authorization.
+
+---
+
+## 👤 Author
+
+**DaNgelo Marques**  
+Software Engineer • Web Architecture • SEO-driven Systems  
+GitHub: https://github.com/danmarques127-sys
 
 <p align="center">
-  <img src="https://img.shields.io/badge/status-production-success" />
-  <img src="https://img.shields.io/badge/SEO-optimized-blue" />
-  <img src="https://img.shields.io/badge/performance-fast-yellow" />
-  <img src="https://img.shields.io/badge/license-All%20Rights%20Reserved-lightgrey" />
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FFFFFF,60:FFC400,100:FFFFFF&height=120&section=footer" />
 </p>
-
----
-
-## 🚀 One-liner
-A **dual-brand service website** for a professional company operating in **Cleaning (Lupa Services)** and **Painting (Lupa Painting)**, built with a strong focus on **SEO, performance, accessibility, and production-grade deployment**.
-
-Designed for real clients, real traffic, and real conversions.
-
----
-
-## 🌐 Live Links
-
-- **Production:** https://lupaservices.com  
-- **GitHub Repository:** https://github.com/danmarques127-sys/lupa-services  
-
----
-
-## ✨ Features
-
-- ✅ Multi-brand website (Cleaning + Painting) with unified architecture  
-- ⚡ High-performance static pages with aggressive cache strategy  
-- 🔍 SEO-first structure (semantic HTML, metadata, clean URLs)  
-- ♿ Accessibility-aware layout (semantic tags, contrast, navigation)  
-- 📱 100% mobile-friendly & responsive  
-- 🔐 HTTPS + SSL ready (production environment)
-
----
-
-## 🎨 Brand & Design System
-
-This project intentionally blends **two brands under one engineering core**:
-
-### Lupa Services (Cleaning)
-- **Primary colors:**  
-  - Blue `#0B3C5D`  
-  - White `#FFFFFF`
-
-### Lupa Painting
-- **Primary colors:**  
-  - Yellow `#FFC400`  
-  - White `#FFFFFF`
-
-### Shared accents
-- Dark Blue + Yellow for CTA, highlights, and motion details  
-- Clean layouts with subtle animations and transitions (premium feel)
-
----
-
-## 🛠 Tech Stack
-
-<p>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" width="40"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="40"/>
-</p>
-
-- **HTML5** — semantic, SEO-friendly markup  
-- **CSS3** — custom design system, animations, responsive layout  
-- **Vanilla JavaScript** — lightweight interactivity (no bloat)  
-- **Apache (.htaccess)** — cache, compression, security headers  
-- **Git / GitHub** — versioning and portfolio-grade presentation  
 
 ---
 

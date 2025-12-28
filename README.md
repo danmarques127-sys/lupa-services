@@ -53,7 +53,7 @@
 
 ---
 
-## ✨ Features (3–6)
+## ✨ Features
 
 - **Dual-brand architecture** (Cleaning + Painting) sharing a single, consistent codebase
 - **SEO-first static structure** (semantic HTML, metadata, clean internal linking)
@@ -131,11 +131,15 @@ This project intentionally supports **two brands in one site**:
 
 ## 🚀 Deployment
 
-### cPanel / Apache (Production)
-1. Upload all files to `public_html/` (or domain root)
-2. Ensure `.htaccess` is included and overrides are allowed
-3. Confirm HTTPS / SSL is active
-4. Validate internal links and assets on the live domain
+### Production Deployment (Apache / cPanel)
+
+The website is deployed on an Apache server with support for `.htaccess`
+rules for caching, routing, and security headers.
+
+Production environment considerations:
+- Server must allow `.htaccess` overrides
+- SEO assets (robots.txt, sitemap.xml) are publicly accessible
+- All internal links and assets are validated post-deployment
 
 ---
 
@@ -152,7 +156,7 @@ This project intentionally supports **two brands in one site**:
 
 ---
 
-## 📜 License (conscious choice)
+## 📜 License 
 
 **All Rights Reserved**
 

@@ -41,7 +41,7 @@
 
 **Lupa Services & Lupa Painting** — a production-ready static website for a real dual-service company, operating **Cleaning** and **Painting** under a unified, SEO-driven, performance-focused engineering architecture.
 
-> Built and maintained by **DaNgelo Marques**  
+> Built and maintained by **Dangelo Marques**  
 > GitHub: https://github.com/danmarques127-sys
 
 ---

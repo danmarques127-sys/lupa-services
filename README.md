@@ -1,7 +1,7 @@
 <!--
   Lupa Services — README (Top-tier / Senior)
   Theme: Dark Blue + Dark Yellow + Off White
-  Author: DaNgelo Marques (GitHub: danmarques127-sys)
+  Author: Dangelo Marques (GitHub: danmarques127-sys)
 -->
 
 <p align="center">

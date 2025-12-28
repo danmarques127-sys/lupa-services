@@ -1,0 +1,21 @@
+# Security Policy
+
+## Reporting a Vulnerability
+
+If you discover a security vulnerability related to the Lupa Services website
+or its infrastructure, please report it responsibly.
+
+### How to Report
+- Email: security@lupaservices.com
+- Subject: Security Vulnerability Report
+
+Please include:
+- A clear description of the issue
+- Steps to reproduce (if applicable)
+- Any relevant screenshots or logs
+
+### Responsible Disclosure
+Please do not publicly disclose security issues until they have been
+reviewed and addressed by the responsible team.
+
+Thank you for helping keep this project and its users safe.

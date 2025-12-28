@@ -63,7 +63,7 @@
 
 ---
 
-## 🎨 Brand System (Design Intent)
+## 🎨 Brand System 
 
 This project intentionally supports **two brands in one site**:
 
@@ -143,7 +143,7 @@ Production environment considerations:
 
 ---
 
-## 🗄️ Cache Policy (2 lines)
+## 🗄️ Cache Policy 
 
 - Static assets (CSS, JS, images, icons) are cached aggressively for repeat visits.  
 - HTML documents use shorter cache to avoid stale content after updates.

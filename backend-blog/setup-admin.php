@@ -4,6 +4,8 @@ declare(strict_types=1);
 // One-time web installer. Available only until the private config exists.
 // Upload the site and run setup immediately before sharing the URL.
 require_once __DIR__ . '/bootstrap.php';
+// Deny the first-run installer unless explicitly enabled on the hosting server.
+if (getenv('BLOG_SETUP_ENABLED') !== '1') { http_response_code(403); exit('Administrator setup is disabled.'); }
 session_safe();
 header('Cache-Control: no-store, private');
 header('X-Robots-Tag: noindex, nofollow');

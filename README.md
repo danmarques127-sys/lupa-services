@@ -1,178 +1,97 @@
-<!--
-  Lupa Services — README (Top-tier / Senior)
-  Theme: Dark Blue + Dark Yellow + Off White
-  Author: Dangelo Marques (GitHub: danmarques127-sys)
--->
+<div align="center">
+
+# Lupa Painting — Website
+
+**Residential & Commercial Painting · Massachusetts**
+
+Source code for the updated Lupa Painting website, including service pages, project galleries and customer inquiry flows.
+
+[**Official Website**](https://lupaservices.com/) · [**Repository**](https://github.com/danmarques127-sys/lupa-services)
+
+</div>
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:F8F9FA,35:0B3C5D,70:FFC400,100:F8F9FA&height=240&section=header&text=Lupa%20Services&fontSize=54&fontColor=111827&animation=fadeIn&fontAlignY=38&desc=Production%20static%20website%20%E2%80%A2%20SEO-first%20%E2%80%A2%20Performance-focused%20%E2%80%A2%20Accessibility-aware&descAlignY=64&descSize=18" />
-</p>
-
-<p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=20&pause=900&color=FFC400&center=true&vCenter=true&width=980&lines=Client-grade+static+site+for+a+real+service+business;Engineered+for+SEO%2C+speed%2C+and+reliability+on+Apache%2FcPanel;Dark+Blue+%26+Yellow+theme+for+GitHub;No+frameworks.+No+build+step.+Clean+delivery." />
-</p>
-
-<p align="center">
-  <a href="https://lupaservices.com">
-    <img src="https://img.shields.io/badge/Production-Live-0B3C5D?style=for-the-badge&logo=googlechrome&logoColor=white" />
-  </a>
-  <a href="https://github.com/danmarques127-sys/lupa-services">
-    <img src="https://img.shields.io/badge/GitHub-Repository-111827?style=for-the-badge&logo=github&logoColor=white" />
-  </a>
-  <a href="https://github.com/danmarques127-sys">
-    <img src="https://img.shields.io/badge/Author-DaNgelo%20Marques-F8F9FA?style=for-the-badge&logo=github&logoColor=0B3C5D" />
-  </a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Theme-Dark%20Blue%20%26%20Yellow-F8F9FA?style=for-the-badge&labelColor=0B3C5D&color=F8F9FA" />
-  <img src="https://img.shields.io/badge/Brand-Lupa%20Services-F8F9FA?style=for-the-badge&labelColor=FFC400&color=F8F9FA" />
-  <img src="https://img.shields.io/badge/Hosting-Apache%20%2F%20cPanel-111827?style=for-the-badge&logo=apache&logoColor=white" />
-</p>
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=rect&color=0:F8F9FA,50:0B3C5D,100:F8F9FA&height=2&section=header" />
-</p>
-
-
----
-
-## 🔍 Title + One-liner
-
-**Lupa Services & Lupa Painting** — a production-ready static website for a real dual-service company, operating **Cleaning** and **Painting** under a unified, SEO-driven, performance-focused engineering architecture.
-
-> Built and maintained by **Dangelo Marques**  
-> GitHub: https://github.com/danmarques127-sys
-
----
-
-## 🔗 Live Links
-
-- **Production:** https://lupaservices.com  
-- **GitHub Repository:** https://github.com/danmarques127-sys/lupa-services  
-
----
-
-## ✨ Features
-
-- **Dual-brand architecture** (Cleaning + Painting) sharing a single, consistent codebase
-- **SEO-first static structure** (semantic HTML, metadata, clean internal linking)
-- **Performance-focused delivery** with cache policy via **`.htaccess`**
-- **Accessibility-aware layout** (semantic landmarks, readable hierarchy, mobile-first)
-- **Deployment-ready** for **Apache/cPanel** with HTTPS (SSL enabled)
-
----
-
-## 🎨 Brand System 
-
-This project intentionally supports **two brands in one site**:
-
-### Lupa Services — Cleaning
-- Dark Blue `#0B3C5D`
-- White `#FFFFFF`
-
-### Lupa Painting
-- Yellow `#FFC400`
-- White `#FFFFFF`
-
-### Shared language
-- Dark blue for structure and trust  
-- Yellow for CTAs, highlights, and motion  
-- Clean white space for clarity and premium feel  
-
----
-
-## 🧰 Tech Stack
-
-<p align="center">
-  <img alt="HTML5" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" />
-  <img alt="CSS3" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" />
-  <img alt="JavaScript" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
-  <img alt="Apache" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apache/apache-original.svg" />
-  <img alt="Git" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" />
-  <img alt="GitHub" height="44" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" />
-  <img alt="HTTPS/SSL Secure" src="https://img.shields.io/badge/HTTPS%20%2F%20SSL-Secure-22C55E?style=for-the-badge&logo=letsencrypt&logoColor=white" />
-</p>
-
-- **HTML5** — semantic, SEO- and accessibility-oriented markup  
-- **CSS3** — responsive layout, animations, and brand system  
-- **Vanilla JavaScript** — lightweight interactions only  
-- **Apache (.htaccess)** — cache control, compression, and static hosting behavior  
-- **Git + GitHub** — versioning, release hygiene (tags/releases), collaboration  
-- **HTTPS / SSL** — secure production deployment
-- 
----
-
-## 🗂️ Project Structure
-
-> Production static-site layout — simple, portable, and predictable.
-
-/
-├── assets/
-│ ├── css/ # Stylesheets
-│ ├── js/ # JavaScript
-│ ├── img/ # Images (flattened; no /images nesting)
-│ └── icons/ # Icons + favicons (flattened; no /icons nesting)
-│
-├── seo/
-│ ├── robots.txt
-│ └── sitemap.xml
-│
-├── docs/
-│ └── ARCHITECTURE.md
-│
-├── .htaccess
-├── index.html
-├── cleaning.html
-├── painting.html
-└── *.html
-
----
-
-## 🚀 Deployment
-
-### Production Deployment (Apache / cPanel)
-
-The website is deployed on an Apache server with support for `.htaccess`
-rules for caching, routing, and security headers.
-
-Production environment considerations:
-- Server must allow `.htaccess` overrides
-- SEO assets (robots.txt, sitemap.xml) are publicly accessible
-- All internal links and assets are validated post-deployment
-
----
-
-## 🗄️ Cache Policy 
-
-- Static assets (CSS, JS, images, icons) are cached aggressively for repeat visits.  
-- HTML documents use shorter cache to avoid stale content after updates.
-
----
-
-## 📄 Documentation
-
-- `docs/ARCHITECTURE.md` — explains routing, asset strategy, SEO decisions, and performance trade-offs.
-
----
-
-## 📜 License 
-
-**All Rights Reserved**
-
-This repository represents a real client-grade production website.  
-Reuse, redistribution, or modification is not permitted without explicit authorization.
-
----
-
-## 👤 Author
-
-**Dangelo Marques**  
-Software Engineer • Web Architecture • SEO-driven Systems  
-GitHub: https://github.com/danmarques127-sys
-
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FFFFFF,60:FFC400,100:FFFFFF&height=120&section=footer" />
+  <img alt="HTML5" src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white">
+  <img alt="CSS3" src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css&logoColor=white">
+  <img alt="JavaScript" src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black">
+  <img alt="PHP" src="https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white">
+  <img alt="Responsive" src="https://img.shields.io/badge/Responsive-Design-087E8B?style=flat-square">
+  <img alt="SEO" src="https://img.shields.io/badge/SEO-Site%20Metadata-238636?style=flat-square">
+  <img alt="Hosting" src="https://img.shields.io/badge/Apache%20%2F%20cPanel-Hosting-D22128?style=flat-square&logo=apache&logoColor=white">
 </p>
 
 ---
+
+## Overview
+
+Lupa Painting's website features painting and related services, project showcases, company information, reviews, contact forms and a blog. The intended replacement version was supplied in two source archives: `vscode.zip` (pages) and `css_folder_services.zip` (CSS, JS and favicon assets).
+
+**Repository synchronization status:** The uploaded source archives differ from the legacy website currently tracked in this repository. The new version must be deployed and checked alongside its full media library; updating this README alone does not update the live website.
+
+## Technology Stack
+
+| Layer | Technologies |
+| --- | --- |
+| Frontend | HTML5, CSS3, vanilla JavaScript |
+| Dynamic pages | PHP blog |
+| Styling | Shared, page-specific and service-specific CSS |
+| Assets | Images, videos, SVG and favicon resources |
+| SEO | Sitemap, robots.txt, structured page metadata |
+| Hosting | Apache / cPanel-compatible hosting |
+
+## Intended Project Structure
+
+```text
+index.html
+about.html
+services.html
+reviews.html
+contact.html
+inspiration.html
+privacy.html
+terms.html
+blog.php
+404.html
+services/
+  interior-painting/
+  exterior-painting/
+  deck-fence-painting/
+  cabinet/
+  carpentry/
+  trim-door/
+  drywall-repair/
+  power-washing/
+  commercial/
+assets/
+  css_main/
+  css_pages/
+  css_folder_services/
+  js/
+  favicons/
+  images/      # large media provided separately
+  videos/      # large media provided separately
+```
+
+## Deployment
+
+1. Back up the live website and its entire media library before replacing existing files.
+2. Deploy the updated pages, CSS, JavaScript and favicons, preserving the directory structure.
+3. Restore all required photos and videos under the exact paths referenced in the pages.
+4. Configure PHP on the production host for `blog.php` and other dynamic functionality.
+5. Check HTTPS, rewrites, canonical URLs and the correct official production domain.
+6. Test navigation, all nine service categories, galleries, forms, blog and mobile layout.
+7. Verify sitemap and robots.txt, image/video loading, browser console and server logs.
+
+**Important:** some page metadata in the supplied source uses `lupaservices.com`, while the blog references `lupapaintingservices.com`. Choose and consistently apply the approved canonical domain before publishing. The HTML source includes a Formspree form endpoint; verify its owner, recipients and form delivery.
+
+## Security
+
+Do not commit private credentials, production API tokens, hosting passwords or client-private files. Review the PHP application, upload handling and server-side access controls before deployment. Never rely on `.gitignore` to erase secrets from old Git commits.
+
+## SEO & Maintenance
+
+Keep page titles, canonical URLs, service descriptions, sitemaps, structured data and Open Graph metadata consistent with the verified production domain. Maintain redirects from legacy URLs when replacing the previous website. Test mobile layouts and optimize heavy media files without breaking referenced paths.
+
+## Maintainer & Ownership
+
+Maintained under [danmarques127-sys](https://github.com/danmarques127-sys). Company branding, photography and video content remain subject to their respective usage rights.

@@ -26,7 +26,7 @@ Source code for the updated Lupa Painting website, including service pages, proj
 
 Lupa Painting's website features painting and related services, project showcases, company information, reviews, contact forms and a blog. The intended replacement version was supplied in two source archives: `vscode.zip` (pages) and `css_folder_services.zip` (CSS, JS and favicon assets).
 
-**Repository synchronization status:** The uploaded source archives differ from the legacy website currently tracked in this repository. The new version must be deployed and checked alongside its full media library; updating this README alone does not update the live website.
+**Development status:** The source ZIPs have been imported and the legacy website removed. The site includes an updated PHP publishing system, a MetroWest service-areas landing page, and corrected core SEO paths. Validate deployment and media paths on GoDaddy before launch.
 
 ## Technology Stack
 
@@ -71,6 +71,13 @@ assets/
   images/      # large media provided separately
   videos/      # large media provided separately
 ```
+
+## Blog & Local SEO
+
+- [Public painting blog](https://lupaservices.com/blog.php) — PHP article index and detail pages.
+- [PHP setup guide](backend-blog/SETUP.md) — protected editor, GoDaddy configuration and publishing.
+- [Service areas](https://lupaservices.com/service-areas.html) — MetroWest Massachusetts location coverage.
+- The blog saves posts and uploads on the PHP host, not in Git. Large images and videos may be hosted on GoDaddy only.
 
 ## Deployment
 

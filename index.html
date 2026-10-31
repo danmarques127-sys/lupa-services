@@ -1611,12 +1611,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       safeTrack('Contact', { method: 'sms', href: a.getAttribute('href') });
     }, { capture: true });
 
-    var form = document.getElementById('quoteForm');
-    if(form){
-      form.addEventListener('submit', function(){
-        safeTrack('Lead', { form: 'quoteForm' });
-      });
-    }
+    // Form success is tracked by app.js after a successful HTTP response.
   })();
   </script>
 </body>

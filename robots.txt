@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
-Disallow: /backend-blog/
+Disallow: /backend-blog/login.php
+Disallow: /backend-blog/dashboard.php
+Disallow: /backend-blog/logout.php
+Disallow: /backend-blog/setup-admin.php
+Disallow: /backend-blog/storage/
+Disallow: /backend-blog/uploads/
 Sitemap: https://lupaservices.com/sitemap.xml

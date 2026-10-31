@@ -81,7 +81,7 @@ $body = preg_replace('/^#\\s+' . preg_quote(trim((string)$post['title']), '/') .
 <link rel="stylesheet" href="/assets/css/blog-php.css">
 </head>
 <body class="blog-article-page">
-<header><a href="/blog.php">&larr; All articles</a><a href="/request-quote.html">Request a Quote</a></header>
+<header><a href="/blog.php">&larr; All articles</a><a href="/contact.html">Request a Quote</a></header>
 <main class="article-shell">
 <article class="article-container">
 <div class="article-kicker">VIANA COMMERCIAL SERVICES &nbsp; / &nbsp; CLEANING INSIGHTS</div>
@@ -91,7 +91,7 @@ $body = preg_replace('/^#\\s+' . preg_quote(trim((string)$post['title']), '/') .
 <?php if (!empty($post['video'])): ?><video class="article-cover" controls src="<?= h($post['video']) ?>"></video><?php endif; ?>
 <?php if (!empty($post['youtube'])): ?><p><a href="<?= h($post['youtube']) ?>" rel="noopener noreferrer" target="_blank">Watch the video</a></p><?php endif; ?>
 <div class="article-prose"><?= articleHtml($body) ?></div>
-<div class="article-footer"><strong>Need a cleaner workplace?</strong><p>Contact Lupa Painting for a free commercial cleaning quote.</p><a class="article-cta" href="/request-quote.html">Request a Free Quote &rarr;</a></div>
+<div class="article-footer"><strong>Need a cleaner workplace?</strong><p>Contact Lupa Painting for a free commercial cleaning quote.</p><a class="article-cta" href="/contact.html">Request a Free Quote &rarr;</a></div>
 </article>
 </main>
 </body>

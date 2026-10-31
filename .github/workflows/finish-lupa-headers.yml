@@ -1,0 +1,36 @@
+name: Finish Lupa page-header consistency
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/finish-lupa-headers.yml
+permissions:
+  contents: write
+jobs:
+  normalize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add original Lupa mobile menu and hero scripts
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          paths = sorted(Path('service-areas').glob('*.html')) + [Path('service-areas.html')]
+          for p in paths:
+              s=p.read_text(encoding='utf-8')
+              if 'src="/assets/js/app.js"' not in s:
+                  s=s.replace('</body>','<script src="/assets/js/app.js" defer></script><script src="/assets/js/services.js" defer></script></body>')
+              if p.name=='service-areas.html':
+                  s=s.replace('<h1>Professional Painting Services Across MetroWest Massachusetts</h1>','<h2>Professional Painting Services Across MetroWest Massachusetts</h2>')
+              p.write_text(s,encoding='utf-8')
+          print('Normalized',len(paths),'location pages')
+          PY
+      - name: Commit completed page behavior
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add service-areas service-areas.html
+          if ! git diff --cached --quiet; then
+            git commit -m "fix: enable Lupa mobile navigation and hero scripts on all local pages"
+            git push
+          fi

@@ -1,0 +1,70 @@
+name: Match every Lupa hero to About
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/match-about-heroes.yml
+permissions:
+  contents: write
+jobs:
+  match:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild hero wrappers using About template, preserve each page's content and videos
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('.')
+          about=Path('about.html').read_text(encoding='utf-8')
+          hero_re=re.compile(r'<header class="hero\b[\s\S]*?</header>',re.I)
+          template=hero_re.search(about).group()
+          def block(pattern,text):
+              match=re.search(pattern,text,re.I)
+              return match.group() if match else None
+          bg_pattern=r'<div class="hero__bg hero__bgVideo"[\s\S]*?</div>'
+          title_pattern=r'<div class="serviceHeroTitle">[\s\S]*?</p>\s*</div>'
+          action_pattern=r'<div class="hero__actions hero__actions--only serviceHeroActions">[\s\S]*?</div>'
+          scroll_pattern=r'<a class="hero__scroll"[\s\S]*?</a>'
+          pages=[p for p in root.rglob('*.html') if '.github' not in p.parts and p.name!='index.html']
+          pages += [Path('blog.php')]
+          changed=[]
+          for p in pages:
+              if p.name=='about.html': continue
+              s=p.read_text(encoding='utf-8')
+              m=hero_re.search(s)
+              if not m: continue
+              original=m.group()
+              title=block(title_pattern,original)
+              bg=block(bg_pattern,original)
+              actions=block(action_pattern,original)
+              scroll=block(scroll_pattern,original)
+              if not title or not bg or not actions: continue
+              new=template
+              new=re.sub(bg_pattern,lambda _:bg,new,count=1,flags=re.I)
+              new=re.sub(title_pattern,lambda _:title,new,count=1,flags=re.I)
+              new=re.sub(action_pattern,lambda _:actions,new,count=1,flags=re.I)
+              if scroll:
+                  new=re.sub(scroll_pattern,lambda _:scroll,new,count=1,flags=re.I)
+              # Exactly the About wrapper and content hierarchy; other media/text remain page-specific.
+              new=new.replace('id="pageHero"', 'id="pageHero"')
+              updated=s[:m.start()]+new+s[m.end():]
+              if '/assets/css_main/css_services/hero.css' in updated:
+                  updated=re.sub(r'/assets/css_main/css_services/hero.css(?:\?v=[^"\']*)?', '/assets/css_main/css_services/hero.css?v=20261031-hero-fix',updated)
+              else:
+                  updated=updated.replace('</head>','<link rel="stylesheet" href="/assets/css_main/css_services/hero.css?v=20261031-hero-fix"></head>')
+              if updated!=s:
+                  p.write_text(updated,encoding='utf-8')
+                  changed.append(str(p))
+          print('Updated hero wrappers',len(changed),changed)
+          PY
+      - name: Commit standardized heroes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.html' '*.php'
+          if ! git diff --cached --quiet; then
+            git commit -m "design: match About hero structure on all pages except homepage"
+            git push
+          fi

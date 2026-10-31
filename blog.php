@@ -9,7 +9,7 @@ $articles=posts();
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css_main/global.css">
 <link rel="stylesheet" href="/assets/css_main/css_services/services.css">
-<link rel="stylesheet" href="/assets/css_main/css_services/hero.css">
+<link rel="stylesheet" href="/assets/css_main/css_services/hero.css?v=20261031-hero-fix">
 <link rel="stylesheet" href="/assets/css_main/footer.css">
 <style>.lupaBlogListing{padding:65px 0;background:#0b0d12;color:white}.lupaBlogGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}.lupaBlogCard{background:#161a22;border:1px solid #393e45;border-radius:12px;overflow:hidden}.lupaBlogCardContent{padding:22px}.lupaBlogCard img{width:100%;height:220px;object-fit:cover}.lupaBlogCard a{color:#f3c926}.lupaBlogListing .container{max-width:1150px}.lupaBlogFooter{padding:30px;text-align:center;background:#090c12;color:white}.lupaBlogFooter a{color:#f3c926}</style>
 <script type="application/ld+json"><?=json_encode(['@context'=>'https://schema.org','@type'=>'Blog','name'=>'Lupa Painting Blog','url'=>'https://lupaservices.com/blog.php','publisher'=>['@type'=>'Organization','name'=>'Lupa Painting','url'=>'https://lupaservices.com/']],JSON_UNESCAPED_SLASHES)?></script>

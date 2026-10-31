@@ -66,6 +66,7 @@ $articles=posts();
       <source src="/assets/videos/LUCAS - LUPA SERVICES - EXTERIOR PAINTING.mp4" type="video/mp4" />
     </video>
   </div>
+  </div>
 
   <!-- Overlay -->
   <div class="hero__overlay" aria-hidden="true"></div>

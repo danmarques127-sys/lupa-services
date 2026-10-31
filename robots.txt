@@ -1,7 +1,4 @@
-```txt
 User-agent: *
 Allow: /
-
-# Sitemap
+Disallow: /backend-blog/
 Sitemap: https://lupaservices.com/sitemap.xml
-```

@@ -1020,6 +1020,24 @@
     });
   }
 
+  // Respect autoplay policies: sound is enabled only by explicit user action.
+  const aboutSoundToggle = document.getElementById("aboutSoundToggle");
+  const aboutSoundVideo = document.getElementById("aboutVideo");
+  if (aboutSoundToggle && aboutSoundVideo) {
+    aboutSoundToggle.addEventListener("click", () => {
+      const enableSound = aboutSoundVideo.muted;
+      aboutSoundVideo.muted = !enableSound;
+      aboutSoundVideo.volume = enableSound ? 0.35 : 0;
+      aboutSoundToggle.textContent = enableSound ? "MUTE VIDEO" : "ENABLE VIDEO SOUND";
+      aboutSoundToggle.setAttribute("aria-pressed", String(enableSound));
+      aboutSoundToggle.setAttribute("aria-label", enableSound ? "Mute video sound" : "Turn on video sound");
+      if (enableSound) {
+        const result = aboutSoundVideo.play();
+        if (result && typeof result.catch === "function") result.catch(() => {});
+      }
+    });
+  }
+
   // 10) About video autoplay and popup
   const aboutVideo = document.getElementById("aboutVideo");
   const videoPopup = document.getElementById("videoPopup");

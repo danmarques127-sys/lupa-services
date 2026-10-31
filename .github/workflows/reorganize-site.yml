@@ -1,0 +1,104 @@
+name: Reorganize Lupa repository from original ZIP sources
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/reorganize-site.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: lupa-source-reorganization
+  cancel-in-progress: false
+
+jobs:
+  restructure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Rebuild the site exactly from the source archives and preserve media
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path, PurePosixPath
+          from zipfile import ZipFile
+          import shutil, subprocess, tempfile
+          root = Path.cwd()
+          zips = ['vscode.zip', 'css_folder_services.zip']
+          for z in zips:
+              if not (root/z).is_file():
+                  raise SystemExit('Required uploaded archive missing: ' + z)
+          output = {}
+          for zipname in zips:
+              with ZipFile(root/zipname) as z:
+                  for item in z.infolist():
+                      if item.is_dir():
+                          continue
+                      p = PurePosixPath(item.filename)
+                      if p.is_absolute() or '..' in p.parts:
+                          raise SystemExit('Unsafe path in ZIP')
+                      if zipname == 'vscode.zip':
+                          if p.parts[0] == '.vscode':
+                              continue
+                          dest = p
+                      else:
+                          mapping = {
+                              'css_folder_services':'assets/css_folder_services',
+                              'css_main':'assets/css_main',
+                              'css_pages':'assets/css_pages',
+                              'js':'assets/js',
+                              'favicons':'assets/favicons'
+                          }
+                          if p.parts[0] not in mapping:
+                              raise SystemExit('Unexpected source directory: '+str(p))
+                          dest = PurePosixPath(mapping[p.parts[0]],*p.parts[1:])
+                      output[str(dest)] = z.read(item)
+          if len(output) < 65 or not {'index.html','services.html','services/cabinet/gallery.html','assets/js/app.js','assets/css_main/index.css'}.issubset(output):
+              raise SystemExit('Archive contents incomplete; no cleanup performed')
+          # Retain only the original ZIP sources, current README/LICENSE and the workflow.
+          # Keep all old image/video assets but move them into the new directory conventions.
+          preserve = {'README.md', 'LICENSE', '.gitignore', '.github/workflows/reorganize-site.yml'}
+          media = {}
+          tracked = subprocess.check_output(['git','ls-files','-z']).decode().split('\0')
+          for name in filter(None,tracked):
+              p=PurePosixPath(name)
+              suffix=p.suffix.lower()
+              if name.startswith('assets/images/') or name.startswith('assets/videos/'):
+                  target=name
+              elif name.startswith('images/'):
+                  target='assets/'+name
+              elif suffix in {'.mp4','.webm','.mov'} and len(p.parts)==1:
+                  target='assets/videos/'+p.name
+              else:
+                  continue
+              if target not in output and target not in media:
+                  media[target]=(root/name).read_bytes()
+          desired = {**output,**media}
+          for name in filter(None,tracked):
+              if name in preserve:
+                  continue
+              path = root/name
+              if path.exists() and path.is_file():
+                  path.unlink()
+          for name,blob in desired.items():
+              path=root/name
+              path.parent.mkdir(parents=True,exist_ok=True)
+              path.write_bytes(blob)
+          print('Website files from ZIP:',len(output))
+          print('Retained image/video files:',len(media))
+          print('Legacy files removed from working tree')
+          PY
+      - name: Commit restructuring
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m 'refactor: rebuild Lupa site from supplied archives and preserve media'
+            git push origin HEAD:main
+          fi

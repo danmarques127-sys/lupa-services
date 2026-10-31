@@ -1,0 +1,1975 @@
+/* ================================
+   services.css
+   - Services page (main sections)
+   - Ajustes: cards MAIS LARGOS (wide), menos “margem”, nada cortado,
+     watermark "LUPA PAINTING" no background, e animação de entrada.
+   - NÃO mexe em global/footer/hero
+================================== */
+
+/* ---------- Services section: mais “wide” + sobe conteúdo ---------- */
+#servicesList{
+  position: relative;
+  overflow: hidden;
+}
+
+/* sobe um pouco o bloco (menos “vazio” antes dos cards) */
+.servicesList--up{
+  padding-top: 56px;   /* era maior */
+  padding-bottom: 84px;
+}
+
+/* deixa o container mais largo SÓ nessa seção (cards mais wide) */
+.servicesList--up .container{
+  max-width: 1560px;           /* MAIS LARGO para ocupar mais as extremidades */
+  padding-left: 12px;          /* reduz “margem” lateral */
+  padding-right: 12px;
+}
+
+@media (max-width: 980px){
+  .servicesList--up{
+    padding-top: 48px;
+    padding-bottom: 76px;
+  }
+  .servicesList--up .container{
+    max-width: 1160px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+/* ---------- Watermark background: "LUPA PAINTING" repetido ---------- */
+/* camada de watermark por trás (bem sutil) */
+#servicesList::after{
+  content:"";
+  position:absolute;
+  inset:-60px;                 /* folga para não “cortar” o padrão */
+  pointer-events:none;
+  z-index: 0;
+
+  /* SVG com texto repetido */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='220'%3E%3Cg transform='rotate(-12 260 110)'%3E%3Ctext x='0' y='80' font-family='Inter, Arial, sans-serif' font-size='48' font-weight='900' fill='white' fill-opacity='0.06'%3ELUPA%20PAINTING%3C/text%3E%3Ctext x='0' y='160' font-family='Inter, Arial, sans-serif' font-size='48' font-weight='900' fill='white' fill-opacity='0.04'%3ELUPA%20PAINTING%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 520px 220px;
+  background-position: center;
+}
+
+/* garante que o conteúdo fica acima do watermark */
+#servicesList > .container{
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Shared headings (page only) ---------- */
+.sectionHead{
+  margin-bottom: 28px; /* menor para “subir” os cards na primeira tela */
+}
+
+.sectionHead--center{
+  text-align:center;
+  max-width: 980px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* ---------- Services grid (links) ---------- */
+.servicesGrid{
+  display:grid;
+
+  /* MAIS WIDE: 3 colunas por padrão (cards ficam mais largos) */
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 18px;                  /* menos “vazio” entre cards */
+  align-items: stretch;
+}
+
+/* em telas bem grandes: pode voltar pra 4 colunas sem “apertar” demais */
+@media (min-width: 1600px){
+  .servicesGrid{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 1100px){
+  .servicesGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 980px){
+  .servicesGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px){
+  .servicesGrid{ grid-template-columns: 1fr; }
+}
+
+/* ---------- Reveal / entrada em cena (grid + cascata) ---------- */
+.servicesGrid.reveal .serviceCard{
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity .7s ease,
+    transform .7s ease,
+    background-color .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
+  will-change: transform, opacity;
+}
+
+.servicesGrid.reveal.active .serviceCard,
+.servicesGrid.reveal.isIn .serviceCard{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Cascata */
+.servicesGrid.reveal.active .serviceCard:nth-child(1),
+.servicesGrid.reveal.isIn    .serviceCard:nth-child(1){ transition-delay: .06s; }
+.servicesGrid.reveal.active .serviceCard:nth-child(2),
+.servicesGrid.reveal.isIn    .serviceCard:nth-child(2){ transition-delay: .12s; }
+.servicesGrid.reveal.active .serviceCard:nth-child(3),
+.servicesGrid.reveal.isIn    .serviceCard:nth-child(3){ transition-delay: .18s; }
+.servicesGrid.reveal.active .serviceCard:nth-child(4),
+.servicesGrid.reveal.isIn    .serviceCard:nth-child(4){ transition-delay: .24s; }
+.servicesGrid.reveal.active .serviceCard:nth-child(5),
+.servicesGrid.reveal.isIn    .serviceCard:nth-child(5){ transition-delay: .10s; }
+.servicesGrid.reveal.active .serviceCard:nth-child(6),
+.servicesGrid.reveal.isIn    .serviceCard:nth-child(6){ transition-delay: .16s; }
+.servicesGrid.reveal.active .serviceCard:nth-child(7),
+.servicesGrid.reveal.isIn    .serviceCard:nth-child(7){ transition-delay: .22s; }
+.servicesGrid.reveal.active .serviceCard:nth-child(8),
+.servicesGrid.reveal.isIn    .serviceCard:nth-child(8){ transition-delay: .28s; }
+
+/* ---------- Card (wide, sem aumentar altura) ---------- */
+.serviceCard{
+  position: relative;
+  display:flex;
+  flex-direction: column;
+
+  /* OPACO (para o watermark não “vazar” e confundir o texto) */
+  background: rgba(10,10,10,.92);
+  border: 1px solid rgba(255,255,255,.12);
+
+  /* ARREDONDADO SÓ EM CIMA (CTA band continua quadrado) */
+  border-radius: 14px 14px 0 0;
+
+  overflow:hidden;
+
+  /* reduz altura (pra caber melhor na primeira dobra) */
+  min-height: 310px;
+
+  box-shadow: none;
+
+  /* mantém hover/efeito suave sem quebrar o reveal */
+  transition:
+    background-color .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease,
+    transform .2s ease;
+}
+
+/* mídia um pouco menor (ajuda a “subir” tudo na primeira tela) */
+.serviceCard__media{
+  position: relative;
+  width: 100%;
+  height: 150px;               /* era 170 */
+  overflow:hidden;
+  background: rgba(0,0,0,.20);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+}
+
+.serviceCard__media img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  transform: scale(1.03);
+  filter: contrast(1.06) saturate(1.06);
+  transition: transform .45s ease, filter .45s ease;
+}
+
+/* overlay para legibilidade */
+.serviceCard__media::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    180deg,
+    rgba(0,0,0,.06) 0%,
+    rgba(0,0,0,.32) 60%,
+    rgba(0,0,0,.58) 100%
+  );
+  pointer-events:none;
+  transition: opacity .25s ease;
+}
+
+/* corpo mais compacto (sobe o texto) */
+.serviceCard__body{
+  position: relative;
+  padding: 18px 18px 16px;     /* era 24 */
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.serviceCard__title{
+  margin: 0;
+  text-align:center;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: #fff;
+  font-size: 16px;
+}
+
+.serviceCard__desc{
+  margin: 0;
+  text-align:center;
+  color: rgba(255,255,255,.62);
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+.serviceCard__cta{
+  margin-top: auto;
+  padding-top: 10px;
+  text-align:center;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: transform .2s ease, color .2s ease;
+}
+
+/* Hover premium */
+.serviceCard:hover{
+  background: var(--accent);
+  border-color: rgba(0,0,0,.28);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 34px rgba(250,204,21,.14);
+}
+
+.serviceCard:hover .serviceCard__title,
+.serviceCard:hover .serviceCard__desc,
+.serviceCard:hover .serviceCard__cta{
+  color:#000;
+}
+
+.serviceCard:hover .serviceCard__media::after{
+  opacity: 0;
+}
+
+.serviceCard:hover .serviceCard__media img{
+  transform: scale(1.10);
+  filter: contrast(1.14) saturate(1.14);
+}
+
+/* ---------- CTA band ---------- */
+.servicesCtaBand{
+  margin-top: 34px;
+
+  /* OPACO (igual os cards) */
+  background: rgba(10,10,10,.92);
+
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 0;            /* CTA continua QUADRADO */
+  padding: 38px 34px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 20px;
+}
+
+.servicesCtaBand__title{
+  margin:0 0 10px;
+  font-size: 28px;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  color:#fff;
+}
+
+.servicesCtaBand__text{
+  margin:0;
+  max-width: 720px;
+}
+
+@media (max-width: 980px){
+  .servicesCtaBand{
+    padding: 28px 22px;
+    flex-direction: column;
+    align-items:flex-start;
+  }
+}
+
+/* ---------- Pequenos ajustes para caber melhor na “primeira dobra” ---------- */
+#servicesList .muted{
+  max-width: 880px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* mantém reveal consistente com seu JS */
+.reveal{ overflow: visible; }
+/* ================================
+   SERVICES LIST — Mobile Carousel (CENTERED) + Dots
+   ✅ Replica do mecanismo da HOME (spacers before/after + snap center)
+   Obs: mantém seu grid no desktop
+================================== */
+
+/* dots: default hidden */
+#servicesList .servicesDots{
+  display:none;
+}
+
+/* ===== Mobile carousel CENTRALIZADO (igual HOME) ===== */
+@media (max-width: 620px){
+
+  /* ✅ largura real do card: nunca “gigante” */
+  #servicesList{
+    --serviceCardW: clamp(300px, 86vw, 420px);
+  }
+
+  /* rail vira carousel */
+  #servicesList .servicesGrid{
+    display:flex;
+    gap: 14px !important;
+
+    overflow-x: auto;
+    overflow-y: visible;
+
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+
+    /* ✅ sem margem negativa / sem corte */
+    padding: 0 0 14px;
+    margin: 0;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    box-shadow: none !important;
+    background: transparent !important;
+    box-sizing: border-box;
+  }
+  #servicesList .servicesGrid::-webkit-scrollbar{ display:none; }
+
+  /* ✅ spacers para centralizar o 1º e o último card (igual HOME) */
+  #servicesList .servicesGrid::before,
+  #servicesList .servicesGrid::after{
+    content:"";
+    display:block;
+    flex: 0 0 calc((100vw - var(--serviceCardW)) / 2);
+  }
+
+  /* card vira slide central */
+  #servicesList .servicesGrid .serviceCard{
+    flex: 0 0 var(--serviceCardW);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+
+    /* evita “hover grudado” no touch */
+    transform: none;
+    box-shadow: none !important;
+  }
+
+  /* ✅ desliga hover lift/sombra no mobile (touch às vezes gruda) */
+  #servicesList .serviceCard:hover{
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* dots visíveis no mobile */
+  #servicesList .servicesDots{
+    display:flex;
+    gap: 10px;
+    justify-content:center;
+    margin-top: 14px;
+    pointer-events:auto;
+  }
+
+  /* RESET completo pra button não virar "traço" */
+  #servicesList .servicesDots .dot{
+    appearance: none;
+    -webkit-appearance: none;
+
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+
+    border-radius: 999px;
+    background: rgba(255,255,255,.22);
+
+    display: inline-block;
+    line-height: 0;
+    font-size: 0;
+
+    box-shadow: none;
+    outline: none;
+
+    cursor: pointer;
+  }
+
+  #servicesList .servicesDots .dot.is-active{
+    background: var(--gold);
+  }
+}
+
+/* telas muito pequenas: abre um pouco, mas com limite */
+@media (max-width: 480px){
+  #servicesList{
+    --serviceCardW: clamp(280px, 90vw, 420px);
+  }
+}
+/* =========================================================
+   SERVICES LIST — Mobile: Subtitle after cards + CTA centered
+========================================================= */
+@media (max-width: 620px){
+
+  /* ✅ mantém o TÍTULO antes dos cards */
+  /* (não mexe no h2) */
+
+  /* 1) esconde o subtítulo ORIGINAL no header (mobile) */
+  #servicesList .sectionHead .muted{
+    display:none !important;
+  }
+
+  /* 2) recria o subtítulo DEPOIS dos cards (mobile) */
+  #servicesList #servicesRail::after{
+    content: "Choose a service to view details, what’s included, and examples. Each service has its own page.";
+    display:block;
+
+    margin-top: 16px;
+    padding: 0 10px;
+
+    text-align:center;
+    color: rgba(255,255,255,.62);
+    line-height: 1.55;
+    font-size: 14px;
+
+    /* ✅ não vira “slide” do carrossel */
+    flex: 0 0 100%;
+    scroll-snap-align: none;
+  }
+
+  /* =========================
+     CTA BAND — centralizado (mobile)
+  ========================= */
+
+  #servicesList .servicesCtaBand{
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  #servicesList .servicesCtaBand__left{
+    width: 100%;
+  }
+
+  #servicesList .servicesCtaBand__text{
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #servicesList .servicesCtaBand__right{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* ---------- Process INSANE section (FINAL / CORRIGIDO) ---------- */
+
+#process.process{
+  position: relative;
+  overflow: hidden;
+
+  /* controle fino do fundo */
+  --process-bg: url('/assets/images/process/prep.jpg');
+  --process-bg-2: var(--process-bg);
+}
+
+/* camadas de BG com crossfade */
+#process.process .process__bg{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+}
+
+/* camada A */
+#process.process .process__bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: var(--process-bg);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  filter: saturate(1.05) contrast(1.02);
+  opacity: 1;
+  transition: opacity .45s ease;
+}
+
+/* camada B */
+#process.process .process__bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: var(--process-bg-2);
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  filter: saturate(1.05) contrast(1.02);
+  opacity: 0;
+  transition: opacity .45s ease;
+}
+
+/* quando trocar a imagem, o JS alterna a classe pra crossfade */
+#process.process.is-bg-b .process__bg::before{ opacity: 0; }
+#process.process.is-bg-b .process__bg::after{ opacity: 1; }
+
+/* overlay filter (tipo hero) */
+#process.process::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  background:
+    radial-gradient(900px 520px at 18% 10%, rgba(0,0,0,.12), rgba(0,0,0,.62) 58%, rgba(0,0,0,.84)),
+    linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.78));
+  pointer-events:none;
+}
+
+#process.process > .container{
+  position:relative;
+  z-index:2;
+}
+
+/* Shell: cards + details */
+.processShell{
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+}
+
+/* DESKTOP/TABLET grid */
+.processGrid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* base card */
+.processCard{
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 0;
+  padding: 22px 20px;
+  cursor: pointer;
+  outline: none;
+
+  transition:
+    transform .24s ease,
+    background-color .24s ease,
+    border-color .24s ease,
+    box-shadow .24s ease;
+  will-change: transform;
+}
+
+/* cascade feel */
+.processGrid .processCard:nth-child(1){ transition-delay: 0ms; }
+.processGrid .processCard:nth-child(2){ transition-delay: 35ms; }
+.processGrid .processCard:nth-child(3){ transition-delay: 70ms; }
+.processGrid .processCard:nth-child(4){ transition-delay: 105ms; }
+
+.processCard:focus-visible{
+  box-shadow: 0 0 0 3px rgba(255,255,255,.18);
+}
+
+/* title base */
+.processCard__title{
+  margin:0 0 10px;
+  font-weight: 950;
+  letter-spacing: .10em;
+  text-transform: uppercase;
+  font-size: 12px;
+  color: var(--accent);
+  transition: color .22s ease;
+}
+
+.processCard__text{
+  margin:0;
+  font-size: 14px;
+  transition: color .22s ease, opacity .22s ease;
+}
+
+/* hover/active => amarelo */
+.processCard:hover,
+.processCard.is-active{
+  background: #ffd400;
+  border-color: rgba(0,0,0,.25);
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(0,0,0,.25);
+}
+
+.processCard:hover .processCard__title,
+.processCard.is-active .processCard__title{
+  color: #111;
+}
+
+.processCard:hover .processCard__text,
+.processCard.is-active .processCard__text{
+  color: #111;
+  opacity: 1;
+}
+
+/* DETAILS PANEL */
+.processDetail{
+  background: rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.10);
+  padding: 24px 22px;
+}
+
+.processDetail__inner{
+  transition: opacity .22s ease, transform .22s ease, filter .22s ease;
+}
+
+.processDetail__inner.is-exiting{
+  opacity: 0;
+  transform: translateY(6px);
+  filter: blur(2px);
+}
+
+.processDetail__inner.is-entering{
+  opacity: 0;
+  transform: translateY(8px);
+  filter: blur(3px);
+}
+
+/* content */
+.processDetail__title{
+  margin: 0 0 6px;
+  font-weight: 950;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: 13px;
+  color: var(--accent);
+}
+
+.processDetail__lead{
+  margin: 0 0 16px;
+  max-width: 78ch;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.processDetail__grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.processDetail__block{
+  background: rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.08);
+  padding: 14px 14px;
+}
+
+.processDetail__h{
+  margin: 0 0 10px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: rgba(255,255,255,.95);
+}
+
+.processDetail__list{
+  margin: 0;
+  padding-left: 16px;
+}
+.processDetail__list li{
+  margin: 7px 0;
+}
+
+/* responsive tablet */
+@media (max-width: 980px){
+  .processGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .processDetail__grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 640px){
+  .processDetail{ padding: 20px 18px; }
+  .processDetail__grid{ grid-template-columns: 1fr; }
+}
+
+/* =========================================================
+   MOBILE (<=560px) — SLIDER + DOTS AMARELOS + HINT AMARELO
+   (1 card central + peek)
+========================================================= */
+@media (max-width: 560px){
+
+  /* seção um pouco mais compacta */
+  #process.process.section{
+    padding-top: 46px;
+    padding-bottom: 46px;
+  }
+
+  .processShell{
+    overflow: visible;
+    gap: 12px;
+  }
+
+  /* largura controlada do card */
+  #process.process{
+    --processCardW: clamp(260px, 84vw, 340px);
+  }
+
+  /* TRACK do slider (mesma lógica do services) */
+  .processGrid{
+    display: flex !important;
+    grid-template-columns: none !important;
+    grid-auto-flow: unset !important;
+    grid-auto-columns: unset !important;
+
+    gap: 12px;
+
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+
+    /* sem padding lateral em % (isso desalinha) */
+    padding: 0 0 6px;
+    margin: 0;
+
+    transform: none !important;   /* deixa o CSS/scroll cuidar do visual */
+    transition: none !important;
+
+    touch-action: pan-x pan-y;
+    user-select: none;
+    -webkit-user-select: none;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .processGrid::-webkit-scrollbar{ display: none; }
+
+  /* spacers pra centralizar primeiro e último card */
+  .processGrid::before,
+  .processGrid::after{
+    content:"";
+    display:block;
+    flex: 0 0 calc((100vw - var(--processCardW)) / 2);
+  }
+
+  .processGrid.is-dragging{
+    cursor: grabbing;
+  }
+
+  /* card amarelo / cards do processo */
+  .processCard{
+    flex: 0 0 var(--processCardW);
+    min-width: var(--processCardW);
+    max-width: var(--processCardW);
+
+    box-sizing: border-box;
+    padding: 16px 14px;
+
+    transform: none !important;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  /* snap */
+  .processGrid{
+    scroll-snap-type: x mandatory;
+  }
+
+  /* no mobile, hover não “levanta” */
+  .processCard:hover{
+    transform: none !important;
+  }
+
+  /* indicador do ativo */
+  .processCard.is-active{
+    position: relative;
+  }
+  .processCard.is-active::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    height: 4px;
+    background: rgba(0,0,0,.35);
+  }
+
+  /* painel */
+  .processDetail{
+    padding: 18px 16px;
+  }
+
+  /* DOTS amarelos */
+  .processDots{
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 10px;
+  }
+  .processDot{
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 212, 0, .25);
+    border: 1px solid rgba(255, 212, 0, .55);
+    padding: 0;
+    cursor: pointer;
+  }
+  .processDot.is-active{
+    background: #ffd400;
+    border-color: rgba(0,0,0,.28);
+  }
+
+  /* hint amarelo */
+  .processSwipeHint{
+    margin: 10px 0 0;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #ffd400;
+    opacity: .95;
+  }
+}
+/* CTA final da seção Process */
+.processCtaWrap{
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.processCtaBtn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 22px;
+  background: #ffd400; /* amarelo */
+  color: #000;         /* escrita preta */
+  border: 2px solid #ffd400;
+  border-radius: 0;    /* bordas quadradas */
+  font-weight: 700;
+  text-decoration: none;
+  letter-spacing: .2px;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.processCtaBtn:hover,
+.processCtaBtn:focus-visible{
+  background: #fff;    /* hover branco */
+  color: #000;         /* escrita preta */
+  border-color: #fff;
+  outline: none;
+}
+
+/* Mobile: botão centralizado e "Text Us" */
+@media (max-width: 768px){
+  .processCtaWrap{
+    margin-top: 20px;
+    justify-content: center;
+  }
+
+  .processCtaBtn{
+    width: min(92vw, 360px);
+    text-align: center;
+    margin-inline: auto;
+    padding: 0 16px;
+  }
+
+  .processCtaBtn::after{
+    content: "Text Us";
+  }
+
+  .processCtaBtn{
+    font-size: 0; /* esconde o texto original no mobile */
+  }
+
+  .processCtaBtn::after{
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
+    line-height: 1;
+  }
+}
+/* =========================================================
+   PAINT GUIDE - VISUAL SURFACE CARDS + STACKED MOBILE CAROUSEL
+   (desktop grid + mobile center-focus carousel style)
+========================================================= */
+
+:root{
+  --paint-yellow: #ffd400;
+  --paint-black: #080808;
+  --paint-line: rgba(255,255,255,.10);
+  --paint-panel: rgba(255,255,255,.04);
+  --paint-panel-2: rgba(255,255,255,.02);
+}
+
+/* ---------- Surface cards area ---------- */
+.paintSurfaceWrap{
+  margin-top: 8px;
+}
+
+.paintSurfaceRail{
+  display:grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  perspective: 1000px;
+}
+
+.surfaceCard{
+  border: 1px solid var(--paint-line);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+  border-radius: 18px 18px 0 0;
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    transform .28s ease,
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background-color .25s ease;
+  min-height: 100%;
+}
+
+.surfaceCard__media{
+  position: relative;
+  aspect-ratio: 1.05 / 1;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.surfaceCard__media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+  transition: transform .45s ease, filter .3s ease;
+}
+
+.surfaceCard__overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(180deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.18) 45%, rgba(0,0,0,.72) 100%);
+  transition: opacity .25s ease, background .25s ease;
+}
+
+.surfaceCard__body{
+  padding: 12px 12px 14px;
+  min-height: 88px;
+}
+
+.surfaceCard__label{
+  margin: 0 0 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: rgba(255,255,255,.70);
+  font-weight: 800;
+}
+
+.surfaceCard__reco{
+  margin:0;
+  font-size: 13px;
+  line-height: 1.35;
+  color:#fff;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+/* Hover / active effect (desktop) */
+.surfaceCard:hover,
+.surfaceCard.is-active{
+  border-color: rgba(255,212,0,.85);
+  background: var(--paint-yellow);
+  box-shadow:
+    0 0 0 1px rgba(255,212,0,.75) inset,
+    0 0 22px rgba(255,212,0,.18);
+  transform: translateY(-2px);
+}
+
+.surfaceCard:hover .surfaceCard__media img,
+.surfaceCard.is-active .surfaceCard__media img{
+  transform: scale(1.04);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+.surfaceCard:hover .surfaceCard__overlay,
+.surfaceCard.is-active .surfaceCard__overlay{
+  background:
+    linear-gradient(180deg, rgba(255,212,0,.00) 0%, rgba(255,212,0,.05) 35%, rgba(255,212,0,.35) 100%);
+}
+
+.surfaceCard:hover .surfaceCard__label,
+.surfaceCard:hover .surfaceCard__reco,
+.surfaceCard.is-active .surfaceCard__label,
+.surfaceCard.is-active .surfaceCard__reco{
+  color: var(--paint-black);
+}
+
+/* ---------- Dynamic reason box ---------- */
+.surfaceReason{
+  margin-top: 14px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.55);
+  border-radius: 16px 16px 0 0;
+  padding: 16px 16px 14px;
+  min-height: 112px;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+
+.surfaceReason__kicker{
+  margin:0 0 6px;
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.surfaceReason__reco{
+  margin:0 0 8px;
+  font-size: 14px;
+  line-height: 1.35;
+  color:#fff;
+  font-weight: 900;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.surfaceReason__text{
+  margin:0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.surfaceReason.is-highlight{
+  border-color: rgba(255,212,0,.45);
+  box-shadow: 0 0 24px rgba(255,212,0,.08);
+}
+
+/* ---------- Carousel controls (hidden desktop) ---------- */
+.surfaceCarouselCtrls{
+  display:none;
+  margin-top: 10px;
+  justify-content: center;
+  gap: 10px;
+}
+
+.surfaceNav{
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.04);
+  color:#fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor:pointer;
+  transition: all .2s ease;
+}
+
+.surfaceNav:hover{
+  background: var(--paint-yellow);
+  color: var(--paint-black);
+  border-color: rgba(255,212,0,.9);
+  box-shadow: 0 0 18px rgba(255,212,0,.2);
+}
+
+/* ---------- Sheen block ---------- */
+.sheenBlock{
+  margin-top: 24px;
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px 14px 0 0;
+  padding: 24px 20px;
+}
+
+.sheenBlock__title{
+  margin: 0 0 16px;
+  color: var(--accent);
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+.sheenGrid{
+  display:grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.sheenItem{
+  border: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  padding: 14px 12px;
+  border-radius: 14px 14px 0 0;
+  transition: .25s ease;
+}
+
+.sheenItem h4{
+  margin:0 0 8px;
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 900;
+  color:#fff;
+  line-height: 1.35;
+}
+.sheenItem p{
+  margin:0 0 10px;
+  font-size: 13px;
+}
+.sheenItem__list{
+  margin:0;
+  padding:0;
+  list-style:none;
+  display:grid;
+  gap:6px;
+  color: rgba(255,255,255,.78);
+  font-size:12px;
+  line-height:1.4;
+}
+.sheenItem__list strong{ color:#fff; font-weight:900; }
+
+/* Hover amarelo + intensidade de glow pelo brilho */
+.sheenItem:hover{
+  background: var(--paint-yellow);
+  color: var(--paint-black);
+  border-color: rgba(255,212,0,.9);
+  transform: translateY(-2px);
+}
+.sheenItem:hover h4,
+.sheenItem:hover p,
+.sheenItem:hover .sheenItem__list,
+.sheenItem:hover .sheenItem__list strong{
+  color: var(--paint-black) !important;
+}
+.sheenItem--matte:hover{
+  box-shadow: 0 0 8px rgba(255,212,0,.10), 0 0 14px rgba(255,212,0,.06);
+}
+.sheenItem--eggshell:hover{
+  box-shadow: 0 0 12px rgba(255,212,0,.16), 0 0 22px rgba(255,212,0,.08);
+}
+.sheenItem--satin:hover{
+  box-shadow: 0 0 18px rgba(255,212,0,.24), 0 0 30px rgba(255,212,0,.12);
+}
+.sheenItem--semi:hover{
+  box-shadow: 0 0 24px rgba(255,212,0,.34), 0 0 42px rgba(255,212,0,.18);
+}
+.sheenItem--gloss:hover{
+  box-shadow: 0 0 32px rgba(255,212,0,.48), 0 0 56px rgba(255,212,0,.24);
+}
+
+/* ---------- CTA ---------- */
+.paintCta{
+  margin-top: 22px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: #0b0b0b;
+  border-radius: 14px 14px 0 0;
+  padding: 30px 28px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 18px;
+}
+
+.paintCta__title{
+  margin:0 0 8px;
+  font-size: 22px;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+/* =========================================================
+   PAINT GUIDE — MOBILE CAROUSEL (mesmo modelo do Services)
+   Cola no FINAL do CSS (override)
+   NÃO mexe no desktop
+========================================================= */
+@media (max-width: 820px){
+
+  /* ---------- Surface Cards (Paint by Surface) ---------- */
+  #paintGuide{
+    --paintSurfaceCardW: clamp(300px, 82vw, 380px);
+    --sheenCardW: clamp(280px, 84vw, 360px);
+  }
+
+  .paintSurfaceWrap{
+    overflow: hidden;
+  }
+
+  /* vira carousel horizontal com snap e card centralizado */
+  #paintSurfaceRail.paintSurfaceRail{
+    display: flex !important;
+    gap: 16px !important;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+
+    padding: 0 0 14px;
+    margin: 0;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    height: auto !important;
+    perspective: none !important;
+    position: relative !important;
+  }
+  #paintSurfaceRail.paintSurfaceRail::-webkit-scrollbar{ display:none; }
+
+  /* spacers para centralizar primeiro/último */
+  #paintSurfaceRail.paintSurfaceRail::before,
+  #paintSurfaceRail.paintSurfaceRail::after{
+    content: "";
+    display: block;
+    flex: 0 0 calc((100vw - var(--paintSurfaceCardW)) / 2);
+  }
+
+  #paintSurfaceRail .surfaceCard{
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: var(--paintSurfaceCardW) !important;
+    max-width: none !important;
+    min-height: auto;
+    flex: 0 0 var(--paintSurfaceCardW);
+
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
+    z-index: auto !important;
+    pointer-events: auto !important;
+    transition: background-color .25s ease, border-color .25s ease, transform .25s ease !important;
+    box-shadow: none !important;
+  }
+
+  /* limpa classes do modelo antigo stacked */
+  #paintSurfaceRail .surfaceCard.pos-center,
+  #paintSurfaceRail .surfaceCard.pos-left,
+  #paintSurfaceRail .surfaceCard.pos-right,
+  #paintSurfaceRail .surfaceCard.pos-back-left,
+  #paintSurfaceRail .surfaceCard.pos-back-right,
+  #paintSurfaceRail .surfaceCard.pos-hidden{
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    box-shadow: none !important;
+  }
+
+  /* destaque do card ativo no mobile (igual lógica desktop, mas controlado por JS) */
+  #paintSurfaceRail .surfaceCard.is-active{
+    border-color: rgba(255,212,0,.92) !important;
+    background: var(--paint-yellow) !important;
+    box-shadow: none !important;
+  }
+
+  #paintSurfaceRail .surfaceCard.is-active .surfaceCard__label,
+  #paintSurfaceRail .surfaceCard.is-active .surfaceCard__reco{
+    color: var(--paint-black) !important;
+  }
+
+  #paintSurfaceRail .surfaceCard.is-active .surfaceCard__overlay{
+    background:
+      linear-gradient(180deg, rgba(255,212,0,.00) 0%, rgba(255,212,0,.05) 35%, rgba(255,212,0,.35) 100%);
+  }
+
+  /* remove hover “desktop” no touch pra não grudar */
+  #paintSurfaceRail .surfaceCard:hover{
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* botão prev/next antigo não precisa mais nesse modelo */
+  .surfaceCarouselCtrls{
+    display: none !important;
+  }
+
+  .surfaceReason{
+    margin-top: 10px;
+  }
+
+  /* Dots (surface) */
+  .paintSurfaceDots{
+    display:flex;
+    gap: 10px;
+    justify-content:center;
+    margin-top: 10px;
+  }
+
+  .paintSurfaceDots .dot{
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.22);
+    display: inline-block;
+    line-height: 0;
+    font-size: 0;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .paintSurfaceDots .dot.is-active{
+    background: var(--gold);
+  }
+  /* PATCH — surface cards ~15% menores no mobile */
+@media (max-width: 820px){
+  #paintGuide{
+    /* antes: clamp(300px, 82vw, 380px) */
+    --paintSurfaceCardW: clamp(270px, 74vw, 340px);
+  }
+}
+
+  /* ---------- Sheen (Finish Levels) ---------- */
+  #sheenRail.sheenGrid{
+    display: flex !important;
+    gap: 14px !important;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+
+    padding: 0 0 10px;
+    margin: 0;
+
+    grid-template-columns: none !important;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  #sheenRail.sheenGrid::-webkit-scrollbar{ display:none; }
+
+  #sheenRail.sheenGrid::before,
+  #sheenRail.sheenGrid::after{
+    content: "";
+    display: block;
+    flex: 0 0 calc((100vw - var(--sheenCardW)) / 2);
+  }
+
+  #sheenRail .sheenItem{
+    flex: 0 0 var(--sheenCardW);
+    width: var(--sheenCardW);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+  }
+
+  /* Dots (sheen) */
+  .sheenDots{
+    display:flex;
+    gap: 10px;
+    justify-content:center;
+    margin-top: 12px;
+  }
+
+  .sheenDots .dot{
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.22);
+    display: inline-block;
+    line-height: 0;
+    font-size: 0;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .sheenDots .dot.is-active{
+    background: var(--gold);
+  }
+}
+
+/* ajuste extra telas pequenas */
+@media (max-width: 480px){
+  #paintGuide{
+    --paintSurfaceCardW: clamp(280px, 88vw, 380px);
+    --sheenCardW: clamp(260px, 88vw, 360px);
+  }
+}
+/* =========================================================
+   AJUSTE FINO MOBILE — Sheen + CTA
+   (colar no FINAL do CSS)
+========================================================= */
+@media (max-width: 820px){
+  #paintGuide{
+    /* antes estava grande demais; reduz ~15% */
+    --sheenCardW: clamp(238px, 72vw, 306px);
+  }
+
+  /* garante centralização visual e evita “corte” lateral */
+  #sheenRail.sheenGrid{
+    justify-content: flex-start;
+    align-items: stretch;
+    padding-bottom: 10px;
+  }
+
+  #sheenRail .sheenItem{
+    width: var(--sheenCardW) !important;
+    flex: 0 0 var(--sheenCardW) !important;
+    box-sizing: border-box;
+  }
+
+  /* CTA: empilha corretamente (texto em cima / botão embaixo) */
+  .paintCta{
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 14px;
+  }
+
+  .paintCta__left,
+  .paintCta__right{
+    width: 100%;
+  }
+
+  .paintCta__right{
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .paintCta__right .btn{
+    width: 100%;
+    max-width: 280px; /* evita botão gigante */
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* ajuste extra para telas bem pequenas */
+@media (max-width: 480px){
+  #paintGuide{
+    --sheenCardW: clamp(228px, 70vw, 290px);
+  }
+
+  .paintCta__right .btn{
+    max-width: 100%;
+  }
+}
+/* =========================================================
+   MOBILE — Hint abaixo do título do Sheen
+========================================================= */
+@media (max-width: 820px){
+  .sheenBlock__title{
+    position: relative;
+    margin-bottom: 28px; /* abre espaço pra frase */
+  }
+
+  .sheenBlock__title::after{
+    content: "Tap to preview the finish sheen";
+    display: block;
+    margin-top: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+
+    color: var(--gold);
+    opacity: .95;
+    font-style: normal; /* evita itálico se o título estiver itálico */
+  }
+}
+/* =========================================================
+   PARTNERS — Hover padrão amarelo + Mobile Carousel
+   (colar no FINAL do CSS)
+========================================================= */
+
+/* ---------- Desktop / geral (mantém grid) ---------- */
+#partners .partnersGrid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+#partners .partnerCard{
+  background: rgba(0,0,0,.55);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 14px;
+  padding: 22px 20px;
+  display:flex;
+  flex-direction: column;
+  gap: 10px;
+  transition:
+    background-color .25s ease,
+    border-color .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+  box-shadow: none !important;
+}
+
+#partners .partnerCard__logo{
+  height: 76px;
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  transition: transform .25s ease;
+}
+
+#partners .partnerCard__logo img{
+  height: 58px;
+  width:auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.55));
+  transition: transform .25s ease, filter .25s ease;
+}
+
+#partners .partnerCard__title{
+  margin: 0;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-size: 12px;
+  color: var(--accent);
+  transition: color .25s ease;
+}
+
+#partners .partnerCard__text{
+  margin: 0;
+  font-size: 14px;
+  transition: color .25s ease;
+}
+
+/* Hover padrão (amarelo + preto) */
+#partners .partnerCard:hover{
+  background: var(--gold) !important;
+  border-color: rgba(0,0,0,.28) !important;
+  transform: translateY(-4px);
+  box-shadow: none !important;
+}
+
+#partners .partnerCard:hover .partnerCard__title,
+#partners .partnerCard:hover .partnerCard__text{
+  color: #000 !important;
+}
+
+#partners .partnerCard:hover .partnerCard__logo{
+  transform: translateY(-2px);
+}
+
+#partners .partnerCard:hover .partnerCard__logo img{
+  transform: scale(1.04);
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.18));
+}
+
+/* tablets */
+@media (max-width: 1100px){
+  #partners .partnersGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* ---------- MOBILE CAROUSEL (igual modelo Services) ---------- */
+#partners .partnersDots{
+  display:none;
+}
+
+@media (max-width: 820px){
+  #partners{
+    --partnerCardW: clamp(270px, 82vw, 340px);
+  }
+
+  #partners .partnersGrid{
+    display:flex !important;
+    gap: 14px !important;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+
+    padding: 0 0 10px;
+    margin: 0;
+
+    grid-template-columns: none !important;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  #partners .partnersGrid::-webkit-scrollbar{ display:none; }
+
+  /* spacers para centralizar primeiro e último */
+  #partners .partnersGrid::before,
+  #partners .partnersGrid::after{
+    content: "";
+    display:block;
+    flex: 0 0 calc((100vw - var(--partnerCardW)) / 2);
+  }
+
+  #partners .partnerCard{
+    flex: 0 0 var(--partnerCardW);
+    width: var(--partnerCardW);
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    min-height: 180px;
+    box-sizing: border-box;
+    border-radius: 14px;
+  }
+
+  /* destaque do card ativo (controlado por JS) */
+  #partners .partnerCard.is-active{
+    background: var(--gold) !important;
+    border-color: rgba(0,0,0,.28) !important;
+    box-shadow: none !important;
+  }
+
+  #partners .partnerCard.is-active .partnerCard__title,
+  #partners .partnerCard.is-active .partnerCard__text{
+    color: #000 !important;
+  }
+
+  #partners .partnerCard.is-active .partnerCard__logo img{
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,.18));
+  }
+
+  /* desliga hover "grudado" no mobile touch */
+  #partners .partnerCard:hover{
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  #partners .partnerCard:hover .partnerCard__logo{
+    transform: none !important;
+  }
+  #partners .partnerCard:hover .partnerCard__logo img{
+    transform: none !important;
+  }
+
+  /* Dots */
+  #partners .partnersDots{
+    display:flex;
+    gap: 10px;
+    justify-content:center;
+    margin-top: 12px;
+  }
+
+  #partners .partnersDots .dot{
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    min-height: 8px;
+    border-radius: 999px;
+    background: rgba(255,255,255,.22);
+    display: inline-block;
+    line-height: 0;
+    font-size: 0;
+    box-shadow: none;
+    outline: none;
+    cursor: pointer;
+  }
+
+  #partners .partnersDots .dot.is-active{
+    background: var(--gold);
+  }
+}
+
+@media (max-width: 480px){
+  #partners{
+    --partnerCardW: clamp(250px, 86vw, 320px);
+  }
+}
+/* PATCH — centraliza logo + título no card */
+#partners .partnerCard__logo{
+  justify-content: center !important;
+}
+
+#partners .partnerCard__title{
+  text-align: center !important;
+}
+/* ---------- FAQ (services page) ---------- */
+.faqWrap{
+  border-top: 1px solid rgba(255,255,255,.09);
+}
+
+.faqItem{
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+
+.faqQ{
+  width:100%;
+  padding: 22px 0;
+  background: transparent;
+  border: none;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+  cursor:pointer;
+  text-align:left;
+}
+
+.faqQ span:first-child{
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.faqIcon{
+  font-size: 22px;
+  color: rgba(255,255,255,.55);
+  transition: transform .25s ease, color .25s ease;
+}
+
+.faqQ[aria-expanded="true"] .faqIcon{
+  color: var(--accent);
+  transform: rotate(90deg);
+}
+
+.faqA{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .28s ease;
+}
+
+.faqA p{
+  margin: 0 0 22px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 820px;
+}
+
+.faqA.open{ max-height: 260px; }
+
+/* ---------- Bottom CTA ---------- */
+.servicesBottomCta{
+  margin-top: 24px;
+  background: #0b0b0b;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 0;
+  padding: 34px 34px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 18px;
+}
+
+.servicesBottomCta__title{
+  margin:0 0 8px;
+  font-size: 22px;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 980px){
+  .servicesBottomCta{
+    padding: 26px 22px;
+    flex-direction: column;
+    align-items:flex-start;
+  }
+}
+
+/* ---------- Minor polish ---------- */
+#servicesList .muted{
+  max-width: 860px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* keep reveal consistent with your JS (.active/.isIn) */
+.reveal{ overflow: visible; }
+/* =========================================================
+   SERVICES FAQ — CTA mobile centralizado + divider amarelo no bottom
+   (override final)
+========================================================= */
+
+/* remove linha interna no topo da FAQ */
+#servicesFaq .faqWrap{
+  border-top: none !important;
+}
+
+/* remove divider padrão da classe .divided (topo) só nesta seção */
+#servicesFaq.section.divided::before,
+#servicesFaq.divided::before{
+  content: none !important;
+  display: none !important;
+}
+
+/* prepara a seção para receber divider customizado no bottom */
+#servicesFaq.section.divided,
+#servicesFaq{
+  position: relative;
+  border-bottom: none !important; /* evita linha simples competindo com o divider novo */
+}
+
+/* divider amarelo no BOTTOM (mesmo estilo do seu modelo) */
+#servicesFaq.section.divided::after,
+#servicesFaq::after{
+  content:"";
+  position:absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: auto;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,204,51,0),
+    rgba(245,158,11,.95),
+    rgba(255,204,51,0)
+  );
+  box-shadow: 0 10px 20px rgba(245,158,11,.18);
+  pointer-events:none;
+  z-index: 2;
+}
+
+/* CTA centralizado no mobile */
+@media (max-width: 980px){
+  #servicesFaq .servicesBottomCta{
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center;
+    text-align: center;
+    gap: 14px;
+  }
+
+  #servicesFaq .servicesBottomCta__left,
+  #servicesFaq .servicesBottomCta__right{
+    width: 100%;
+    text-align: center;
+  }
+
+  #servicesFaq .servicesBottomCta__right{
+    display: flex;
+    justify-content: center;
+  }
+
+  #servicesFaq .servicesBottomCta__right .btn{
+    justify-content: center;
+  }
+}
+/* =========================================================
+   FAILSAFE — TEXTO NÃO PODE SUMIR
+   Motivo: em algum CSS global/hero, .reveal começa com opacity:0
+   e depende do JS para ativar. Se o JS falhar nesta página,
+   o conteúdo fica invisível. Este bloco garante visibilidade.
+========================================================= */
+
+/* Mostra tudo dentro do MAIN da Services, mesmo sem JS */
+#servicesList .reveal,
+main .reveal,
+.section .reveal{
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+}
+
+/* Se por acaso alguma parte do services usa paint-reveal */
+#servicesList .paint-reveal,
+main .paint-reveal,
+.section .paint-reveal{
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  clip-path: none !important;
+}
+
+/* Caso exista algum overlay ou pseudo-elemento cobrindo texto */
+.section,
+.section *{
+  position: relative;
+  z-index: 1;
+}
+/* =========================================
+   Divider entre Services e Process
+   (mesmo design do #about + #quote::before)
+========================================= */
+.dividerBetweenSections{
+  position: relative;
+  height: 0;              /* sem criar espaço */
+  width: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.dividerBetweenSections::before{
+  content: "";
+  position: absolute;
+
+  /* alinhado com o conteúdo wide da services */
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+
+  width: min(1560px, calc(100% - 24px)); /* 12px + 12px */
+  height: 3px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(255,204,51,0),
+    rgba(245,158,11,.95),
+    rgba(255,204,51,0)
+  );
+
+  box-shadow: 0 10px 20px rgba(245,158,11,.18);
+  pointer-events: none;
+}
+
+/* responsivo igual ao seu container da services */
+@media (max-width: 980px){
+  .dividerBetweenSections::before{
+    width: min(1160px, calc(100% - 28px)); /* 14px + 14px */
+  }
+}
+.hero .scrollCue,
+.hero .hero__scroll,
+.hero .hero__arrow,
+.hero .scroll-down,
+.hero .heroScroll {
+  display: none !important;
+}

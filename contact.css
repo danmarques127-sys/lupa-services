@@ -1,0 +1,1204 @@
+/* ================================
+   contact.css
+   - Contact page
+   - Visual language aligned with services.css
+   - Hero CTAs centered
+   - Premium cards / estimate form / process / payment / faq
+   - Mobile-first refinements + fallback visibility
+================================== */
+
+:root{
+  --contact-yellow: #ffd400;
+  --contact-gold: #f59e0b;
+  --contact-black: #080808;
+  --contact-panel: rgba(10,10,10,.92);
+  --contact-panel-2: rgba(255,255,255,.04);
+  --contact-line: rgba(255,255,255,.10);
+  --contact-line-strong: rgba(255,255,255,.16);
+  --contact-text: #ffffff;
+  --contact-muted: rgba(255,255,255,.68);
+  --contact-shadow: 0 20px 46px rgba(0,0,0,.22);
+}
+
+/* =========================================
+   HERO — centraliza CTAs da contact page
+========================================= */
+.hero--ctasOnly .hero__content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.hero--ctasOnly .reveal{
+  width: 100%;
+}
+
+.hero--ctasOnly .hero__actions{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  margin-inline: auto;
+}
+
+.hero--ctasOnly .hero__actions .btn{
+  justify-content: center;
+  text-align: center;
+}
+
+@media (max-width: 768px){
+  .hero--ctasOnly .hero__actions{
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero--ctasOnly .hero__actions .btn{
+    width: min(92vw, 360px);
+  }
+}
+
+/* =========================================
+   SHARED PAGE POLISH
+========================================= */
+#contactIntro,
+#quote,
+#contactProcess,
+#paymentMethods,
+#contactFaq{
+  position: relative;
+  overflow: hidden;
+}
+
+#contactIntro > .container,
+#quote > .container,
+#contactProcess > .container,
+#paymentMethods > .container,
+#contactFaq > .container{
+  position: relative;
+  z-index: 1;
+}
+
+.sectionHead{
+  margin-bottom: 28px;
+}
+
+.sectionHead--center{
+  text-align: center;
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#contactIntro .muted,
+#contactProcess .muted,
+#paymentMethods .muted,
+#contactFaq .muted{
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* subtle watermark on key sections */
+#contactIntro::after,
+#contactProcess::after,
+#paymentMethods::after,
+#contactFaq::after{
+  content:"";
+  position:absolute;
+  inset:-60px;
+  pointer-events:none;
+  z-index:0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='520' height='220'%3E%3Cg transform='rotate(-12 260 110)'%3E%3Ctext x='0' y='80' font-family='Inter, Arial, sans-serif' font-size='48' font-weight='900' fill='white' fill-opacity='0.05'%3ELUPA%20PAINTING%3C/text%3E%3Ctext x='0' y='160' font-family='Inter, Arial, sans-serif' font-size='48' font-weight='900' fill='white' fill-opacity='0.035'%3ELUPA%20PAINTING%3C/text%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 520px 220px;
+  background-position: center;
+}
+
+/* =========================================
+   CONTACT INTRO
+========================================= */
+#contactIntro{
+  padding-top: 58px;
+  padding-bottom: 82px;
+}
+
+#contactIntro .container{
+  max-width: 1460px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.contactIntroGrid{
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.35fr);
+  gap: 22px;
+  align-items: start;
+}
+
+.contactIntroMain{
+  background: rgba(0,0,0,.36);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px 18px 0 0;
+  padding: 34px 30px;
+  min-height: 100%;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+}
+
+.contactIntroMain .kicker{
+  margin-bottom: 10px;
+}
+
+.contactIntroMain .h3{
+  margin: 0 0 14px;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: .98;
+  text-transform: uppercase;
+  font-style: italic;
+  font-weight: 900;
+  letter-spacing: -.03em;
+  color: #fff;
+}
+
+.contactIntroMain .muted{
+  margin: 0;
+  max-width: 60ch;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.contactMethods{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.contactMethodCard{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: var(--contact-panel);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px 18px 0 0;
+  padding: 28px 22px 24px;
+  transition:
+    transform .24s ease,
+    background-color .24s ease,
+    border-color .24s ease,
+    box-shadow .24s ease;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.contactMethodCard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0));
+  pointer-events:none;
+}
+
+.contactMethodCard__icon{
+  width: 64px;
+  height: 64px;
+  display:grid;
+  place-items:center;
+  margin: 0 auto 16px;
+  border-radius: 999px;
+  background: rgba(255,212,0,.10);
+  border: 1px solid rgba(255,212,0,.22);
+  font-size: 26px;
+  line-height: 1;
+  transition: transform .24s ease, background-color .24s ease, border-color .24s ease;
+}
+
+.contactMethodCard__title{
+  margin: 0 0 10px;
+  text-align: center;
+  color:#fff;
+  font-size: 16px;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.contactMethodCard__text{
+  margin: 0 0 16px;
+  text-align:center;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.contactMethodCard__link{
+  margin-top: auto;
+  text-align:center;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  transition: color .22s ease;
+  word-break: break-word;
+}
+
+.contactMethodCard:hover{
+  transform: translateY(-6px);
+  background: var(--contact-yellow);
+  border-color: rgba(0,0,0,.28);
+  box-shadow: 0 16px 34px rgba(250,204,21,.14);
+}
+
+.contactMethodCard:hover .contactMethodCard__icon{
+  background: rgba(0,0,0,.09);
+  border-color: rgba(0,0,0,.18);
+  transform: scale(1.05);
+}
+
+.contactMethodCard:hover .contactMethodCard__title,
+.contactMethodCard:hover .contactMethodCard__text,
+.contactMethodCard:hover .contactMethodCard__link{
+  color:#000;
+}
+
+.contactMethodCard:focus-within{
+  box-shadow: 0 0 0 3px rgba(255,212,0,.18);
+}
+
+@media (max-width: 1100px){
+  .contactIntroGrid{
+    grid-template-columns: 1fr;
+  }
+
+  .contactMethods{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 820px){
+  #contactIntro{
+    padding-top: 50px;
+    padding-bottom: 74px;
+  }
+
+  .contactMethods{
+    grid-template-columns: 1fr;
+  }
+
+  .contactIntroMain{
+    text-align:center;
+  }
+
+  .contactIntroMain .muted{
+    margin-left:auto;
+    margin-right:auto;
+  }
+}
+/* =========================================
+   PAYMENT METHODS MINI — CONTACT INTRO
+========================================= */
+.paymentMethodsMini{
+  margin-top: 34px;
+}
+
+.paymentMethodsMini__head{
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.paymentMethodsMini__kicker{
+  margin: 0 0 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+
+.paymentMethodsMini__title{
+  margin: 0 0 10px;
+  color: #fff;
+  font-size: clamp(30px, 4.2vw, 50px);
+  line-height: .96;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+}
+
+.paymentMethodsMini__sub{
+  margin: 0 auto;
+  max-width: 70ch;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.paymentMethodsMini__viewport{
+  min-width: 0;
+}
+
+.paymentMethodsMini__grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.paymentMiniCard{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 148px;
+  padding: 24px 18px;
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px 10px 0 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+  transition:
+    transform .24s ease,
+    background-color .24s ease,
+    border-color .24s ease,
+    box-shadow .24s ease;
+  overflow: hidden;
+}
+
+.paymentMiniCard::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,0));
+  pointer-events:none;
+}
+
+.paymentMiniCard__icon{
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  margin: 0 0 16px;
+  background: rgba(255,212,0,.08);
+  border: 1px solid rgba(255,212,0,.22);
+  border-radius: 8px;
+  font-size: 28px;
+  line-height: 1;
+  transition:
+    transform .24s ease,
+    background-color .24s ease,
+    border-color .24s ease;
+}
+
+.paymentMiniCard__title{
+  margin: 0;
+  color: #fff;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+}
+
+.paymentMiniCard:hover{
+  transform: translateY(-6px);
+  background: var(--contact-yellow);
+  border-color: rgba(0,0,0,.24);
+  box-shadow: 0 16px 34px rgba(250,204,21,.14);
+}
+
+.paymentMiniCard:hover .paymentMiniCard__icon{
+  background: rgba(0,0,0,.08);
+  border-color: rgba(0,0,0,.18);
+  transform: scale(1.05);
+}
+
+.paymentMiniCard:hover .paymentMiniCard__title{
+  color: #000;
+}
+
+.paymentMiniCard:focus-within{
+  box-shadow: 0 0 0 3px rgba(255,212,0,.18);
+}
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+@media (max-width: 1100px){
+  .paymentMethodsMini{
+    margin-top: 30px;
+  }
+
+  .paymentMethodsMini__grid{
+    gap: 16px;
+  }
+
+  .paymentMiniCard{
+    min-height: 136px;
+    padding: 22px 16px;
+  }
+}
+
+@media (max-width: 820px){
+  .paymentMethodsMini{
+    margin-top: 28px;
+  }
+
+  .paymentMethodsMini__head{
+    margin-bottom: 16px;
+  }
+
+  .paymentMethodsMini__title{
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  .paymentMethodsMini__sub{
+    max-width: 38ch;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .paymentMethodsMini__viewport{
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  .paymentMethodsMini__viewport::-webkit-scrollbar{
+    display: none;
+  }
+
+  .paymentMethodsMini__grid{
+    display: flex;
+    gap: 14px;
+    width: max-content;
+  }
+
+  .paymentMiniCard{
+    flex: 0 0 clamp(220px, 72vw, 280px);
+    min-height: 150px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .paymentMiniCard__icon{
+    width: 60px;
+    height: 60px;
+    font-size: 26px;
+  }
+
+  .paymentMiniCard__title{
+    font-size: 17px;
+  }
+}
+/* =========================================================
+   QUOTE (FORM) - CORES INVERTIDAS AJUSTADAS
+========================================================= */
+
+.quoteCard{
+  display:grid;
+  grid-template-columns: 1fr 2fr;
+  background: #000;
+  border: none;
+  border-radius: 0;
+  overflow:hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.45);
+}
+
+.quoteCard__side{
+  background: #000;
+  color:#fff;
+  padding: 48px;
+}
+
+.quoteCard__title{
+  margin:0 0 16px;
+  font-size: 36px;
+  line-height: 1.05;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  color:#fff;
+}
+
+.quoteCard__desc{
+  margin:0 0 22px;
+  font-weight: 600;
+  line-height:1.6;
+  color: rgba(255,255,255,.82);
+}
+
+.quoteCard__list{
+  list-style:none;
+  padding:0;
+  margin:0;
+  display:grid;
+  gap:14px;
+}
+
+.quoteCard__list li{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  text-transform: uppercase;
+  font-weight: 900;
+  letter-spacing:.08em;
+  font-size: 12px;
+  color:#fff;
+}
+
+.check{
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: var(--accent);
+  color:#000;
+  display:grid;
+  place-items:center;
+}
+
+.quoteCard__form{
+  padding: 48px;
+  background: var(--accent);
+  color:#000;
+}
+
+/* form */
+.form{
+  display:grid;
+  gap: 16px;
+}
+
+.form__grid{
+  display:grid;
+  gap: 16px;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Label acima dos campos */
+.field{
+  display:flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field__label{
+  display:block;
+  color: #000;
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 11px;
+  line-height: 1;
+}
+
+/* inputs e textarea voltando para a cor antiga */
+.field input,
+.field textarea{
+  width:100%;
+  padding: 16px;
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,.12);
+  background: #1a1a1a;
+  color:#fff;
+  outline:none;
+  transition: border-color .2s ease, background-color .2s ease;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.field input:focus,
+.field textarea:focus{
+  border-bottom-color: #000;
+  background: #222;
+}
+
+.field input::placeholder,
+.field textarea::placeholder{
+  color: transparent;
+  opacity: 0;
+}
+
+.field input:focus::placeholder,
+.field textarea:focus::placeholder{
+  color: transparent;
+  opacity: 0;
+}
+
+/* botão */
+#quote .btn--white{
+  background:#000;
+  color:#fff;
+  border-color:#000;
+  border-radius: 0;
+}
+
+#quote .btn--white:hover{
+  background:#111;
+  border-color:#111;
+  color:#fff;
+  transform: translateY(-1px);
+}
+
+#quote .btn--full{
+  width:100%;
+}
+
+#quote .btn__arrow{
+  transition: transform .2s ease;
+}
+
+#quote .btn--white:hover .btn__arrow{
+  transform: translateX(4px);
+}
+
+/* success state */
+.quoteSuccess{
+  min-height: 320px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding: 36px 10px;
+  color:#000;
+}
+
+.quoteSuccess__icon{
+  width: 84px;
+  height: 84px;
+  border-radius: 999px;
+  border: 2px solid rgba(0,0,0,.20);
+  display:grid;
+  place-items:center;
+  color: #000;
+  font-size: 36px;
+  margin-bottom: 18px;
+  background: rgba(255,255,255,.25);
+}
+
+.quoteSuccess h3{
+  margin:0 0 8px;
+  font-size: 28px;
+  color:#000;
+}
+
+.quoteSuccess p{
+  margin:0;
+  color: rgba(0,0,0,.72);
+  max-width: 520px;
+  line-height:1.7;
+}
+
+/* spacing do quote */
+#quote.section.section--alt{
+  padding-top: 72px;
+  padding-bottom: 120px;
+  margin-top: 0;
+  border-top: 0 !important;
+  box-shadow: none !important;
+  position: relative;
+}
+
+#quote.section.section--alt::before{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  top:-2px;
+  height:2px;
+  background:#181818;
+}
+
+/* responsivo */
+@media (max-width: 920px){
+  .quoteCard{
+    grid-template-columns: 1fr;
+  }
+
+  .form__grid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   WHAT HAPPENS NEXT
+========================================= */
+#contactProcess{
+  padding-top: 70px;
+  padding-bottom: 80px;
+}
+
+.processStepsGrid{
+  display:grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 8px;
+}
+
+.processStepCard{
+  position: relative;
+  background: var(--contact-panel);
+  border: 1px solid rgba(255,255,255,.11);
+  border-radius: 18px 18px 0 0;
+  padding: 28px 24px 24px;
+  transition:
+    transform .25s ease,
+    background-color .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
+}
+
+.processStepCard__number{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width: 64px;
+  height: 40px;
+  padding: 0 14px;
+  margin-bottom: 16px;
+  background: rgba(255,212,0,.10);
+  border: 1px solid rgba(255,212,0,.22);
+  color: var(--contact-yellow);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: .14em;
+}
+
+.processStepCard__title{
+  margin:0 0 10px;
+  color:#fff;
+  font-size: 18px;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  line-height: 1.15;
+}
+
+.processStepCard .muted{
+  margin:0;
+  max-width: none;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.processStepCard:hover{
+  background: var(--contact-yellow);
+  border-color: rgba(0,0,0,.26);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 34px rgba(250,204,21,.14);
+}
+
+.processStepCard:hover .processStepCard__number{
+  background: rgba(0,0,0,.08);
+  border-color: rgba(0,0,0,.18);
+  color:#000;
+}
+
+.processStepCard:hover .processStepCard__title,
+.processStepCard:hover .muted{
+  color:#000;
+}
+
+@media (max-width: 980px){
+  .processStepsGrid{
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   FAQ
+========================================= */
+#contactFaq{
+  padding-top: 70px;
+  padding-bottom: 84px;
+}
+
+/* remove divider padrão do .divided no topo apenas aqui */
+#contactFaq.section.divided::before,
+#contactFaq.divided::before{
+  content: none !important;
+  display:none !important;
+}
+
+/* divider custom bottom */
+#contactFaq::after{
+  content:"";
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,204,51,0),
+    rgba(245,158,11,.95),
+    rgba(255,204,51,0)
+  );
+  box-shadow: 0 10px 20px rgba(245,158,11,.18);
+  pointer-events:none;
+  z-index: 2;
+}
+
+.faqTopAction{
+  display:flex;
+  justify-content:center;
+  margin-bottom: 18px;
+}
+
+.faqWrap{
+  border-top: none !important;
+}
+
+.faqItem{
+  border-bottom: 1px solid rgba(255,255,255,.09);
+}
+
+.faqQ{
+  width:100%;
+  padding: 22px 0;
+  background: transparent;
+  border: none;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 14px;
+  cursor:pointer;
+  text-align:left;
+}
+
+.faqQ span:first-child{
+  font-size: 16px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.faqIcon{
+  font-size: 22px;
+  color: rgba(255,255,255,.55);
+  transition: transform .25s ease, color .25s ease;
+}
+
+.faqQ[aria-expanded="true"] .faqIcon{
+  color: var(--accent);
+  transform: rotate(90deg);
+}
+
+.faqA{
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .28s ease;
+}
+
+.faqA p{
+  margin: 0 0 22px;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 820px;
+}
+
+.faqA.open{
+  max-height: 260px;
+}
+
+/* keep first open item visually consistent */
+.faqItem.is-open .faqA{
+  max-height: 260px;
+}
+
+.servicesBottomCta{
+  margin-top: 24px;
+  background: #0b0b0b;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 0;
+  padding: 34px 34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 18px;
+}
+
+.servicesBottomCta__title{
+  margin:0 0 8px;
+  font-size: 22px;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 980px){
+  #contactFaq{
+    padding-top: 60px;
+    padding-bottom: 76px;
+  }
+
+  .servicesBottomCta{
+    padding: 26px 22px;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content:center;
+    text-align:center;
+    gap: 14px;
+  }
+
+  .servicesBottomCta__left,
+  .servicesBottomCta__right{
+    width:100%;
+    text-align:center;
+  }
+
+  .servicesBottomCta__right{
+    display:flex;
+    justify-content:center;
+  }
+
+  .servicesBottomCta__right .btn{
+    justify-content:center;
+  }
+}
+
+@media (max-width: 640px){
+  .faqQ{
+    padding: 18px 0;
+    align-items:flex-start;
+  }
+
+  .faqQ span:first-child{
+    font-size: 14px;
+    line-height: 1.45;
+  }
+
+  .faqIcon{
+    margin-top: -2px;
+  }
+
+  .faqTopAction .btn{
+    width: min(92vw, 320px);
+    justify-content:center;
+  }
+}
+
+/* =========================================
+   DIVIDER BETWEEN SECTIONS
+========================================= */
+.dividerBetweenSections{
+  position: relative;
+  height: 0;
+  width: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.dividerBetweenSections::before{
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  width: min(1460px, calc(100% - 32px));
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(255,204,51,0),
+    rgba(245,158,11,.95),
+    rgba(255,204,51,0)
+  );
+  box-shadow: 0 10px 20px rgba(245,158,11,.18);
+  pointer-events: none;
+}
+
+@media (max-width: 980px){
+  .dividerBetweenSections::before{
+    width: min(1160px, calc(100% - 28px));
+  }
+}
+
+/* =========================================
+   SIMPLE ENTRY ANIMATIONS
+========================================= */
+.reveal{
+  overflow: visible;
+}
+
+.contactMethods.reveal .contactMethodCard,
+.processStepsGrid.reveal .processStepCard,
+.paymentGrid.reveal .paymentCard{
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity .7s ease,
+    transform .7s ease,
+    background-color .3s ease,
+    border-color .3s ease,
+    box-shadow .3s ease;
+  will-change: transform, opacity;
+}
+
+.contactMethods.reveal.active .contactMethodCard,
+.contactMethods.reveal.isIn .contactMethodCard,
+.processStepsGrid.reveal.active .processStepCard,
+.processStepsGrid.reveal.isIn .processStepCard,
+.paymentGrid.reveal.active .paymentCard,
+.paymentGrid.reveal.isIn .paymentCard{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.contactMethods.reveal.active .contactMethodCard:nth-child(1),
+.contactMethods.reveal.isIn .contactMethodCard:nth-child(1),
+.processStepsGrid.reveal.active .processStepCard:nth-child(1),
+.processStepsGrid.reveal.isIn .processStepCard:nth-child(1),
+.paymentGrid.reveal.active .paymentCard:nth-child(1),
+.paymentGrid.reveal.isIn .paymentCard:nth-child(1){ transition-delay: .06s; }
+
+.contactMethods.reveal.active .contactMethodCard:nth-child(2),
+.contactMethods.reveal.isIn .contactMethodCard:nth-child(2),
+.processStepsGrid.reveal.active .processStepCard:nth-child(2),
+.processStepsGrid.reveal.isIn .processStepCard:nth-child(2),
+.paymentGrid.reveal.active .paymentCard:nth-child(2),
+.paymentGrid.reveal.isIn .paymentCard:nth-child(2){ transition-delay: .12s; }
+
+.contactMethods.reveal.active .contactMethodCard:nth-child(3),
+.contactMethods.reveal.isIn .contactMethodCard:nth-child(3),
+.processStepsGrid.reveal.active .processStepCard:nth-child(3),
+.processStepsGrid.reveal.isIn .processStepCard:nth-child(3),
+.paymentGrid.reveal.active .paymentCard:nth-child(3),
+.paymentGrid.reveal.isIn .paymentCard:nth-child(3){ transition-delay: .18s; }
+
+.contactMethods.reveal.active .contactMethodCard:nth-child(4),
+.contactMethods.reveal.isIn .contactMethodCard:nth-child(4),
+.paymentGrid.reveal.active .paymentCard:nth-child(4),
+.paymentGrid.reveal.isIn .paymentCard:nth-child(4){ transition-delay: .24s; }
+
+.contactMethods.reveal.active .contactMethodCard:nth-child(5),
+.contactMethods.reveal.isIn .contactMethodCard:nth-child(5),
+.paymentGrid.reveal.active .paymentCard:nth-child(5),
+.paymentGrid.reveal.isIn .paymentCard:nth-child(5){ transition-delay: .30s; }
+
+.contactMethods.reveal.active .contactMethodCard:nth-child(6),
+.contactMethods.reveal.isIn .contactMethodCard:nth-child(6),
+.paymentGrid.reveal.active .paymentCard:nth-child(6),
+.paymentGrid.reveal.isIn .paymentCard:nth-child(6){ transition-delay: .36s; }
+
+/* =========================================
+   ACCESSIBILITY / FOCUS
+========================================= */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,212,0,.22);
+}
+
+/* =========================================
+   FAILSAFE — if reveal JS fails, content stays visible
+========================================= */
+main .reveal,
+.section .reveal,
+#contactIntro .reveal,
+#quote .reveal,
+#contactProcess .reveal,
+#paymentMethods .reveal,
+#contactFaq .reveal{
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  clip-path: none !important;
+}
+
+/* keep content above pseudo layers */
+.section,
+.section *{
+  position: relative;
+  z-index: 1;
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after{
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+/* =========================================================
+   PATCH — remove watermark do Contact Intro e What Happens Next
+========================================================= */
+
+/* remove a marca d’água dessas duas seções */
+#contactIntro::after,
+#contactProcess::after{
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+
+/* garantia extra: remove qualquer pseudo layer de watermark interna */
+#contactIntro .container::before,
+#contactIntro .container::after,
+#contactProcess .container::before,
+#contactProcess .container::after{
+  content: none !important;
+  display: none !important;
+  background: none !important;
+}
+/* =========================================================
+   PATCH — SELECT DROPDOWN DARK MODE
+========================================================= */
+
+.field select{
+  background-color: #111 !important;
+  color: #fff !important;
+  border: 1px solid rgba(255,212,0,.35) !important;
+}
+
+.field select option{
+  background: #0b0b0b;
+  color: #ffffff;
+}
+
+.field select option:hover,
+.field select option:focus,
+.field select option:checked,
+.field select option:active{
+  background: var(--contact-yellow);
+  color: #000000;
+}
+
+/* melhora visual no estado aberto/ativo */
+.field select:focus,
+.field select:active{
+  background-color: #111 !important;
+  color: #fff !important;
+  border-color: rgba(255,212,0,.75) !important;
+  box-shadow: 0 0 0 4px rgba(255,212,0,.10);
+}
+
+/* alguns navegadores WebKit */
+.field select optgroup{
+  background: #0b0b0b;
+  color: #ffffff;
+}
+.hero .scrollCue,
+.hero .hero__scroll,
+.hero .hero__arrow,
+.hero .scroll-down,
+.hero .heroScroll {
+  display: none !important;
+}

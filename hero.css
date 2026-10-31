@@ -1,0 +1,401 @@
+/* =========================================================
+   services-hero-header.css (CLEANED + UPDATED)
+   - Navbar (Gemini) + Hero Video BG
+   - Services hero: ONLY 3 CTAs centered + HALF HEIGHT
+   - Removed old/ghost blocks: paint-reveal tuning, heroTrust, CTA swap, etc.
+   - Keeps your existing tokens from global.css
+========================================================= */
+
+/* =========================
+  Typography blocks (Gemini)
+========================= */
+.kicker{
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 0 0 16px;
+}
+
+.h2{
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.05;
+  margin: 0 0 24px;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.upper{ text-transform: uppercase; }
+
+.muted{
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.muted.small{
+  font-size: 12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.pill{
+  display:inline-block;
+  border: 1px solid rgba(250,204,21,.9);
+  color: var(--accent);
+  padding: 8px 14px;
+  border-radius: 999px; /* pill continua pill (não é CTA) */
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+/* =========================
+  Buttons (Gemini) — SQUARE
+========================= */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+
+  border: 1px solid transparent;
+  padding: 14px 20px;
+
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+
+  cursor:pointer;
+  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  user-select:none;
+
+  border-radius: 0; /* ✅ CTAs quadrados */
+}
+
+.btn:hover{ transform: translateY(-2px); }
+
+.btn--lg{ padding: 16px 26px; font-size: 14px; }
+.btn--full{ width:100%; }
+
+.btn--cta{
+  background: var(--accent);
+  color:#000;
+}
+.btn--cta:hover{ background:#fff; }
+
+.btn--ghost{
+  background: transparent;
+  border-color: #fff;
+  color:#fff;
+}
+.btn--ghost:hover{
+  background:#fff;
+  color:#000;
+}
+
+.btn--white{
+  background:#fff;
+  color:#000;
+}
+.btn--white:hover{
+  background: var(--accent);
+}
+
+/* =========================
+  Brand (Gemini) — SQUARE
+========================= */
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  font-style: italic;
+  letter-spacing:-.04em;
+  text-transform: uppercase;
+}
+
+.brand__lupa{
+  background:#fff;
+  color:#000;
+  padding: 4px 10px;
+  border-radius: 0; /* ✅ quadrado */
+}
+
+.brand__painting{ color: var(--accent); }
+.brand:hover .brand__lupa{ background: var(--accent); }
+.brand--big{ font-size: 42px; }
+
+/* =========================
+  Navbar (Gemini sticky blur)
+========================= */
+.nav{
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+
+  padding: 18px 0;
+  transition: background .25s ease, backdrop-filter .25s ease, padding .25s ease, box-shadow .25s ease;
+  background: transparent;
+}
+
+.nav.isScrolled{
+  background: rgba(24,24,24,.88);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+  padding: 12px 0;
+}
+
+.nav__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.nav__desktop{
+  display:flex;
+  align-items:center;
+  gap: 26px;
+}
+
+.nav__link{
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: rgba(255,255,255,.85);
+  transition: color .2s ease;
+}
+
+.nav__link:hover{ color: var(--accent); }
+
+/* Mobile toggle */
+.nav__toggle{
+  display:none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line2);
+  background: rgba(0,0,0,.25);
+  border-radius: 0; /* ✅ quadrado */
+  cursor:pointer;
+}
+
+.nav__burger{
+  display:block;
+  width: 20px;
+  height: 2px;
+  background:#fff;
+  margin: 0 auto;
+  position:relative;
+}
+
+.nav__burger:before,
+.nav__burger:after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:2px;
+  background:#fff;
+}
+
+.nav__burger:before{ top:-7px; }
+.nav__burger:after{ top:7px; }
+
+.nav__toggle.isOpen .nav__burger{ background: transparent; }
+.nav__toggle.isOpen .nav__burger:before{ top:0; transform: rotate(45deg); }
+.nav__toggle.isOpen .nav__burger:after{ top:0; transform: rotate(-45deg); }
+
+/* Mobile menu */
+.nav__mobile{
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  height: calc(100vh - 72px);
+
+  background: #111;
+  border-top: 1px solid var(--line);
+
+  padding: 24px 18px;
+  display:none;
+
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav__mobile.isOpen{ display:flex; }
+
+.nav__mobileLink{
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 10px 0;
+}
+
+.nav__mobileLink:hover{ color: var(--accent); }
+
+@media (max-width: 920px){
+  .nav__desktop{ display:none; }
+  .nav__toggle{ display:inline-flex; align-items:center; justify-content:center; }
+}
+
+/* =========================
+  HERO (Video BG) — Services (CTAs ONLY)
+========================= */
+.hero{
+  position:relative;
+  min-height: 100vh; /* default (index/home) */
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* ✅ Services-only modifier: half height */
+.hero--ctasOnly{
+  min-height: 50vh;
+}
+
+.hero__content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  padding-top: 72px; /* base space for fixed navbar */
+}
+
+/* ✅ Services-only: center the CTAs vertically and remove “dead space” */
+.hero--ctasOnly .hero__content{
+  padding-top: 92px;     /* keeps nav clearance */
+  padding-bottom: 28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.hero__overlay{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.72);
+  z-index:1;
+}
+
+/* Video container */
+.hero__bgVideo{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+/* Videos A/B/C */
+.hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity .9s ease, transform 1.2s ease;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.hero-video.is-active{
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+/* Actions (CTAs row) */
+.hero__actions{
+  display:flex;
+  gap: 14px;
+  justify-content:center;
+  flex-wrap: wrap;
+}
+
+/* ✅ Services-only: CTA row only */
+.hero__actions--only{
+  margin: 0;
+  gap: 14px;
+}
+
+/* Scroll */
+.hero__scroll{
+  position:absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+
+  width: 44px;
+  height: 44px;
+  display:grid;
+  place-items:center;
+
+  color: var(--accent);
+  opacity:.95;
+}
+
+.chev{
+  width: 18px;
+  height: 18px;
+  border-right: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
+  transform: rotate(45deg);
+  animation: bob 2s infinite ease-in-out;
+}
+
+@keyframes bob{
+  0%,100%{ transform: rotate(45deg) translateY(0); }
+  50%{ transform: rotate(45deg) translateY(6px); }
+}
+
+/* Reveal compatibility (no hidden overflow) */
+.reveal{
+  overflow: visible;
+}
+
+/* Responsive: stack CTAs nicely */
+@media (max-width: 920px){
+  .hero--ctasOnly{
+    min-height: 52vh; /* little extra room */
+  }
+
+  .hero__actions--only{
+    gap: 12px;
+  }
+
+  .hero--ctasOnly .btn{
+    width: min(520px, 100%);
+  }
+}
+/* =========================
+   HERO PATCH — subir CTAs/texto e dar mais respiro embaixo
+========================= */
+
+/* desktop/tablet */
+.hero--ctasOnly .hero__content{
+  padding-top: 72px !important;     /* antes 92px */
+  padding-bottom: 56px !important;  /* antes 28px */
+}
+
+/* opcional: sobe um pouco o ícone/seta animada */
+.hero__scroll{
+  bottom: 26px !important; /* antes 16px */
+}
+
+/* mobile */
+@media (max-width: 920px){
+  .hero--ctasOnly .hero__content{
+    padding-top: 64px !important;
+    padding-bottom: 64px !important;
+  }
+
+  .hero__scroll{
+    bottom: 22px !important;
+  }
+}

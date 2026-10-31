@@ -1,0 +1,387 @@
+/* =========================================================
+   MAIN (GLOBAL) — Lupa Painting Services
+   - Regras globais para TODAS as páginas
+   - NÃO colocar estilos específicos de seções aqui (Blog/Services/etc)
+   - Hero e Footer ficam nos seus arquivos próprios (hero.css / footer.css)
+========================================================= */
+
+/* =========================
+   TOKENS / VARIABLES
+========================= */
+:root{
+  --bg: #121212;
+  --panel: #0b0b0b;
+  --panel2: #171717;
+
+  --ink: #ffffff;
+  --muted: rgba(255,255,255,.62);
+  --muted2: rgba(255,255,255,.45);
+
+  --line: rgba(255,255,255,.06);
+  --line2: rgba(255,255,255,.10);
+
+  --accent: #facc15; /* yellow */
+  --gold: #facc15;
+
+  --shadow: 0 24px 80px rgba(0,0,0,.45);
+
+  --radius: 14px;
+  --radius-lg: 18px;
+
+  --container: 1160px;
+  --gutter: 24px;
+}
+
+/* =========================
+   RESET / BASE
+========================= */
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
+html, body{
+  height: 100%;
+}
+
+html{
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body{
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection{
+  background: var(--accent);
+  color: #000;
+}
+
+img, svg, video{
+  max-width: 100%;
+  display: block;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea, select{
+  font: inherit;
+  color: inherit;
+}
+
+button{
+  cursor: pointer;
+}
+
+:focus-visible{
+  outline: 2px solid rgba(250,204,21,.75);
+  outline-offset: 3px;
+}
+
+/* =========================
+   LAYOUT HELPERS
+========================= */
+.container{
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section{
+  padding: 96px 0;
+}
+
+.section--dark{
+  background: #000;
+}
+
+.section--alt{
+  background: #181818;
+}
+
+/* Responsivo base */
+@media (max-width: 980px){
+  .section{
+    padding: 80px 0;
+  }
+  :root{
+    --gutter: 16px;
+  }
+}
+
+/* =========================
+   TYPOGRAPHY HELPERS
+========================= */
+.kicker{
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: .20em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 0 0 16px;
+}
+
+.h2{
+  margin: 0;
+  font-size: clamp(28px, 3.6vw, 54px);
+  line-height: 1.05;
+  font-weight: 900;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+}
+
+.muted{
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.muted.small{
+  font-size: 12px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
+/* Acento forte (usado em textos) */
+.accentStrong{
+  color: var(--accent);
+  font-weight: 900;
+}
+
+/* =========================
+   UTILITIES
+========================= */
+.hidden{
+  display: none !important;
+}
+
+.srOnly{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/* =========================
+   BUTTONS (BASE)
+   - estilos específicos (cta/ghost/white/lg/full) podem estar no index.css
+   - aqui só a base para padronizar
+========================= */
+.btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  border: 1px solid rgba(255,255,255,.14);
+  background: transparent;
+  color: #fff;
+
+  padding: 14px 18px;
+  border-radius: var(--radius);
+
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 12px;
+
+  transition: transform .18s ease, background .18s ease, color .18s ease, border-color .18s ease, box-shadow .18s ease;
+  user-select: none;
+}
+
+.btn:hover{
+  transform: translateY(-1px);
+}
+
+/* =========================
+   BRAND (texto do logo)
+========================= */
+.brand{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.brand__lupa{
+  background: #fff;
+  color: #000;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.brand__painting{
+  color: var(--accent);
+}
+
+.brand:hover .brand__lupa{
+  background: var(--accent);
+}
+
+.brand--big{
+  font-size: 42px;
+}
+
+/* =========================
+   REVEAL (animação por JS)
+   Compatível com .active e .isIn
+========================= */
+.reveal{
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .7s ease, transform .7s ease;
+  will-change: opacity, transform;
+}
+
+.reveal.active,
+.reveal.isIn{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================
+   DIVIDER (por seção)
+   Use: <section class="section divided ...">
+========================= */
+.section.divided{
+  position: relative;
+  padding-top: 26px; /* espaço pro divider */
+}
+
+.section.divided::before{
+  content:"";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+
+  height: 3px;
+  width: min(1100px, calc(100% - 48px));
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(250,204,21,0),
+    rgba(250,204,21,.95),
+    rgba(250,204,21,0)
+  );
+
+  box-shadow: 0 10px 20px rgba(250,204,21,.18);
+  pointer-events: none;
+  z-index: 5;
+}
+
+@media (max-width: 640px){
+  .section.divided::before{
+    width: calc(100% - 28px);
+  }
+}
+
+/* =========================
+   SCROLLBAR (global)
+   - leve, discreta
+========================= */
+*{
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.18) rgba(255,255,255,.05);
+}
+
+*::-webkit-scrollbar{
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,.16);
+  border-radius: 999px;
+  border: 2px solid rgba(0,0,0,0);
+  background-clip: padding-box;
+}
+*::-webkit-scrollbar-track{
+  background: rgba(255,255,255,.05);
+  border-radius: 999px;
+}
+
+/* =========================
+   GRID UTIL (opcional)
+   Use só se você quiser um padrão de grid em várias páginas.
+   (Se preferir, tire este bloco e deixe grid em cada section/page css)
+========================= */
+.grid3{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+@media (max-width: 980px){
+  .grid3{
+    grid-template-columns: 1fr;
+  }
+}
+/* =========================================
+   SCROLLBAR — Lupa Yellow (modern)
+   Cole no FINAL do seu CSS (global.css)
+========================================= */
+
+/* Firefox */
+html{
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) rgba(255,255,255,.08);
+}
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar{
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track{
+  background: rgba(255,255,255,.06);
+}
+
+::-webkit-scrollbar-thumb{
+  background: linear-gradient(
+    180deg,
+    rgba(250,204,21,.95),
+    rgba(245,158,11,.90)
+  );
+  border-radius: 999px;
+  border: 3px solid rgba(18,18,18,.95); /* “gap” moderno */
+  box-shadow: 0 10px 22px rgba(0,0,0,.35);
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,.98),
+    rgba(250,204,21,.98)
+  );
+}
+
+::-webkit-scrollbar-thumb:active{
+  background: rgba(250,204,21,1);
+}
+
+::-webkit-scrollbar-corner{
+  background: rgba(0,0,0,.25);
+}

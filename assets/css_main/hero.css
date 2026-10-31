@@ -1,0 +1,622 @@
+/* =========================
+  Typography blocks (Gemini)
+========================= */
+.kicker{
+  color: var(--accent);
+  font-weight: 800;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin: 0 0 16px;
+}
+
+.h2{
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1.05;
+  margin: 0 0 24px;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.upper{ text-transform: uppercase; }
+
+.muted{
+  color: var(--muted);
+  line-height: 1.8;
+  font-size: 16px;
+}
+
+.muted.small{
+  font-size: 12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+.pill{
+  display:inline-block;
+  border: 1px solid rgba(250,204,21,.9);
+  color: var(--accent);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+
+/* =========================
+  Buttons (Gemini)
+========================= */
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  border: 1px solid transparent;
+  padding: 14px 20px;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  cursor:pointer;
+  transition: transform .2s ease, background .2s ease, color .2s ease, border-color .2s ease, box-shadow .2s ease;
+  user-select:none;
+}
+
+.btn--lg{ padding: 16px 26px; font-size: 14px; }
+.btn--full{ width:100%; }
+
+/* CORES ANTIGAS - usar para TEXT US / telefone se já usavam CTA */
+.btn--cta{
+  background: var(--accent);
+  color:#000;
+}
+.btn--cta:hover{
+  background:#fff;
+  color:#000;
+  transform: translateY(-2px);
+}
+
+/* NOVO BOTÃO APENAS PARA REQUEST FREE ESTIMATE / REQUEST A FREE QUOTE */
+.btn--quote{
+  background: #c1121f !important;
+  color:#fff !important;
+  border-color: #c1121f !important;
+}
+.btn--quote:hover{
+  background:#9b0d18 !important;
+  color:#fff !important;
+  border-color:#9b0d18 !important;
+  transform: translateY(-2px);
+}
+
+.btn--ghost{
+  background: transparent;
+  border-color: #fff;
+  color:#fff;
+}
+.btn--ghost:hover{
+  background:#fff;
+  color:#000;
+}
+
+.btn--white{
+  background:#fff;
+  color:#000;
+}
+.btn--white:hover{
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
+.btn__arrow{ transition: transform .2s ease; }
+.btn--white:hover .btn__arrow{ transform: translateX(4px); }
+
+/* =========================
+  Brand (Gemini)
+  - LUPA (preto em fundo branco)
+  - PAINTING amarelo
+========================= */
+.brand{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  font-weight:900;
+  font-style: italic;
+  letter-spacing:-.04em;
+  text-transform: uppercase;
+}
+
+.brand__lupa{
+  background:#fff;
+  color:#000;
+  padding: 4px 10px;
+}
+
+.brand__painting{
+  color: var(--accent);
+}
+
+.brand:hover .brand__lupa{ background: var(--accent); }
+.brand--big{ font-size: 42px; }
+
+/* =========================
+  Navbar (Gemini sticky blur)
+========================= */
+.nav{
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  padding: 18px 0;
+  transition: background .25s ease, backdrop-filter .25s ease, padding .25s ease, box-shadow .25s ease;
+  background: transparent;
+}
+
+.nav.isScrolled{
+  background: rgba(24,24,24,.88);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.3);
+  padding: 12px 0;
+}
+
+.nav__inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.nav__desktop{
+  display:flex;
+  align-items:center;
+  gap: 26px;
+}
+
+.nav__link{
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .18em;
+  color: rgba(255,255,255,.85);
+  transition: color .2s ease;
+}
+
+.nav__link:hover{ color: var(--accent); }
+
+/* Mobile toggle */
+.nav__toggle{
+  display:none;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line2);
+  background: rgba(0,0,0,.25);
+  border-radius: 10px;
+  cursor:pointer;
+}
+
+.nav__burger{
+  display:block;
+  width: 20px;
+  height: 2px;
+  background:#fff;
+  margin: 0 auto;
+  position:relative;
+}
+
+.nav__burger:before,
+.nav__burger:after{
+  content:"";
+  position:absolute;
+  left:0;
+  width:100%;
+  height:2px;
+  background:#fff;
+}
+
+.nav__burger:before{ top:-7px; }
+.nav__burger:after{ top:7px; }
+
+.nav__toggle.isOpen .nav__burger{ background: transparent; }
+.nav__toggle.isOpen .nav__burger:before{ top:0; transform: rotate(45deg); }
+.nav__toggle.isOpen .nav__burger:after{ top:0; transform: rotate(-45deg); }
+
+/* Mobile menu */
+.nav__mobile{
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  height: calc(100vh - 72px);
+  background: #111;
+  border-top: 1px solid var(--line);
+  padding: 24px 18px;
+  display:none;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav__mobile.isOpen{ display:flex; }
+
+.nav__mobileLink{
+  font-size: 22px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 10px 0;
+}
+
+.nav__mobileLink:hover{ color: var(--accent); }
+
+@media (max-width: 920px){
+  .nav__desktop{ display:none; }
+  .nav__toggle{ display:inline-flex; align-items:center; justify-content:center; }
+}
+
+/* =========================
+  HERO (Gemini) + VIDEO BG
+========================= */
+.hero{
+  position:relative;
+  min-height: 100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.hero__content{
+  position:relative;
+  z-index:2;
+  text-align:center;
+  padding-top: 72px;
+}
+
+.hero__overlay{
+  position:absolute;
+  inset:0;
+  background: rgba(0,0,0,.72);
+  z-index:1;
+}
+
+/* Video container */
+.hero__bgVideo{
+  position:absolute;
+  inset:0;
+  z-index:0;
+}
+
+/* Seus vídeos A/B/C */
+.hero-video{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.06);
+  transition: opacity .9s ease, transform 1.2s ease;
+  filter: saturate(1.05) contrast(1.05);
+}
+
+.hero-video.is-active{
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.hero__title{
+  margin: 18px 0 18px;
+  font-size: clamp(42px, 6.2vw, 92px);
+  line-height: 1.02;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+.hero__subtitle{
+  color: rgba(255,255,255,.78);
+  font-size: clamp(16px, 2vw, 20px);
+  max-width: 760px;
+  margin: 0 auto 28px;
+  line-height: 1.7;
+  min-height: 3rem;
+}
+
+.hero__actions{
+  display:flex;
+  gap: 14px;
+  justify-content:center;
+  flex-wrap: wrap;
+}
+
+.hero__scroll{
+  position:absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 44px;
+  height: 44px;
+  display:grid;
+  place-items:center;
+  color: var(--accent);
+  opacity:.95;
+}
+
+.chev{
+  width: 18px;
+  height: 18px;
+  border-right: 3px solid var(--accent);
+  border-bottom: 3px solid var(--accent);
+  transform: rotate(45deg);
+  animation: bob 2s infinite ease-in-out;
+}
+
+@keyframes bob{
+  0%,100%{ transform: rotate(45deg) translateY(0); }
+  50%{ transform: rotate(45deg) translateY(6px); }
+}
+
+/* blobs */
+.blob{
+  position:absolute;
+  border-radius: 999px;
+  filter: blur(40px);
+  opacity: .9;
+  z-index:1;
+  pointer-events:none;
+}
+
+.blob--right{
+  top: 18%;
+  right: -120px;
+  width: 320px;
+  height: 320px;
+  background: rgba(250,204,21,.10);
+}
+
+.blob--left{
+  bottom: 18%;
+  left: -160px;
+  width: 420px;
+  height: 420px;
+  background: rgba(255,255,255,.06);
+}
+
+/* =========================
+  PAINT REVEAL
+========================= */
+.paint-line{
+  display:block;
+  overflow: visible;
+  padding-bottom: .28em;
+  margin-bottom: -.28em;
+}
+
+.paint-reveal{
+  display:inline-block;
+  position: relative;
+  padding: .06em .02em .18em;
+  line-height: 1.08;
+  transform: translateY(14px);
+  opacity: 0;
+  filter: blur(6px);
+  will-change: transform, opacity, clip-path;
+}
+
+.paint-reveal.is-accent{
+  color: var(--accent);
+}
+
+.paint-reveal::before{
+  content:"";
+  position:absolute;
+  left:-18%;
+  top: 55%;
+  width: 160%;
+  height: 1.15em;
+  transform: translateY(-50%) skewX(-10deg);
+  background:
+    linear-gradient(90deg,
+      rgba(250,204,21,0) 0%,
+      rgba(250,204,21,.22) 18%,
+      rgba(245,158,11,.52) 42%,
+      rgba(245,158,11,.38) 62%,
+      rgba(250,204,21,0) 100%);
+  border-radius: 999px;
+  filter: blur(1px);
+  opacity: 0;
+}
+
+body.is-loaded .paint-reveal{
+  animation: paintTextIn .95s cubic-bezier(.2,.9,.2,1) forwards;
+}
+body.is-loaded .paint-reveal::before{
+  animation: brushSweep .88s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+#heroTitle .paint-line:nth-child(1) .paint-reveal{ animation-delay: .06s; }
+#heroTitle .paint-line:nth-child(2) .paint-reveal{ animation-delay: .20s; }
+#heroTitle .paint-line:nth-child(3) .paint-reveal{ animation-delay: .36s; }
+
+#heroTitle .paint-line:nth-child(1) .paint-reveal::before{ animation-delay: .06s; }
+#heroTitle .paint-line:nth-child(2) .paint-reveal::before{ animation-delay: .20s; }
+#heroTitle .paint-line:nth-child(3) .paint-reveal::before{ animation-delay: .36s; }
+
+@keyframes paintTextIn{
+  0%{
+    opacity:0;
+    transform: translateY(14px);
+    filter: blur(8px);
+    clip-path: inset(-0.20em 100% -0.35em 0);
+  }
+  45%{ opacity:1; filter: blur(2px); }
+  100%{
+    opacity:1;
+    transform: translateY(0);
+    filter: blur(0);
+    clip-path: inset(-0.20em 0 -0.35em 0);
+  }
+}
+@keyframes brushSweep{
+  0%{ opacity:0; transform: translateY(-50%) translateX(-28%) skewX(-10deg); }
+  15%{ opacity:1; }
+  100%{ opacity:0; transform: translateY(-50%) translateX(28%) skewX(-10deg); }
+}
+
+/* =========================================
+   HERO TUNING
+========================================= */
+.hero__content{
+  padding-top: 54px;
+}
+
+.hero__title{
+  font-size: clamp(36px, 5.2vw, 78px);
+  letter-spacing: -0.05em;
+  margin: 12px 0 10px;
+}
+
+.hero__title--paint{
+  line-height: .86;
+}
+
+.hero__title--paint .paint-line{
+  padding-bottom: .06em;
+  margin-bottom: -.06em;
+}
+
+.pill{
+  padding: 6px 12px;
+  font-size: 10px;
+  letter-spacing: .16em;
+}
+
+.hero__subtitle{
+  font-size: clamp(14px, 1.7vw, 18px);
+  margin: 0 auto 18px;
+  line-height: 1.6;
+  max-width: 720px;
+}
+
+.hero__actions{
+  gap: 12px;
+}
+
+.hero__scroll{
+  bottom: 16px;
+}
+
+/* =========================
+   PATCH — bordas QUADRADAS
+========================= */
+.brand__lupa{
+  border-radius: 0 !important;
+}
+
+.btn{
+  border-radius: 0 !important;
+}
+
+.btn--cta,
+.btn--quote,
+.btn--white,
+.btn--ghost{
+  border-radius: 0 !important;
+}
+
+.nav__toggle{
+  border-radius: 0 !important;
+}
+
+.hero__title--paint,
+.hero__title--paint .paint-line,
+.hero__title--paint .paint-reveal,
+.reveal {
+  overflow: visible !important;
+}
+
+.hero__title--paint .paint-line {
+  display: inline-block;
+  padding: 0 0.08em;
+  margin: 0 -0.08em;
+}
+
+.hero__title--paint .paint-reveal {
+  display: inline-block;
+  padding: 0 0.06em;
+}
+
+/* =========================================
+   HERO TRUST BADGES
+========================================= */
+.heroTrust{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 18px;
+  flex-wrap: wrap;
+  max-width: 980px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: none;
+  transform: translateY(-292px);
+  margin: 0 auto -292px;
+}
+
+.heroTrust__item{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height: 272px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  transition: transform .16s ease, opacity .16s ease;
+}
+
+.heroTrust__item img{
+  height: 106px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,.65));
+  opacity: .96;
+}
+
+.heroTrust__item--link:hover{
+  transform: translateY(-1px);
+}
+.heroTrust__item--link:hover img{
+  opacity: 1;
+}
+
+.heroPill{
+  display:inline-block;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 560px){
+  .heroTrust{
+    gap: 12px;
+    transform: translateY(-120px);
+    margin: 0 auto -120px;
+  }
+
+  .heroTrust__item{ height: 44px; }
+
+  .heroTrust__item img{
+    height: 70px;
+    max-width: 200px;
+  }
+}
+
+/* CTA swap: Desktop mantém igual, Mobile troca REQUEST por TEXT */
+.heroCta--mobile{ display:none; }
+.heroCta--desktop{ display:inline-flex; }
+
+@media (max-width: 920px){
+  .heroCta--desktop{ display:none; }
+  .heroCta--mobile{ display:inline-flex; }
+}

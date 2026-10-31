@@ -11,33 +11,11 @@ $articles=posts();
 <link rel="stylesheet" href="/assets/css_main/css_services/services.css">
 <link rel="stylesheet" href="/assets/css_main/css_services/hero.css">
 <link rel="stylesheet" href="/assets/css_main/footer.css">
-<style>
-body{background:#0b0d12;color:#fff}
-.lupaBlogKicker{font-size:13px;font-weight:800;color:#f6d123;letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px}
-.lupaBlogTitle{font-size:clamp(35px,5vw,72px);font-style:italic;font-weight:900;text-transform:uppercase;line-height:1.08;max-width:970px;margin:0 auto 20px;color:#fff}
-.lupaBlogIntro{font-size:17px;color:#f4f4f4;max-width:690px;margin:0 auto 25px;line-height:1.6}
-.hero__content .reveal{text-align:center}
-.lupaBlogListing{background:#0b0d12;padding:75px 0 110px}
-.lupaBlogListing .container{max-width:1180px}
-.lupaBlogEyebrow{letter-spacing:.2em;color:#f6ca20;font-weight:800;font-size:13px}
-.lupaBlogHeading{font-size:clamp(30px,4vw,52px);text-transform:uppercase;font-style:italic;margin:12px 0}
-.lupaBlogSubtitle{color:#c5c9d0;max-width:720px;margin-bottom:35px}
-.lupaBlogGrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.lupaBlogCard{border:1px solid #35383f;background:#171a20;border-radius:12px;overflow:hidden}
-.lupaBlogCard img{width:100%;height:215px;object-fit:cover;display:block}
-.lupaBlogCardContent{padding:22px}.lupaBlogCard small{color:#f6cd26}
-.lupaBlogCard h3{font-size:22px;line-height:1.3;margin:12px 0}.lupaBlogCard a{color:#fff;text-decoration:none}
-.lupaBlogCard a:hover{color:#ffd12b}.lupaBlogCard p{color:#c9c9cc}
-.lupaBlogCard .lupaRead{font-weight:800;color:#f6cd26}
-.lupaBlogEmpty{background:#171a20;border:1px solid #343943;border-radius:12px;padding:38px;max-width:780px}.lupaBlogEmpty p{color:#d1d1d1}
-.lupaBlogFooter{background:#0a0c11;padding:28px;text-align:center;color:#aaa}.lupaBlogFooter a{color:#f4ce2a}
-@media(max-width:960px){.lupaBlogGrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:650px){.lupaBlogGrid{grid-template-columns:1fr}.lupaBlogListing{padding:48px 0}.lupaBlogTitle{font-size:36px}.lupaBlogIntro{font-size:15px}}
-</style>
+<style>.lupaBlogListing{padding:65px 0;background:#0b0d12;color:white}.lupaBlogGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}.lupaBlogCard{background:#161a22;border:1px solid #393e45;border-radius:12px;overflow:hidden}.lupaBlogCardContent{padding:22px}.lupaBlogCard img{width:100%;height:220px;object-fit:cover}.lupaBlogCard a{color:#f3c926}.lupaBlogListing .container{max-width:1150px}.lupaBlogFooter{padding:30px;text-align:center;background:#090c12;color:white}.lupaBlogFooter a{color:#f3c926}</style>
 <script type="application/ld+json"><?=json_encode(['@context'=>'https://schema.org','@type'=>'Blog','name'=>'Lupa Painting Blog','url'=>'https://lupaservices.com/blog.php','publisher'=>['@type'=>'Organization','name'=>'Lupa Painting','url'=>'https://lupaservices.com/']],JSON_UNESCAPED_SLASHES)?></script>
 </head><body><nav id="navbar" class="nav">
     <div class="container nav__inner">
-      <a href="/" class="brand" aria-label="Lupa Painting Services - Home">
+      <a href="/" class="brand" aria-label="Lupa Painting - Home">
         <span class="brand__lupa">LUPA</span>
         <span class="brand__painting">PAINTING</span>
       </a>
@@ -59,7 +37,7 @@ body{background:#0b0d12;color:#fff}
       </button>
     </div>
 
-    <!-- Mobile Menu (Gemini padrão) -->
+    <!-- Mobile Menu -->
     <div id="mobileMenu" class="nav__mobile" aria-hidden="true">
       <a class="nav__mobileLink" href="/about.html" data-close>About</a>
       <a class="nav__mobileLink" href="/reviews.html" data-close>Reviews</a>
@@ -73,7 +51,7 @@ body{background:#0b0d12;color:#fff}
       <a class="btn btn--ghost btn--lg" href="sms:+18572465998" data-close>TEXT US</a>
     </div>
   </nav>
-<header class="hero hero--video hero--ctasOnly" id="home">
+<header class="hero hero--video hero--ctasOnly" id="pageHero">
   <!-- Video Background -->
   <div class="hero__bg hero__bgVideo" aria-hidden="true">
     <video class="hero-video is-active" id="heroVideoA" autoplay muted loop playsinline preload="metadata">
@@ -94,15 +72,21 @@ body{background:#0b0d12;color:#fff}
 
   <div class="container hero__content">
     <div class="reveal">
-      <p class="lupaBlogKicker">THE LUPA JOURNAL</p><h1 class="lupaBlogTitle">PAINTING TIPS &amp; PROJECT INSIGHTS</h1><p class="lupaBlogIntro">Practical painting advice, project inspiration and surface preparation tips from Lupa Painting.</p><div class="hero__actions hero__actions--only">
-        <a class="btn btn--cta btn--lg" href="/index.html#quote">REQUEST A FREE QUOTE</a>
-        <a class="btn btn--ghost btn--lg" href="mailto:paintinglupa@gmail.com">EMAIL US</a>
-        <a class="btn btn--white btn--lg" href="/index.html#service-areas">SEE SERVICE AREAS</a>
+      <div class="serviceHeroTitle">
+        <h1 class="serviceHeroHeading">
+          <span class="hero__line hero__line--top">
+            <span class="is-white serviceHeroWord">OUR</span>
+            <span class="is-yellow serviceHeroAccent">BLOG</span>
+          </span>
+        </h1>
+
+        <p class="serviceHeroSubline"><span class="is-white">PAINTING TIPS. PROJECT STORIES. PRACTICAL ADVICE.</span></p>
       </div>
+
+      <div class="hero__actions hero__actions--only serviceHeroActions"><a class="btn btn--cta btn--lg" href="/index.html#quote">REQUEST A FREE QUOTE</a><a class="btn btn--ghost btn--lg" href="#latestArticles">READ ARTICLES</a><a class="btn btn--white btn--lg" href="/services.html">OUR SERVICES</a></div>
     </div>
   </div>
 
-  <!-- Scroll icon -->
   <a class="hero__scroll" href="#latestArticles" aria-label="Scroll">
     <span class="chev" aria-hidden="true"></span>
   </a>

@@ -1,0 +1,58 @@
+name: Import Lupa Painting site package
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lupa_painting_site_preparado.zip'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout current website
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Validate and unpack the supplied site
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import pathlib, zipfile, hashlib
+          archive = pathlib.Path("lupa_painting_site_preparado.zip")
+          if not archive.is_file():
+              raise SystemExit("Upload lupa_painting_site_preparado.zip to repository root")
+          root = pathlib.Path.cwd().resolve()
+          with zipfile.ZipFile(archive) as z:
+              files = [x for x in z.infolist() if not x.is_dir()]
+              if not (len(files) == 76 and {"index.html", "blog.php", "services.html", "assets/js/app.js"}.issubset({x.filename for x in files})):
+                  raise SystemExit("Unexpected package contents. Import cancelled.")
+              for item in files:
+                  p = pathlib.PurePosixPath(item.filename)
+                  if p.is_absolute() or ".." in p.parts or p.parts[0] == ".github":
+                      raise SystemExit("Unsafe archive path: " + item.filename)
+                  target = (root / item.filename).resolve()
+                  if not target.is_relative_to(root):
+                      raise SystemExit("Unsafe extraction destination")
+                  target.parent.mkdir(parents=True, exist_ok=True)
+                  target.write_bytes(z.read(item))
+          print(f"Imported {len(files)} site files; existing photos/videos were not deleted.")
+          PY
+
+      - name: Commit website files without deleting media
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- index.html about.html contact.html reviews.html inspiration.html privacy.html terms.html services.html blog.php 404.html .htaccess robots.txt sitemap.xml site.webmanifest assets/css_folder_services assets/css_main assets/css_pages assets/js assets/favicons services
+          rm -- lupa_painting_site_preparado.zip
+          git add -A -- lupa_painting_site_preparado.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "site: import updated Lupa Painting pages and assets"
+            git push origin HEAD:main
+          fi

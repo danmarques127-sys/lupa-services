@@ -1,0 +1,32 @@
+name: Correct all local page hero headings
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fix-city-hero-headings.yml
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply standard hero typography and H1 to cities
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          for p in Path('service-areas').glob('*.html'):
+              s=p.read_text(encoding='utf-8')
+              s=s.replace('<h2 class="serviceHeroHeading">','<h1 class="serviceHeroHeading">').replace('</h2>\n\n        <p class="serviceHeroSubline">','</h1>\n\n        <p class="serviceHeroSubline">')
+              s=s.replace('/assets/css_main/css_services/hero.css"','/assets/css_main/css_services/hero.css?v=20261031-hero-fix"')
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit corrections
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add service-areas
+          if ! git diff --cached --quiet; then
+            git commit -m "fix: use standard white-yellow H1 hero on every city page"
+            git push
+          fi

@@ -1,0 +1,66 @@
+name: Finish Reviews FAQ on local pages and blog
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/final-lupa-faq.yml
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Match Reviews FAQ presentation and use genuine site image paths
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,html
+          files=[Path('service-areas.html'),*sorted(Path('service-areas').glob('*.html')),Path('blog.php')]
+          # Reference only real paths already present in the Services page markup, never fictional assets.
+          services=Path('services.html').read_text(encoding='utf-8')
+          image_paths=list(dict.fromkeys(re.findall(r'<img\b[^>]*src="(/assets/images/services/[^"]+\.(?:jpg|jpeg|png|webp))"',services,re.I)))
+          if len(image_paths)<8: raise RuntimeError('Insufficient existing service image references')
+          for i,p in enumerate(files):
+              s=p.read_text(encoding='utf-8')
+              if p.parent.name=='service-areas':
+                  image_nodes=list(re.finditer(r'<div class="lupaEditorialImage"><img src="([^"]+)"',s))
+                  if len(image_nodes)!=2: raise RuntimeError('City image count mismatch '+str(p))
+                  a=image_paths[(i*2)%len(image_paths)]
+                  b=image_paths[(i*2+5)%len(image_paths)]
+                  if a==b: b=image_paths[(i*2+6)%len(image_paths)]
+                  old=[m.group(1) for m in image_nodes]
+                  s=s.replace('src="'+old[0]+'"','src="'+a+'"',1)
+                  s=s.replace('src="'+old[1]+'"','src="'+b+'"',1)
+                  # Don't imply these photos were taken in the named city.
+              if p.name=='blog.php':
+                  if 'id="reviews-faq"' not in s:
+                      faq='''<section id="reviews-faq" class="section section--dark divided"><div class="container">
+                      <div class="faqShell reveal"><div class="faqIntro"><h2 class="kicker">FAQ</h2><h3 class="h2 upper">Questions<br>&amp; Answers.</h3>
+                      <p class="muted">Helpful information about our painting articles and services.</p>
+                      <a class="faqSupportLink" href="/contact.html">CONTACT LUPA</a></div>
+                      <div class="faqList">
+                      <article class="faqItem"><h3 class="faqItem__title">WHAT DOES THE LUPA PAINTING BLOG COVER?</h3><p class="faqItem__text">Painting preparation, finish selection, interior updates, exterior maintenance and home improvement guidance.</p></article>
+                      <article class="faqItem"><h3 class="faqItem__title">CAN I REQUEST AN ESTIMATE AFTER READING AN ARTICLE?</h3><p class="faqItem__text">Yes. Use the free estimate form to share your location and project requirements with our team.</p></article>
+                      <article class="faqItem"><h3 class="faqItem__title">DO YOU SERVE MY MASSACHUSETTS CITY?</h3><p class="faqItem__text">Explore our service areas and contact us to confirm coverage for your specific address.</p></article>
+                      <article class="faqItem"><h3 class="faqItem__title">DO YOU OFFER INTERIOR AND EXTERIOR PAINTING?</h3><p class="faqItem__text">Yes. Visit our Services page to explore interior, exterior, cabinet and other painting options.</p></article>
+                      </div></div></div></section>'''
+                      s=s.replace('</main>',faq+'</main>')
+                  if '/assets/css_main/lupa-inner-pages.css' not in s:
+                      s=s.replace('</head>','<link rel="stylesheet" href="/assets/css_main/lupa-inner-pages.css?v=20261101-faq-exact"></head>')
+              else:
+                  s=re.sub(r'/assets/css_main/lupa-inner-pages.css(?:\?v=[^"\']*)?', '/assets/css_main/lupa-inner-pages.css?v=20261101-faq-exact',s)
+              if '/assets/js/lupa-local-faq.js' not in s:
+                  s=s.replace('</body>','<script src="/assets/js/lupa-local-faq.js?v=20261101" defer></script></body>')
+              p.write_text(s,encoding='utf-8')
+          print('Updated',len(files),'public pages. Found',len(image_paths),'existing media references.')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add service-areas service-areas.html blog.php
+          if ! git diff --cached --quiet; then
+            git commit -m 'fix: enable Reviews FAQ accordion on all local pages and blog, diversify photos'
+            git push
+          fi

@@ -4,13 +4,13 @@ declare(strict_types=1);
 // One-time web installer. Available only until the private config exists.
 // Upload the site and run setup immediately before sharing the URL.
 require_once __DIR__ . '/bootstrap.php';
-// Deny the first-run installer unless explicitly enabled on the hosting server.
-if (getenv('BLOG_SETUP_ENABLED') !== '1') { http_response_code(403); exit('Administrator setup is disabled.'); }
 session_safe();
 header('Cache-Control: no-store, private');
 header('X-Robots-Tag: noindex, nofollow');
 
 $config = dirname(__DIR__, 2) . '/blog-config.php';
+$setupKeyFile = dirname(__DIR__, 2) . '/blog-setup-key.txt';
+if (!is_file($setupKeyFile)) { http_response_code(403); exit('Setup locked. Create the private setup key in cPanel first.'); }
 if (is_file($config)) {
     http_response_code(403);
     exit('Administrator already configured. <a href="/backend-blog/login.php">Sign in</a>.');
@@ -18,11 +18,13 @@ if (is_file($config)) {
 $error = '';
 if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     verify_csrf();
-    $username = trim((string) ($_POST['username'] ?? ''));
+    $username = 'lupapainting';
+    $submittedKey = (string) ($_POST['setup_key'] ?? '');
+    $expectedKey = trim((string) @file_get_contents($setupKeyFile));
     $password = (string) ($_POST['password'] ?? '');
     $confirm = (string) ($_POST['confirm'] ?? '');
-    if (!preg_match('/^[a-zA-Z0-9_-]{4,64}$/', $username)) {
-        $error = 'Username must be 4-64 letters, numbers, dashes or underscores.';
+    if (strlen($expectedKey) < 20 || !hash_equals($expectedKey, $submittedKey)) {
+        $error = 'Invalid setup key.';
     } elseif (strlen($password) < 12) {
         $error = 'Password must have at least 12 characters.';
     } elseif (!hash_equals($password, $confirm)) {
@@ -40,6 +42,7 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
             fclose($file);
             @chmod($config, 0600);
             if ($ok) {
+                @unlink($setupKeyFile);
                 header('Location: /backend-blog/login.php?setup=complete', true, 303);
                 exit;
             }
@@ -72,7 +75,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
 <form method="post" action="/backend-blog/setup-admin.php">
 <input type="hidden" name="csrf" value="<?= h(csrf()) ?>">
 <label for="username">Username</label>
-<input id="username" name="username" required minlength="4" maxlength="64" pattern="[a-zA-Z0-9_-]+" value="vianacommercialservices" autocomplete="username">
+<input id="username" name="username" value="lupapainting" readonly autocomplete="username">
+<label for="setup_key">One-time setup key (from private cPanel file)</label>
+<input id="setup_key" name="setup_key" type="password" required autocomplete="off">
 <label for="password">New password (minimum 12 characters)</label>
 <input id="password" name="password" type="password" required minlength="12" autocomplete="new-password">
 <label for="confirm">Confirm password</label>

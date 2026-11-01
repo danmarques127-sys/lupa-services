@@ -11,9 +11,9 @@ $articles=posts();
 <link rel="stylesheet" href="/assets/css_main/css_services/services.css">
 <link rel="stylesheet" href="/assets/css_main/css_services/hero.css?v=20261031-hero-fix">
 <link rel="stylesheet" href="/assets/css_main/footer.css">
-<style>.lupaBlogListing{padding:65px 0;background:#0b0d12;color:white}.lupaBlogGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}.lupaBlogCard{background:#161a22;border:1px solid #393e45;border-radius:12px;overflow:hidden}.lupaBlogCardContent{padding:22px}.lupaBlogCard img{width:100%;height:220px;object-fit:cover}.lupaBlogCard a{color:#f3c926}.lupaBlogListing .container{max-width:1150px}.lupaBlogFooter{padding:30px;text-align:center;background:#090c12;color:white}.lupaBlogFooter a{color:#f3c926}</style>
+
 <script type="application/ld+json"><?=json_encode(['@context'=>'https://schema.org','@type'=>'Blog','name'=>'Lupa Painting Blog','url'=>'https://lupaservices.com/blog.php','publisher'=>['@type'=>'Organization','name'=>'Lupa Painting','url'=>'https://lupaservices.com/']],JSON_UNESCAPED_SLASHES)?></script>
-<link rel="stylesheet" href="/assets/css_main/lupa-inner-pages.css?v=20261031"></head><body><nav id="navbar" class="nav">
+<link rel="stylesheet" href="/assets/css_main/lupa-inner-pages.css?v=20261031"><link rel="stylesheet" href="/assets/css_main/lupa-blog-viana.css?v=20261101"></head><body><nav id="navbar" class="nav">
     <div class="container nav__inner">
       <a href="/" class="brand" aria-label="Lupa Painting - Home">
         <span class="brand__lupa">LUPA</span>
@@ -92,7 +92,40 @@ $articles=posts();
     <span class="chev" aria-hidden="true"></span>
   </a>
 </header>
-<main id="mainContent" class="lupaInnerMain"><section id="latestArticles" class="lupaBlogListing lupaContentSection"><div class="container"><p class="lupaBlogEyebrow">LUPA PAINTING JOURNAL</p><h2 class="lupaBlogHeading">THE LATEST FROM LUPA</h2><p class="lupaBlogSubtitle">Painting insights, preparation guides and project inspiration for MetroWest Massachusetts.</p><?php if ($articles): ?><div class="lupaBlogGrid"><?php foreach($articles as $article): ?><article class="lupaBlogCard"><?php if(!empty($article['image'])): ?><img src="<?=h($article['image'])?>" alt="<?=h($article['title'])?>" loading="lazy"><?php endif; ?><div class="lupaBlogCardContent"><small><?=h(substr((string)($article['date']??''),0,10))?></small><h3><a href="/backend-blog/post.php?slug=<?=rawurlencode($article['slug'])?>"><?=h($article['title'])?></a></h3><p><?=h($article['summary']??'')?></p><a class="lupaRead" href="/backend-blog/post.php?slug=<?=rawurlencode($article['slug'])?>">READ ARTICLE</a></div></article><?php endforeach; ?></div><?php else: ?><div class="lupaBlogEmpty"><h3>Painting insights are on the way.</h3><p>We are preparing articles about surface preparation, finishes and home painting projects. You can explore our services or request an estimate today.</p><a class="btn btn--cta btn--lg" href="/index.html#quote">GET A FREE ESTIMATE</a></div><?php endif; ?></div></section></main>
+<main id="mainContent" class="lupaBlogEditorial">
+<section class="lupaBlogIntro" aria-labelledby="blog-intro-heading"><div class="lupaBlogContainer">
+<nav class="lupaBlogBreadcrumb" aria-label="Breadcrumb"><a href="/">Home</a> / Blog</nav>
+<p class="lupaBlogEyebrow">LUPA PAINTING JOURNAL</p>
+<h2 id="blog-intro-heading">PAINTING IDEAS THAT INSPIRE BETTER SPACES.</h2>
+<p class="lead">Discover practical advice on paint finishes, surface preparation, color choices and painting projects for homes and businesses across MetroWest Massachusetts.</p>
+<div class="lupaBlogButtons"><a href="/index.html#quote">REQUEST A FREE QUOTE</a><a class="secondary" href="/services.html">EXPLORE SERVICES</a></div>
+</div></section>
+<section id="latestArticles" class="lupaBlogPosts" aria-labelledby="latestArticlesHeading"><div class="lupaBlogContainer">
+<p class="lupaBlogEyebrow">PAINTING INSIGHTS &amp; PROJECT GUIDES</p>
+<h2 id="latestArticlesHeading">LATEST ARTICLES</h2>
+<p class="lupaBlogPostsSub">Helpful insights and updates from Lupa Painting.</p>
+<?php if ($articles): ?>
+<div class="lupaBlogPostGrid">
+<?php foreach ($articles as $article): ?>
+<article class="lupaBlogPostCard">
+<a class="lupaBlogCardCover" href="/backend-blog/post.php?slug=<?=rawurlencode($article['slug'])?>" aria-label="Read <?=h($article['title'])?>">
+<?php if (!empty($article['image'])): ?>
+<img src="<?=h($article['image'])?>" alt="<?=h($article['title'])?>" loading="lazy" decoding="async">
+<?php else: ?><span class="lupaBlogCardPlaceholder">LUPA PAINTING JOURNAL</span><?php endif; ?>
+</a>
+<div class="lupaBlogCardBody">
+<?php if (!empty($article['date'])): ?><span class="lupaBlogCardDate"><?=h(substr((string)$article['date'],0,10))?></span><?php endif; ?>
+<h3><a href="/backend-blog/post.php?slug=<?=rawurlencode($article['slug'])?>"><?=h($article['title'])?></a></h3>
+<p><?=h($article['summary']??'')?></p>
+<a class="lupaBlogReadMore" href="/backend-blog/post.php?slug=<?=rawurlencode($article['slug'])?>">READ ARTICLE &rarr;</a>
+</div></article>
+<?php endforeach; ?>
+</div>
+<?php else: ?>
+<div class="lupaBlogEmpty"><div><h3>New painting articles are on the way.</h3><p>We are preparing practical tips, project inspiration and guides to help you plan your next painting project.</p></div><a href="/services.html">EXPLORE OUR SERVICES</a></div>
+<?php endif; ?>
+</div></section>
+</main>
 <footer class="footer">
     <div class="container">
       <div class="footerGrid reveal">

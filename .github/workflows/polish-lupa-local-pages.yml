@@ -1,0 +1,107 @@
+name: Polish Lupa local SEO pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/polish-lupa-local-pages.yml'
+permissions:
+  contents: write
+jobs:
+  polish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild local editorial sections and FAQ
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,html
+          root=Path('service-areas')
+          def clean(t):
+              return re.sub('<[^>]*>','',t).strip()
+          images=[
+            ('/assets/images/services/interior/interior.jpeg','Interior painting project photography'),
+            ('/assets/images/services/exterior/exterior.jpeg','Exterior residential painting project'),
+            ('/assets/images/services/cabinet/cabinet.jpeg','Cabinet painting and refinishing project'),
+            ('/assets/images/services/deck/deck.jpeg','Deck painting and staining project')
+          ]
+          for idx,p in enumerate(sorted(root.glob('*.html'))):
+              s=p.read_text(encoding='utf-8')
+              city=p.stem.replace('-',' ').title()
+              main=re.search(r'<main\b[^>]*>[\s\S]*?</main>',s,re.I)
+              if not main: raise RuntimeError('Missing main '+str(p))
+              intro=re.search(r'<p class="lead">([\s\S]*?)</p>',main.group())
+              planning=re.search(r'<h2>Planning a Project[^<]*</h2><p>([\s\S]*?)</p>',main.group())
+              lead=intro.group(1) if intro else 'Talk with Lupa Painting about interior and exterior painting for your property.'
+              detail=planning.group(1) if planning else 'Surface preparation, trim condition and schedule are important considerations for a painting project.'
+              photo,alt=images[idx%len(images)]
+              new=f"""<main class="lupaInnerMain" id="localContent">
+          <section class="lupaContentSection"><div class="container">
+            <div class="lupaLocalIntro"><p class="lupaEyebrow"><a href="/service-areas.html">SERVICE AREAS</a> / {city.upper()}, MA</p>
+              <h2>PAINTING SERVICES IN {city.upper()}, MASSACHUSETTS</h2><p>{lead}</p></div>
+          </div></section>
+          <section class="lupaContentSection"><div class="container lupaEditorialGrid">
+             <div class="lupaEditorialImage"><img src="{photo}" alt="{alt}. Representative Lupa Painting service image; not identified as a {city} project." loading="lazy" decoding="async" width="700" height="520"></div>
+             <div class="lupaEditorialText"><p class="lupaEyebrow">YOUR NEXT PAINTING PROJECT</p>
+             <h2>PAINTING YOUR {city.upper()} PROPERTY WITH CARE</h2><p>{detail}</p>
+             <p>From first impressions to interior details, a successful paint job starts well before the final coat. Discuss your rooms, surfaces, repairs and preferred timeline with our team so the estimate reflects the work involved.</p>
+             <a class="lupaLocalCta" href="/index.html#quote">REQUEST A FREE QUOTE</a></div>
+          </div></section>
+          <section class="lupaContentSection"><div class="container">
+            <p class="lupaEyebrow" style="text-align:center">WHAT WE CAN HELP WITH</p>
+            <h2 class="lupaSectionHeading">PAINTING SERVICES IN {city.upper()}</h2>
+            <p class="lupaSectionLead">Explore the finishes and surface services offered by Lupa Painting. Contact us to confirm project availability for your address.</p>
+            <div class="services">
+              <a href="/services/interior-painting/interior-painting.html">INTERIOR PAINTING</a>
+              <a href="/services/exterior-painting/exterior-painting.html">EXTERIOR PAINTING</a>
+              <a href="/services/cabinet/cabinet-refinishing.html">CABINET REFINISHING</a>
+              <a href="/services/deck-fence-painting/deck-fence.html">DECK &amp; FENCE PAINTING</a>
+              <a href="/services/trim-door/trim-door.html">TRIM &amp; DOORS</a>
+              <a href="/services/drywall-repair/drywall.html">DRYWALL REPAIR</a>
+            </div>
+          </div></section>
+          <section class="lupaContentSection"><div class="container lupaEditorialGrid">
+             <div class="lupaEditorialText"><p class="lupaEyebrow">NEW ENGLAND HOMES</p>
+              <h2>PREPARATION MATTERS AS MUCH AS THE FINISH</h2>
+              <p>Massachusetts weather can be tough on exterior surfaces. Peeling paint, worn caulking, and areas exposed to moisture should be reviewed before work starts. Indoors, careful masking, surface preparation and finish selection can help deliver a cleaner result.</p>
+              <p>Every home is different. The right approach depends on the existing coating, substrate and project scope.</p>
+              <a href="/services.html" class="lupaLocalCta lupaLocalCta--light">EXPLORE ALL SERVICES</a></div>
+             <div class="lupaEditorialImage"><img src="/assets/images/services/exterior/exterior.jpeg" alt="Lupa Painting exterior painting service image, representative of available services" loading="lazy" decoding="async" width="700" height="520"></div>
+          </div></section>
+          <section class="lupaContentSection"><div class="container">
+            <div class="lupaFaqHeader"><p class="lupaEyebrow">FAQ</p><h2>PAINTING SERVICES QUESTIONS</h2>
+            <p>Quick answers about painting projects in {city}, preparation and scheduling.</p></div>
+            <div class="lupaFaqList">
+              <details><summary>HOW DO YOU PRICE A PAINTING PROJECT IN {city.upper()}?</summary><p>Pricing depends on the surfaces, required preparation, access, materials and overall scope. Contact us with project details to discuss an estimate.</p></details>
+              <details><summary>DO YOU PROVIDE INTERIOR AND EXTERIOR PAINTING?</summary><p>Lupa Painting offers both interior and exterior painting, plus cabinet refinishing and additional surface services. Availability depends on the project.</p></details>
+              <details><summary>HOW SOON CAN I SCHEDULE PAINTING?</summary><p>Scheduling depends on the season and the scope of the work. Send your preferred timeframe with the quote request so we can discuss options.</p></details>
+              <details><summary>DO YOU HELP WITH PREPARATION AND COLOR CHOICES?</summary><p>We can discuss surface preparation and suitable finishes as part of reviewing your project. Contact us for the options relevant to your property.</p></details>
+            </div>
+            <div class="lupaFaqCta"><div><h3>READY TO START YOUR PROJECT?</h3><p>Tell us what you would like to paint, and we will discuss the next steps.</p></div><a class="lupaLocalCta lupaLocalCta--light" href="/index.html#quote">REQUEST A QUOTE &rarr;</a></div>
+          </div></section>
+          <section class="lupaContentSection"><div class="container lupaNearby">
+            <h2 class="lupaSectionHeading">EXPLORE NEARBY SERVICE AREAS</h2>
+            <p class="lupaSectionLead">Browse more communities throughout MetroWest and nearby Massachusetts.</p>
+            <a class="lupaLocalCta" href="/service-areas.html">VIEW ALL SERVICE AREAS</a>
+          </div></section>
+          </main>"""
+              s=s[:main.start()]+new+s[main.end():]
+              s=re.sub(r'/assets/css_main/lupa-inner-pages.css(?:\?v=[^"\']*)?','/assets/css_main/lupa-inner-pages.css?v=20261101-editorial',s)
+              p.write_text(s,encoding='utf-8')
+          p=Path('service-areas.html')
+          s=p.read_text(encoding='utf-8')
+          s=re.sub(r'<section class="lupaContentSection"><div class="container lupaLocalIntro"><p>Serving MetroWest Massachusetts</p></div></section>','',s,count=1)
+          s=re.sub(r'/assets/css_main/lupa-inner-pages.css(?:\?v=[^"\']*)?','/assets/css_main/lupa-inner-pages.css?v=20261101-editorial',s)
+          s=s.replace('<h2>Professional Painting Services Across MetroWest Massachusetts</h2>','<p class="lupaEyebrow">SERVING METROWEST &amp; GREATER BOSTON</p><h2>PROFESSIONAL PAINTING SERVICES ACROSS METROWEST MASSACHUSETTS</h2>')
+          p.write_text(s,encoding='utf-8')
+          print('Rebuilt',len(list(root.glob('*.html'))),'city pages and main directory')
+          PY
+      - name: Commit local page updates
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add service-areas service-areas.html
+          if ! git diff --cached --quiet; then
+            git commit -m 'design: add real-service photography, editorial content, standard FAQs and local CTAs'
+            git push
+          fi

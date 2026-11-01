@@ -1,0 +1,12 @@
+/* Common Lupa editorial/area content presentation */
+.lupaInnerMain{background:#090b10;color:#f4f4f4;min-height:300px}
+.lupaInnerMain .lupaContentSection{padding:76px 0;border-top:1px solid #b89519;background:#090b10}
+.lupaInnerMain .lupaContentSection:nth-of-type(even){background:#15191f}
+.lupaInnerMain .container{max-width:1160px;margin:auto;padding:0 24px}
+.lupaInnerMain h2{font-size:clamp(1.8rem,3.8vw,3.2rem);line-height:1.14;text-transform:uppercase;font-weight:900;font-style:italic;color:#fff}
+.lupaInnerMain h3{color:#fff}.lupaInnerMain p,.lupaInnerMain li{color:#c4c9d1;line-height:1.75}
+.lupaInnerMain a:not(.btn){color:#f4cc27}.lupaInnerMain .lupaCard,.lupaInnerMain .panel,.lupaInnerMain .article{background:#1b2028;border:1px solid #3b414b;border-radius:12px;padding:22px}
+.lupaInnerMain .cities,.lupaInnerMain .services{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;list-style:none;padding:0}
+.lupaInnerMain .cities li,.lupaInnerMain .services a{background:#1b2028;border:1px solid #373d48;border-radius:9px;padding:14px}
+.lupaInnerMain .lupaLocalGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+@media(max-width:650px){.lupaInnerMain .lupaContentSection{padding:45px 0}.lupaInnerMain .container{padding:0 17px}}

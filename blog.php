@@ -10,10 +10,17 @@ $articles=posts();
 <link rel="stylesheet" href="/assets/css_main/global.css">
 <link rel="stylesheet" href="/assets/css_main/css_services/services.css">
 <link rel="stylesheet" href="/assets/css_main/css_services/hero.css?v=20261031-hero-fix">
-<link rel="stylesheet" href="/assets/css_main/footer.css">
+<link rel="stylesheet" href="/assets/css_main/footer.css?v=20261101">
 
 <script type="application/ld+json"><?=json_encode(['@context'=>'https://schema.org','@type'=>'Blog','name'=>'Lupa Painting Blog','url'=>'https://lupaservices.com/blog.php','publisher'=>['@type'=>'Organization','name'=>'Lupa Painting','url'=>'https://lupaservices.com/']],JSON_UNESCAPED_SLASHES)?></script>
-<link rel="stylesheet" href="/assets/css_main/lupa-inner-pages.css?v=20261031"><link rel="stylesheet" href="/assets/css_main/lupa-blog-viana.css?v=20261101"></head><body><nav id="navbar" class="nav">
+<link rel="stylesheet" href="/assets/css_main/lupa-inner-pages.css?v=20261031"><link rel="stylesheet" href="/assets/css_main/lupa-blog-viana.css?v=20261101">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+<link rel="icon" type="image/svg+xml" href="/assets/favicons/icon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#111111">
+</head><body><nav id="navbar" class="nav">
     <div class="container nav__inner">
       <a href="/" class="brand" aria-label="Lupa Painting - Home">
         <span class="brand__lupa">LUPA</span>
@@ -126,7 +133,7 @@ $articles=posts();
 <?php endif; ?>
 </div></section>
 </main>
-<footer class="footer">
+<footer class="lupaFooterDivider footer">
     <div class="container">
       <div class="footerGrid reveal">
         <div class="footerBrand">

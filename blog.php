@@ -81,7 +81,7 @@ $articles=posts();
           </span>
         </h1>
 
-        <p class="serviceHeroSubline"><span class="is-white">PAINTING TIPS. PROJECT STORIES. PRACTICAL ADVICE.</span></p>
+        <p class="serviceHeroSubline"><span class="is-white">Explore expert painting insights. Discover practical preparation and design ideas. Plan your next project with confidence.</span></p>
       </div>
 
       <div class="hero__actions hero__actions--only serviceHeroActions"><a class="btn btn--cta btn--lg" href="/index.html#quote">REQUEST A FREE QUOTE</a><a class="btn btn--ghost btn--lg" href="#latestArticles">READ ARTICLES</a><a class="btn btn--white btn--lg" href="/services.html">OUR SERVICES</a></div>

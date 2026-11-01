@@ -17,7 +17,7 @@ The public blog is `https://lupaservices.com/blog.php`. It uses PHP and JSON sto
 2. Upload the PHP code and the `assets/css/blog-php.css` stylesheet to the website root.
 3. Verify that `backend-blog/storage/` and `backend-blog/uploads/` are writable by PHP. Their `.htaccess` protections must be enforced by Apache.
 4. Ensure the directory **above** `public_html` is writable when provisioning credentials; `blog-config.php` is created there and must never be published or committed.
-5. To configure the initial account, temporarily set the PHP-host environment variable `BLOG_SETUP_ENABLED=1` and visit `/backend-blog/setup-admin.php` over HTTPS. Use a new unique password. **Disable `BLOG_SETUP_ENABLED` immediately afterward**; the installer is denied by default.
+5. In cPanel File Manager, create `/home/<account>/blog-setup-key.txt` alongside `public_html`, with a unique random secret of at least 20 characters. Open `/backend-blog/setup-admin.php` using HTTPS, enter the private setup key, and create the `lupapainting` password (minimum 12 characters). The installer removes the setup key after a successful setup and is locked permanently when `blog-config.php` exists. Do not store the key or password in GitHub.
 6. Test login, drafts, publishing, images, videos, article rendering, log-out, CSRF errors and unauthorized requests.
 7. Back up `backend-blog/storage/posts.json` and `backend-blog/uploads/` regularly.
 

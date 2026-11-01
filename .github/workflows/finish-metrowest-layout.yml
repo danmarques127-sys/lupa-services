@@ -1,0 +1,71 @@
+name: Finish MetroWest page layout
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/finish-metrowest-layout.yml'
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build consistent alternating Lupa sections
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          paths=[Path('service-areas.html'), *sorted(Path('service-areas').glob('*.html'))]
+          def split_sections(html):
+              m=re.search(r'<main\b[^>]*>[\s\S]*?</main>',html,re.I)
+              if not m: raise ValueError('Main not found')
+              section=m.group()
+              inner=re.search(r'<div class="container">([\s\S]*?)</div>\s*</section>\s*</main>',section)
+              if not inner: raise ValueError('Original content wrapper not found')
+              source=inner.group(1).strip()
+              parts=re.split(r'(?=<h2\b)',source)
+              pieces=[]
+              first=parts[0]
+              if first.strip():
+                  pieces.append('<section class="lupaContentSection"><div class="container lupaLocalIntro">'+first+'</div></section>')
+              for i,part in enumerate(parts[1:]):
+                  if not part.strip(): continue
+                  group=part
+                  if '<ul class="cities"' in group:
+                      group=group.replace('<h2','<h2 class="lupaSectionHeading"',1)
+                  elif '<div class="services"' in group:
+                      group=group.replace('<h2','<h2 class="lupaSectionHeading"',1)
+                  elif 'Nearby Service Areas' in group:
+                      group=group.replace('<ul>','<ul class="lupaNearbyList">',1)
+                      group=group.replace('<h2','<h2 class="lupaSectionHeading"',1)
+                  elif 'Frequently Asked Questions' in group:
+                      group='<div class="lupaLocalFaq">'+group+'</div>'
+                  if '<a class="cta"' in group:
+                      group=group.replace('class="cta"','class="lupaLocalCta"')
+                  pieces.append('<section class="lupaContentSection"><div class="container">'+group+'</div></section>')
+              new_main='<main class="lupaInnerMain"'+(' id="localContent"' if 'id="localContent"' in section else '')+'>'+''.join(pieces)+'</main>'
+              return html[:m.start()]+new_main+html[m.end():]
+          for p in paths:
+              s=p.read_text(encoding='utf-8')
+              # Remove the old page-specific styling that overrode the original Lupa theme.
+              s=re.sub(r'<style>[\s\S]*?</style>','',s,count=1)
+              s=split_sections(s)
+              s=re.sub(r'/assets/css_main/lupa-inner-pages.css(?:\?v=[^"\']*)?','/assets/css_main/lupa-inner-pages.css?v=20261101-layout',s)
+              if '/assets/css_main/footer.css' not in s:
+                  s=s.replace('</head>','<link rel="stylesheet" href="/assets/css_main/footer.css"></head>')
+              if len(re.findall(r'<main\b',s,re.I))!=1 or len(re.findall(r'</main>',s,re.I))!=1:
+                  raise ValueError('Unexpected main structure in '+str(p))
+              p.write_text(s,encoding='utf-8')
+          print('Updated',len(paths),'location pages')
+          PY
+      - name: Commit location page redesign
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add service-areas.html service-areas
+          if ! git diff --cached --quiet; then
+            git commit -m 'design: centered city cards, alternating sections, consistent sharp quote CTAs'
+            git push
+          fi

@@ -680,3 +680,15 @@
 .lupaInnerMain #reviews-faq.section.section--dark{border-top:1px solid rgba(250,204,21,.25);padding:90px 0;background:#0a0a0a}
 
 .lupaInnerMain #reviews-faq .container{width:min(1160px,calc(100% - 48px))!important;max-width:1160px!important;margin:auto!important}
+
+/* Lupa FAQ kicker: consistent brand yellow across Service Areas, cities and blog */
+#reviews-faq .faqIntro .kicker,
+.lupaInnerMain #reviews-faq .faqIntro .kicker,
+.lupaBlogEditorial #reviews-faq .faqIntro .kicker{
+  color:#facc15 !important;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-style:normal;
+}

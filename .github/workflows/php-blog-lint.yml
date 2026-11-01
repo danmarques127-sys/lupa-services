@@ -1,0 +1,19 @@
+name: PHP syntax check for blog
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/php-blog-lint.yml]
+permissions:
+  contents: read
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check PHP syntax
+        run: |
+          php -v
+          php -l backend-blog/post.php
+          php -l backend-blog/bootstrap.php
+          php -l blog.php
+          php -l backend-blog/dashboard.php

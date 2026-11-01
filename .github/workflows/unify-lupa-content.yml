@@ -1,0 +1,62 @@
+name: Unify Lupa footer, area layouts and hero messages
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/unify-lupa-content.yml
+permissions:
+  contents: write
+jobs:
+  unify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply existing homepage footer to all public pages
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          index=Path('index.html').read_text(encoding='utf-8')
+          footer=re.search(r'<footer class="footer">[\s\S]*?</footer>',index).group().replace('href="#" class="brand','href="/" class="brand')
+          pages=[p for p in Path('.').rglob('*.html') if '.github' not in p.parts and p.name!='index.html']
+          pages += [Path('blog.php')]
+          messages={
+           'about.html':"Your home deserves craftsmanship you can see. We protect every surface before painting begins. We finish each detail with care.",
+           'reviews.html':"See what customers say about our workmanship. Discover the details that make a difference. Choose your painting team with confidence.",
+           'inspiration.html':"Find the colors that bring your vision to life. Explore finishes made for real living. Discover your next transformation.",
+           'services.html':"Refresh your interiors with precision. Protect your exterior with thoughtful preparation. Bring your painting project to life.",
+           'contact.html':"Tell us what you want to transform. Get a clear conversation about scope and timing. Take the first step toward a beautiful finish.",
+           'blog.php':"Explore expert painting insights. Discover practical preparation and design ideas. Plan your next project with confidence.",
+           'service-areas.html':"Find painting services near your community. Explore interior and exterior solutions. Request a project estimate with Lupa Painting."
+          }
+          changed=[]
+          for p in pages:
+              s=p.read_text(encoding='utf-8')
+              original=s
+              if '<footer' in s.lower():
+                  s=re.sub(r'<footer\b[^>]*>[\s\S]*?</footer>',lambda _:footer,s,count=1,flags=re.I)
+              if str(p).startswith('service-areas/'):
+                  name=p.stem.replace('-',' ').title()
+                  message=f"Bring new life to your {name} property. Choose careful preparation and professional finishes. Request an estimate for your next painting project."
+                  s=s.replace('<main class="wrap" id="localContent">','<main class="lupaInnerMain" id="localContent"><section class="lupaContentSection"><div class="container">').replace('</main>','</div></section></main>')
+                  if '/assets/css_main/lupa-inner-pages.css' not in s:
+                      s=s.replace('</head>','<link rel="stylesheet" href="/assets/css_main/lupa-inner-pages.css?v=20261031"></head>')
+              else:
+                  message=messages.get(str(p))
+              if message and 'serviceHeroSubline' in s:
+                  s=re.sub(r'(<p class="serviceHeroSubline">)[\s\S]*?(</p>)',lambda m:m.group(1)+'<span class="is-white">'+message+'</span>'+m.group(2),s,count=1)
+              if s!=original:
+                  p.write_text(s,encoding='utf-8')
+                  changed.append(str(p))
+          print('Updated public pages:',len(changed))
+          print('\n'.join(changed))
+          PY
+      - name: Commit shared visual standards
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*.html' blog.php
+          if ! git diff --cached --quiet; then
+            git commit -m "design: unify public footers, local sections, and compelling hero copy"
+            git push
+          fi

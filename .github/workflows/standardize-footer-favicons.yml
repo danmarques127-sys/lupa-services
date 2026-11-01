@@ -1,0 +1,60 @@
+name: Standardize footer divider and favicon across site
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/standardize-footer-favicons.yml'
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Standardize site footer and browser icons
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          root=Path('.')
+          index=Path('index.html').read_text(encoding='utf-8')
+          icon_tags = [
+            '<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">',
+            '<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">',
+            '<link rel="icon" type="image/svg+xml" href="/assets/favicons/icon.svg">',
+            '<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicons/apple-touch-icon.png">',
+            '<link rel="manifest" href="/site.webmanifest">',
+            '<meta name="theme-color" content="#111111">'
+          ]
+          pages = [p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in {'.html','.php'} and not any(part.startswith('.') for part in p.parts)]
+          changed=[]
+          for p in pages:
+              src=p.read_text(encoding='utf-8')
+              if not re.search(r'<head\b',src,re.I): continue
+              out=src
+              # Remove conflicting icon declarations; canonical absolute URLs avoid nested-page path problems.
+              out=re.sub(r'<link\b[^>]*\brel\s*=\s*["\'](?:icon|shortcut icon|apple-touch-icon|mask-icon|manifest)["\'][^>]*>', '', out,flags=re.I)
+              out=re.sub(r'<meta\b[^>]*\bname\s*=\s*["\']theme-color["\'][^>]*>', '', out,flags=re.I)
+              out=re.sub(r'</head>', '\n'+'\n'.join(icon_tags)+'\n</head>',out,count=1,flags=re.I)
+              if p.name!='index.html' and re.search(r'<footer\b',out,re.I):
+                  # One shared divider. The main page already has its gold line after the trust badges.
+                  out=re.sub(r'<footer\b(?![^>]*\blupaFooterDivider\b)([^>]*)>',r'<footer\1 class="lupaFooterDivider">' if False else lambda m: '<footer'+m.group(1)[:-0] if False else m.group(0),out,count=0)
+                  out=re.sub(r'<footer\b[^>]*>',lambda m:m.group(0)[:-1].replace('class="','class="lupaFooterDivider ',1)+'>' if 'class="' in m.group(0) else m.group(0)[:-1]+' class="lupaFooterDivider">',out,count=1,flags=re.I)
+                  if '/assets/css_main/footer.css' not in out:
+                      out=out.replace('</head>','<link rel="stylesheet" href="/assets/css_main/footer.css?v=20261101"></head>')
+                  else:
+                      out=re.sub(r'/assets/css_main/footer.css(?:\?v=[^"\']*)?','/assets/css_main/footer.css?v=20261101',out)
+              if out!=src:
+                  p.write_text(out,encoding='utf-8')
+                  changed.append(str(p))
+          print('Updated',len(changed),'HTML/PHP files')
+          PY
+      - name: Commit changes
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A -- '*.html' '*.php'
+          if ! git diff --cached --quiet; then
+            git commit -m 'design: consistent favicon paths and gold footer divider across public pages'
+            git push
+          fi

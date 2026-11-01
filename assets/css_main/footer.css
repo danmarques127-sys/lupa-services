@@ -211,3 +211,7 @@ img{ max-width:100%; display:block; }
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Homepage-style gold separator on secondary-page footers */
+footer.lupaFooterDivider{position:relative!important;border-top:1px solid #c49d18!important}
+footer.lupaFooterDivider::before{content:"";position:absolute;top:-1px;left:0;right:0;height:1px;background:#d5ac1f;pointer-events:none}

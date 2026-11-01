@@ -27,3 +27,30 @@
 .lupaInnerMain .lupaSectionLead{text-align:center;max-width:800px;margin:0 auto 20px}
 @media(max-width:900px){.lupaInnerMain .cities{grid-template-columns:repeat(3,minmax(0,1fr))!important}.lupaInnerMain .services{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:600px){.lupaInnerMain .lupaContentSection{padding:48px 0!important}.lupaInnerMain .container{width:calc(100% - 34px)!important}.lupaInnerMain .cities,.lupaInnerMain .services{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important}.lupaInnerMain .cities li a{font-size:13px;padding:15px 5px}.lupaInnerMain .lupaLocalGrid{grid-template-columns:1fr!important}.lupaInnerMain .lupaLocalCta,.lupaInnerMain a.cta{width:100%}}
+
+/* Local editorial pages: accessible, image-first, alternating sections */
+.lupaInnerMain .lupaEyebrow{color:#facc15;font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin:0 0 18px}
+.lupaInnerMain .lupaEditorialGrid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(24px,4vw,65px)}
+.lupaInnerMain .lupaEditorialImage{min-width:0;overflow:hidden;background:#252525;border-radius:9px}
+.lupaInnerMain .lupaEditorialImage img{width:100%;height:clamp(265px,34vw,450px);object-fit:cover}
+.lupaInnerMain .lupaEditorialText h2{margin:0 0 24px;text-align:left}
+.lupaInnerMain .lupaEditorialText p{margin:0 0 22px}
+.lupaInnerMain .lupaFaqHeader{max-width:1000px;margin:0 auto 25px}
+.lupaInnerMain .lupaFaqHeader h2{margin:0 0 18px}
+.lupaInnerMain .lupaFaqList{margin:30px 0}
+.lupaInnerMain .lupaFaqList details{border-bottom:1px solid #303030;padding:0}
+.lupaInnerMain .lupaFaqList summary{position:relative;cursor:pointer;list-style:none;color:#fff;font-weight:850;font-size:16px;padding:23px 44px 23px 0}
+.lupaInnerMain .lupaFaqList summary::-webkit-details-marker{display:none}
+.lupaInnerMain .lupaFaqList summary:after{content:"+";position:absolute;right:6px;top:18px;font-size:25px;font-weight:400;color:#aaa}
+.lupaInnerMain .lupaFaqList details[open] summary:after{content:"−"}
+.lupaInnerMain .lupaFaqList details p{max-width:900px;margin:0 0 24px}
+.lupaInnerMain .lupaFaqCta{background:#141414;border:1px solid #303030;padding:32px;display:flex;align-items:center;justify-content:space-between;gap:28px}
+.lupaInnerMain .lupaFaqCta h3{font-style:italic;font-weight:900;margin:0 0 8px}
+.lupaInnerMain .lupaFaqCta p{margin:0}
+.lupaInnerMain .lupaLocalCta--light{background:#fff!important;color:#111!important}
+.lupaInnerMain .lupaNearby{text-align:center}
+.lupaInnerMain .lupaContentSection:last-of-type{border-bottom:1px solid #b89519}
+.lupaInnerMain+.footer,.lupaInnerMain+footer.footer{border-top:1px solid #a88714}
+.lupaInnerMain .lupaLocalIntro{max-width:930px}
+.lupaInnerMain .lupaLocalIntro .lupaEyebrow{margin-bottom:18px}
+@media(max-width:760px){.lupaInnerMain .lupaEditorialGrid{grid-template-columns:1fr}.lupaInnerMain .lupaFaqCta{flex-direction:column;align-items:flex-start}.lupaInnerMain .lupaFaqCta .lupaLocalCta{width:100%}}

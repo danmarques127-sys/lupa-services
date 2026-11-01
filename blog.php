@@ -132,7 +132,16 @@ $articles=posts();
 <div class="lupaBlogEmpty"><div><h3>New painting articles are on the way.</h3><p>We are preparing practical tips, project inspiration and guides to help you plan your next painting project.</p></div><a href="/services.html">EXPLORE OUR SERVICES</a></div>
 <?php endif; ?>
 </div></section>
-</main>
+<section id="reviews-faq" class="section section--dark divided"><div class="container">
+            <div class="faqShell reveal"><div class="faqIntro"><h2 class="kicker">FAQ</h2><h3 class="h2 upper">Questions<br>&amp; Answers.</h3>
+            <p class="muted">Helpful information about our painting articles and services.</p>
+            <a class="faqSupportLink" href="/contact.html">CONTACT LUPA</a></div>
+            <div class="faqList">
+            <article class="faqItem"><h3 class="faqItem__title">WHAT DOES THE LUPA PAINTING BLOG COVER?</h3><p class="faqItem__text">Painting preparation, finish selection, interior updates, exterior maintenance and home improvement guidance.</p></article>
+            <article class="faqItem"><h3 class="faqItem__title">CAN I REQUEST AN ESTIMATE AFTER READING AN ARTICLE?</h3><p class="faqItem__text">Yes. Use the free estimate form to share your location and project requirements with our team.</p></article>
+            <article class="faqItem"><h3 class="faqItem__title">DO YOU SERVE MY MASSACHUSETTS CITY?</h3><p class="faqItem__text">Explore our service areas and contact us to confirm coverage for your specific address.</p></article>
+            <article class="faqItem"><h3 class="faqItem__title">DO YOU OFFER INTERIOR AND EXTERIOR PAINTING?</h3><p class="faqItem__text">Yes. Visit our Services page to explore interior, exterior, cabinet and other painting options.</p></article>
+            </div></div></div></section></main>
 <footer class="lupaFooterDivider footer">
     <div class="container">
       <div class="footerGrid reveal">
@@ -183,4 +192,4 @@ $articles=posts();
     </div>
   </footer>
 <script src="/assets/js/app.js?v=20261031-conversion" defer></script><script src="/assets/js/services.js" defer></script>
-</body></html>
+<script src="/assets/js/lupa-local-faq.js?v=20261101" defer></script></body></html>

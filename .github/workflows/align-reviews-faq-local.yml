@@ -1,0 +1,103 @@
+name: Align local FAQs with Reviews and diversify media
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/align-reviews-faq-local.yml
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reuse Reviews FAQ structure and distinct service photography
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,html
+          review=Path('reviews.html').read_text(encoding='utf-8')
+          css=Path('assets/css_pages/reviews.css').read_text(encoding='utf-8')
+          src=re.search(r'<section id="reviews-faq"[\s\S]*?</section>',review)
+          if not src or 'faqShell reveal' not in src.group(): raise RuntimeError('Reviews FAQ reference missing')
+          start=css.index('#reviews-faq.section')
+          faqcss=css[start:]
+          # Reuse EXACT selectors and visual rules, scoped by the same reviews-faq ID.
+          localcss=Path('assets/css_main/lupa-inner-pages.css')
+          s=localcss.read_text(encoding='utf-8')
+          if 'Reviews FAQ component, shared with local areas' not in s:
+              s+='\n/* Reviews FAQ component, shared with local areas */\n'+faqcss+'\n'
+          # Original Reviews uses local page-specific CSS; ensure local implementation stays in normal layout flow.
+          s+='\n.lupaInnerMain #reviews-faq.section.section--dark{border-top:1px solid rgba(250,204,21,.25);padding:90px 0;background:#0a0a0a}\n'
+          s+='\n.lupaInnerMain #reviews-faq .container{width:min(1160px,calc(100% - 48px))!important;max-width:1160px!important;margin:auto!important}\n'
+          localcss.write_text(s,encoding='utf-8')
+          photo=[
+              '/assets/images/services/interior/interior.jpeg',
+              '/assets/images/services/exterior/exterior.jpeg',
+              '/assets/images/services/cabinet/cabinet.jpeg',
+              '/assets/images/services/deck/deck.jpeg',
+              '/assets/images/services/door/door.jpeg',
+              '/assets/images/services/commercial/commercial.jpeg'
+          ]
+          photo2=[
+              '/assets/images/services/deck/deck.jpeg',
+              '/assets/images/services/cabinet/cabinet.jpeg',
+              '/assets/images/services/exterior/exterior.jpeg',
+              '/assets/images/services/door/door.jpeg',
+              '/assets/images/services/interior/interior.jpeg',
+              '/assets/images/services/cabinet/cabinet.jpeg'
+          ]
+          for i,p in enumerate(sorted(Path('service-areas').glob('*.html'))):
+              src=p.read_text(encoding='utf-8')
+              name=p.stem.replace('-',' ').title()
+              faq=re.search(r'<section class="lupaContentSection"><div class="container">\s*<div class="lupaFaqHeader">[\s\S]*?</section>',src)
+              if not faq: raise RuntimeError('FAQ not found: '+str(p))
+              pairs=re.findall(r'<details><summary>(.*?)</summary><p>(.*?)</p></details>',faq.group(),re.S)
+              if len(pairs)!=4: raise RuntimeError('Unexpected FAQ entries: '+str(p))
+              entries='\n'.join(f'<article class="faqItem"><h3 class="faqItem__title">{q}</h3><p class="faqItem__text">{a}</p></article>' for q,a in pairs)
+              fresh=f'''<section id="reviews-faq" class="section section--dark divided">
+                <div class="container"><div class="faqShell reveal">
+                <div class="faqIntro"><h2 class="kicker">FAQ</h2><h3 class="h2 upper">Questions<br>&amp; Answers.</h3>
+                <p class="muted">Answers to common painting questions in {name} and surrounding communities.</p>
+                <a class="faqSupportLink" href="/contact.html">CONTACT LUPA</a></div>
+                <div class="faqList">{entries}</div></div>
+                <div class="lupaFaqCta"><div><h3>READY TO START YOUR PROJECT?</h3><p>Tell us about the surfaces, schedule and finish you're considering.</p></div><a class="lupaLocalCta lupaLocalCta--light" href="/index.html#quote">REQUEST A QUOTE &rarr;</a></div>
+                </div></section>'''
+              src=src[:faq.start()]+fresh+src[faq.end():]
+              # Select two separate, valid code-referenced media paths per page. These media files remain on GoDaddy.
+              images=re.findall(r'<div class="lupaEditorialImage"><img src="([^"]+)"',src)
+              if len(images)!=2: raise RuntimeError('Expected two images: '+str(p))
+              a=photo[i%len(photo)]
+              b=photo2[i%len(photo2)]
+              if a==b: b=photo[(i+3)%len(photo)]
+              src=src.replace('src="'+images[0]+'"','src="'+a+'"',1)
+              src=src.replace('src="'+images[1]+'"','src="'+b+'"',1)
+              src=re.sub(r'/assets/css_main/lupa-inner-pages.css(?:\?v=[^"\']*)?','/assets/css_main/lupa-inner-pages.css?v=20261101-faq-reviews',src)
+              p.write_text(src,encoding='utf-8')
+          directory=Path('service-areas.html')
+          s=directory.read_text(encoding='utf-8')
+          original=re.search(r'<section class="lupaContentSection"><div class="container"><div class="lupaLocalFaq">[\s\S]*?</section>',s)
+          if not original: raise RuntimeError('Directory FAQ missing')
+          block='''<section id="reviews-faq" class="section section--dark divided"><div class="container"><div class="faqShell reveal">
+          <div class="faqIntro"><h2 class="kicker">FAQ</h2><h3 class="h2 upper">Questions<br>&amp; Answers.</h3>
+          <p class="muted">Questions about scheduling and painting projects across MetroWest.</p><a class="faqSupportLink" href="/contact.html">CONTACT LUPA</a></div>
+          <div class="faqList">
+          <article class="faqItem"><h3 class="faqItem__title">Do you offer estimates in Framingham and Hopkinton?</h3><p class="faqItem__text">Share your address and project requirements and we can confirm availability and the next steps for an estimate.</p></article>
+          <article class="faqItem"><h3 class="faqItem__title">Can I request interior and exterior painting?</h3><p class="faqItem__text">Yes. Lupa Painting offers interior and exterior painting, along with cabinet refinishing and surface preparation services.</p></article>
+          <article class="faqItem"><h3 class="faqItem__title">How should I prepare for a painting quote?</h3><p class="faqItem__text">Let us know the location, surfaces, approximate scope and preferred timing. Photos can help explain the work.</p></article>
+          <article class="faqItem"><h3 class="faqItem__title">Do you have a separate office in every city?</h3><p class="faqItem__text">No. These are service-area pages, not separate branch locations. Contact Lupa Painting to confirm coverage at your property.</p></article>
+          </div></div></div></section>'''
+          s=s[:original.start()]+block+s[original.end():]
+          s=re.sub(r'/assets/css_main/lupa-inner-pages.css(?:\?v=[^"\']*)?','/assets/css_main/lupa-inner-pages.css?v=20261101-faq-reviews',s)
+          directory.write_text(s,encoding='utf-8')
+          print('Updated 32 city FAQs, their media pairs and main service-area FAQ')
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add service-areas service-areas.html assets/css_main/lupa-inner-pages.css
+          if ! git diff --cached --quiet; then
+            git commit -m 'design: replicate Reviews FAQ and vary local service photos'
+            git push
+          fi

@@ -146,7 +146,6 @@ $body = preg_replace('/^#\\s+' . preg_quote(trim((string)$post['title']), '/') .
       <source src="/assets/videos/LUCAS - LUPA SERVICES - EXTERIOR PAINTING.mp4" type="video/mp4" />
     </video>
   </div>
-  </div>
 
   <!-- Overlay -->
   <div class="hero__overlay" aria-hidden="true"></div>

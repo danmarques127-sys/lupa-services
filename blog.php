@@ -13,7 +13,7 @@ $articles=posts();
 <link rel="stylesheet" href="/assets/css_main/footer.css">
 <style>.lupaBlogListing{padding:65px 0;background:#0b0d12;color:white}.lupaBlogGrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}.lupaBlogCard{background:#161a22;border:1px solid #393e45;border-radius:12px;overflow:hidden}.lupaBlogCardContent{padding:22px}.lupaBlogCard img{width:100%;height:220px;object-fit:cover}.lupaBlogCard a{color:#f3c926}.lupaBlogListing .container{max-width:1150px}.lupaBlogFooter{padding:30px;text-align:center;background:#090c12;color:white}.lupaBlogFooter a{color:#f3c926}</style>
 <script type="application/ld+json"><?=json_encode(['@context'=>'https://schema.org','@type'=>'Blog','name'=>'Lupa Painting Blog','url'=>'https://lupaservices.com/blog.php','publisher'=>['@type'=>'Organization','name'=>'Lupa Painting','url'=>'https://lupaservices.com/']],JSON_UNESCAPED_SLASHES)?></script>
-</head><body><nav id="navbar" class="nav">
+<link rel="stylesheet" href="/assets/css_main/lupa-inner-pages.css?v=20261031"></head><body><nav id="navbar" class="nav">
     <div class="container nav__inner">
       <a href="/" class="brand" aria-label="Lupa Painting - Home">
         <span class="brand__lupa">LUPA</span>
@@ -92,7 +92,55 @@ $articles=posts();
     <span class="chev" aria-hidden="true"></span>
   </a>
 </header>
-<main id="mainContent"><section id="latestArticles" class="lupaBlogListing"><div class="container"><p class="lupaBlogEyebrow">LUPA PAINTING JOURNAL</p><h2 class="lupaBlogHeading">THE LATEST FROM LUPA</h2><p class="lupaBlogSubtitle">Painting insights, preparation guides and project inspiration for MetroWest Massachusetts.</p><?php if ($articles): ?><div class="lupaBlogGrid"><?php foreach($articles as $article): ?><article class="lupaBlogCard"><?php if(!empty($article['image'])): ?><img src="<?=h($article['image'])?>" alt="<?=h($article['title'])?>" loading="lazy"><?php endif; ?><div class="lupaBlogCardContent"><small><?=h(substr((string)($article['date']??''),0,10))?></small><h3><a href="/backend-blog/post.php?slug=<?=rawurlencode($article['slug'])?>"><?=h($article['title'])?></a></h3><p><?=h($article['summary']??'')?></p><a class="lupaRead" href="/backend-blog/post.php?slug=<?=rawurlencode($article['slug'])?>">READ ARTICLE</a></div></article><?php endforeach; ?></div><?php else: ?><div class="lupaBlogEmpty"><h3>Painting insights are on the way.</h3><p>We are preparing articles about surface preparation, finishes and home painting projects. You can explore our services or request an estimate today.</p><a class="btn btn--cta btn--lg" href="/index.html#quote">GET A FREE ESTIMATE</a></div><?php endif; ?></div></section></main>
-<footer class="lupaBlogFooter">Lupa Painting · MetroWest Massachusetts · <a href="/service-areas.html">Service Areas</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></footer>
+<main id="mainContent" class="lupaInnerMain"><section id="latestArticles" class="lupaBlogListing lupaContentSection"><div class="container"><p class="lupaBlogEyebrow">LUPA PAINTING JOURNAL</p><h2 class="lupaBlogHeading">THE LATEST FROM LUPA</h2><p class="lupaBlogSubtitle">Painting insights, preparation guides and project inspiration for MetroWest Massachusetts.</p><?php if ($articles): ?><div class="lupaBlogGrid"><?php foreach($articles as $article): ?><article class="lupaBlogCard"><?php if(!empty($article['image'])): ?><img src="<?=h($article['image'])?>" alt="<?=h($article['title'])?>" loading="lazy"><?php endif; ?><div class="lupaBlogCardContent"><small><?=h(substr((string)($article['date']??''),0,10))?></small><h3><a href="/backend-blog/post.php?slug=<?=rawurlencode($article['slug'])?>"><?=h($article['title'])?></a></h3><p><?=h($article['summary']??'')?></p><a class="lupaRead" href="/backend-blog/post.php?slug=<?=rawurlencode($article['slug'])?>">READ ARTICLE</a></div></article><?php endforeach; ?></div><?php else: ?><div class="lupaBlogEmpty"><h3>Painting insights are on the way.</h3><p>We are preparing articles about surface preparation, finishes and home painting projects. You can explore our services or request an estimate today.</p><a class="btn btn--cta btn--lg" href="/index.html#quote">GET A FREE ESTIMATE</a></div><?php endif; ?></div></section></main>
+<footer class="footer">
+    <div class="container">
+      <div class="footerGrid reveal">
+        <div class="footerBrand">
+          <a href="/" class="brand brand--big" aria-label="Lupa Painting">
+            <span class="brand__lupa">LUPA</span>
+            <span class="brand__painting">PAINTING</span>
+          </a>
+
+          <p class="muted">
+            Premium interior and exterior painting services for homeowners and businesses that value craftsmanship, clean finishes, and dependable results.
+          </p>
+
+          <div class="socials" aria-label="Social links">
+            <a href="https://www.facebook.com/profile.php?id=61586579284078" aria-label="Facebook">f</a>
+            <a href="https://www.instagram.com/lupaservices/" aria-label="Instagram">ig</a>
+            <a href="https://x.com/lupapainting" aria-label="Twitter">x</a>
+          </div>
+        </div>
+
+        <div class="footerCol">
+          <h4 class="footerTitle">CONTACT US</h4>
+          <ul class="footerList">
+            <li>8 Joanne Drive,<br>Ashland, MA 01721</li>
+            <li>+1 (857) 246-5998</li>
+            <li>officelupaservices@gmail.com</li>
+          </ul>
+        </div>
+
+        <div class="footerCol">
+          <h4 class="footerTitle">NEWSLETTER</h4>
+          <p class="muted small">Subscribe for painting tips, color ideas, and seasonal offers.</p>
+          <form class="newsletter" id="newsletterForm">
+            <input type="email" placeholder="YOUR EMAIL" required />
+            <button type="submit">JOIN</button>
+          </form>
+          <p id="newsletterMsg" class="muted small hidden">Thanks! You're subscribed.</p>
+        </div>
+      </div>
+
+      <div class="footerBottom">
+        <p>© <span id="year"></span> LUPA PAINTING. ALL RIGHTS RESERVED.</p>
+        <div class="footerLinks">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 <script src="/assets/js/app.js?v=20261031-conversion" defer></script><script src="/assets/js/services.js" defer></script>
 </body></html>

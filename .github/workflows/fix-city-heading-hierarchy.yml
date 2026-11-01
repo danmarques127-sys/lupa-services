@@ -1,0 +1,36 @@
+name: Fix city page heading hierarchy
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fix-city-heading-hierarchy.yml
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Make hero H1 the only page H1
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          for p in Path('service-areas').glob('*.html'):
+              s=p.read_text(encoding='utf-8')
+              start=s.find('<main ')
+              if start<0: continue
+              pre,body=s[:start],s[start:]
+              body=re.sub(r'<h1(\s[^>]*)?>',lambda m:'<h2'+(m.group(1) or '')+'>',body,flags=re.I)
+              body=re.sub(r'</h1>',r'</h2>',body,flags=re.I)
+              p.write_text(pre+body,encoding='utf-8')
+          PY
+      - name: Commit heading correction
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add service-areas
+          if ! git diff --cached --quiet; then
+            git commit -m "seo: one H1 per city page, use H2 for content title"
+            git push
+          fi
